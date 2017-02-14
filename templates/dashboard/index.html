@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!doctype HTML>
+
+<head>
+
+</head>
+
+<body>
+    <p>{{ amount_made }}</p>
+    <p>{{ total_completed_jobs }}</p>
+    <p>{{ total_uncompleted_jobs }}</p>
+    <p>{{ no_of_clients }}</p>
+    {% for design_problem in design_problems %}
+        <p>{{ design_problem.name }}</p>
+        <ul>
+            <li>{{ design_problem.description }}</li>
+        </ul>
+    {% endfor %}
+    <p>Potential clients</p>
+    {% for client in potential_clients %}
+        <p>{{ client.name }}</p>
+        <p>{{ client.reason }}</p>
+    {% endfor %}
+
+    {% for inspiration in inspirations %}
+        <img src="{{ inspiration.image.url }}">
+    {% endfor %}
+
+</body>

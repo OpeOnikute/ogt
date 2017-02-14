@@ -21,7 +21,6 @@ class Job(models.Model):
 
     client = models.ForeignKey('Client', on_delete=models.CASCADE)
     project_name = models.CharField(max_length=20, null=False, blank=False)
-    colour = models.CharField(max_length=15, null=True, blank=True)
     date = models.DateField(auto_now_add=False)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     payment_status = models.CharField(max_length=20, null=False, blank=False, choices=enum)
@@ -34,8 +33,9 @@ class Job(models.Model):
 class Client(models.Model):
 
     name = models.CharField(max_length=20, null=False, blank=False)
-    email = models.CharField(max_length=20, null=False, blank=False)
+    email = models.CharField(max_length=50, null=False, blank=False)
     phone_number = models.DecimalField(max_digits=11, decimal_places=0)
+    # total_amount_paid = models.DecimalField(max_digits=15, decimal_places=2)
 
     def __unicode__(self):
         return self.name
@@ -63,7 +63,7 @@ class PotentialClient(models.Model):
 
 class PotentialProject(models.Model):
 
-    name = models.CharField(max_length=20, null=False, blank=False)
+    name = models.CharField(max_length=40, null=False, blank=False)
     description = models.TextField(max_length=140, null=True)
     reason = models.TextField(max_length=140, null=True)
     profit_opportunities = models.CharField(max_length=140, null=True, blank=True)
@@ -74,7 +74,7 @@ class PotentialProject(models.Model):
 
 class DesignProblems(models.Model):
 
-    name = models.CharField(max_length=20, null=False, blank=False)
+    name = models.CharField(max_length=40, null=False, blank=False)
     description = models.TextField(max_length=140, null=True)
     potential_solution = models.TextField(max_length=140, null=True)
     profit_opportunities = models.CharField(max_length=140, null=True, blank=True)
@@ -83,6 +83,10 @@ class DesignProblems(models.Model):
         return self.name
 
 
+class Inspiration(models.Model):
 
+    name = models.CharField(max_length=50, null=False, blank=False)
+    image = models.FileField(upload_to='inspiration/%Y/%m/%d')
 
-
+    def __unicode__(self):
+        return self.name
