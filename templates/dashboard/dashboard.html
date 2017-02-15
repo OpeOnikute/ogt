@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,19 +18,19 @@
   <link rel="shortcut icon" sizes="196x196" href="images/logo.png">
   
   <!-- style -->
-  <link rel="stylesheet" href="css/animate.css/animate.min.css" type="text/css" />
-  <link rel="stylesheet" href="css/glyphicons/glyphicons.css" type="text/css" />
-  <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="css/material-design-icons/material-design-icons.css" type="text/css" />
-  <link rel="stylesheet" href="css/ionicons/css/ionicons.min.css" type="text/css" />
-  <link rel="stylesheet" href="css/simple-line-icons/css/simple-line-icons.css" type="text/css" />
-  <link rel="stylesheet" href="css/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/animate.css/animate.min.css" %}" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/glyphicons/glyphicons.css" %}" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/font-awesome/css/font-awesome.min.css" %}" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/material-design-icons/material-design-icons.css" %}" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/ionicons/css/ionicons.min.css" %}" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/simple-line-icons/css/simple-line-icons.css" %}" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/bootstrap/dist/css/bootstrap.min.css" %}" type="text/css" />
 
   <!-- build:css css/styles/app.min.css -->
-  <link rel="stylesheet" href="css/styles/app.css" type="text/css" />
-  <link rel="stylesheet" href="css/styles/style.css" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/styles/app.css" %}" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/styles/style.css" %}" type="text/css" />
   <!-- endbuild -->
-  <link rel="stylesheet" href="css/styles/font.css" type="text/css" />
+  <link rel="stylesheet" href="{% static "css/styles/font.css" %}" type="text/css" />
 
   <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -47,7 +48,7 @@
         <!-- brand -->
         <a href="index.html" class="navbar-brand">
         	<div data-ui-include="'images/logo.svg'"></div>
-        	<img src="images/logo.png" alt="." class="hide">
+        	<img src="{% static "images/logo.png" %}" alt="." class="hide">
         	<span class="hidden-folded inline">aside</span>
         </a>
         <!-- / brand -->
@@ -606,7 +607,7 @@
 						<span class="text-muted l-h-1x"><i class="ion-ios-grid-view text-muted"></i></span>
 					</div>
 					<div class="text-center">
-						<h2 class="text-center _600">&#8358;4500.00</h2>
+						<h2 class="text-center _600">&#8358;{{ amount_made }}</h2>
 						<p class="text-muted m-b-md">Made</p>
 						<div>
 							<span data-ui-jp="sparkline" data-ui-options="[2,3,2,2,1,3,6,3,2,1], {type:'line', height:20, width: '60', lineWidth:1, valueSpots:{'0:':'#818a91'}, lineColor:'#818a91', spotColor:'#818a91', fillColor:'', highlightLineColor:'rgba(120,130,140,0.3)', spotRadius:0}" class="sparkline inline"></span>
@@ -621,7 +622,7 @@
 						<span class="text-muted l-h-1x"><i class="ion-document text-muted"></i></span>
 					</div>
 					<div class="text-center">
-						<h2 class="text-center _600">25</h2>
+						<h2 class="text-center _600">{{ total_completed_jobs }}</h2>
 						<p class="text-muted m-b-md">Projects Completed</p>
 						<div>
 							<span data-ui-jp="sparkline" data-ui-options="[1,1,0,2,3,4,2,1,2,2], {type:'line', height:20, width: '60', lineWidth:1, valueSpots:{'0:':'#818a91'}, lineColor:'#818a91', spotColor:'#818a91', fillColor:'', highlightLineColor:'rgba(120,130,140,0.3)', spotRadius:0}" class="sparkline inline"></span>
@@ -636,7 +637,7 @@
 						<span class="text-muted l-h-1x"><i class="ion-pie-graph text-muted"></i></span>
 					</div>
 					<div class="text-center">
-						<h2 class="text-center _600">8</h2>
+						<h2 class="text-center _600">{{ no_of_clients }}</h2>
 						<p class="text-muted m-b-md">Clients</p>
 						<div>
 							<span data-ui-jp="sparkline" data-ui-options="[9,2,5,5,7,4,4,3,2,2], {type:'line', height:20, width: '60', lineWidth:1, valueSpots:{'0:':'#818a91'}, lineColor:'#818a91', spotColor:'#818a91', fillColor:'', highlightLineColor:'rgba(120,130,140,0.3)', spotRadius:0}" class="sparkline inline"></span>
@@ -651,7 +652,7 @@
 						<span class="text-muted l-h-1x"><i class="ion-paper-airplane text-muted"></i></span>
 					</div>
 					<div class="text-center">
-						<h2 class="text-center _600">36</h2>
+						<h2 class="text-center _600">{{ total_uncompleted_jobs }}</h2>
 						<p class="text-muted m-b-md">Pending projects</p>
 						<div>
 							<span data-ui-jp="sparkline" data-ui-options="[3,3,1,62,4,3,7,3,2,5], {type:'line', height:20, width: '60', lineWidth:1, valueSpots:{'0:':'#818a91'}, lineColor:'#818a91', spotColor:'#818a91', fillColor:'', highlightLineColor:'rgba(120,130,140,0.3)', spotRadius:0}" class="sparkline inline"></span>
@@ -922,11 +923,12 @@
 			    <div class="col-sm-6">
 			        <div class="box">
 			            <div class="box-header">
-			              <span class="label success pull-right">52</span>
+			              <span class="label success pull-right">{{ top_clients|length }}</span>
 			              <h3>Top Clients</h3>
 			            </div>
 			            <div class="p-b-sm">
 				            <ul class="list no-border m-a-0">
+                                {% for client, amount in top_clients %}
 				              <li class="list-item">
 				                <a href="#" class="list-left">
 				                	<span class="w-40 avatar danger">
@@ -935,58 +937,11 @@
 					                </span>
 				                </a>
 				                <div class="list-body">
-				                  <div><a href="#">Chris Fox</a></div>
-				                  <small class="text-muted text-ellipsis">Designer, Blogger</small>
+				                  <div><a href="#">{{ client }}</a></div>
+				                  <small class="text-muted text-ellipsis">Total amount paid: &#8358;{{ amount }}</small>
 				                </div>
 				              </li>
-				              <li class="list-item">
-				                <a href="#" class="list-left">
-				                  <span class="w-40 avatar purple">
-					                  <span>M</span>
-					                  <i class="on b-white bottom"></i>
-					              </span>
-				                </a>
-				                <div class="list-body">
-				                  <div><a href="#">Mogen Polish</a></div>
-				                  <small class="text-muted text-ellipsis">Writter, Mag Editor</small>
-				                </div>
-				              </li>
-				              <li class="list-item">
-				                <a href="#" class="list-left">
-				                  <span class="w-40 avatar info">
-					                  <span>J</span>
-					                  <i class="off b-white bottom"></i>
-					              </span>
-				                </a>
-				                <div class="list-body">
-				                  <div><a href="#">Joge Lucky</a></div>
-				                  <small class="text-muted text-ellipsis">Art director, Movie Cut</small>
-				                </div>
-				              </li>
-				              <li class="list-item">
-				                <a href="#" class="list-left">
-				                  <span class="w-40 avatar warning">
-					                  <span>F</span>
-					                  <i class="on b-white bottom"></i>
-					              </span>
-				                </a>
-				                <div class="list-body">
-				                  <div><a href="#">Folisise Chosielie</a></div>
-				                  <small class="text-muted text-ellipsis">Musician, Player</small>
-				                </div>
-				              </li>
-				              <li class="list-item">
-				                <a href="#" class="list-left">
-				                	<span class="w-40 avatar success">
-					                  <span>P</span>
-					                  <i class="away b-white bottom"></i>
-					                </span>
-				                </a>
-				                <div class="list-body">
-				                  <div><a href="#">Peter</a></div>
-				                  <small class="text-muted text-ellipsis">Musician, Player</small>
-				                </div>
-				              </li>
+                                {% endfor %}
 				            </ul>
 			            </div>
 			        </div>
@@ -1049,34 +1004,15 @@
 							<h3>Design Problems To Be Solved</h3>
 						</div>
 						<ul class="list-group no-border m-b">
+                            {% for problem in design_problems %}
 					        <li class="list-group-item">
 					          <a href="#" class="pull-left w-40 m-r"><img src="images/a8.jpg" class="img-responsive img-circle" alt="."></a>
 					          <div class="clear">
-					            <a href="#" class="_500 block">Jonathan Doe</a>
-					            <span class="text-muted text-ellipsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+					            <a href="#" class="_500 block">{{ problem.name }}</a>
+					            <span class="text-muted text-ellipsis">{{ problem.description }}</span>
 					          </div>
 					        </li>
-					        <li class="list-group-item">
-					          <a href="" class="pull-left w-40 m-r"><img src="images/a8.jpg" class="img-responsive img-circle" alt="."></a>
-					          <div class="clear">
-					            <a href="#" class="_500 block">Jack Michale</a>
-					            <span class="text-muted text-ellipsis">Sectetur adipiscing elit</span>
-					          </div>
-					        </li>
-					        <li class="list-group-item">
-					          <a href="" class="pull-left w-40 m-r"><img src="images/a8.jpg" class="img-responsive img-circle" alt="."></a>
-					          <div class="clear">
-					            <a href="#" class="_500 block">Jessi</a>
-					            <span class="text-muted text-ellipsis">Sectetur adipiscing elit</span>
-					          </div>
-					        </li>
-					        <li class="list-group-item">
-					          <a href="" class="pull-left w-40 m-r"><img src="images/a8.jpg" class="img-responsive img-circle" alt="."></a>
-					          <div class="clear">
-					            <a href="#" class="_500 block">Sodake</a>
-					            <span class="text-muted text-ellipsis">Vestibulum ullamcorper sodales nisi nec condimentum</span>
-					          </div>
-					        </li>
+                            {% endfor %}
 					    </ul>
 				    </div>
 				</div>
@@ -1084,11 +1020,12 @@
               <div class="box">
                   <div class="box-header">
                       <a data-toggle="modal" data-target="#modal-potential-client"><span class="label success pull-right">+</span></a>
-                      <span class="label success pull-left">52</span>
+                      <span class="label success pull-left">{{ potential_clients|length }}</span>
                       <h3>&nbsp;&nbsp;&nbsp;&nbsp;Potential Clients</h3>
                   </div>
                   <div class="p-b-sm">
                     <ul class="list no-border m-a-0">
+                        {% for client in potential_clients %}
                       <li class="list-item">
                         <a href="#" class="list-left">
                           <span class="w-40 avatar danger">
@@ -1097,46 +1034,11 @@
                           </span>
                         </a>
                         <div class="list-body">
-                          <div><a href="#">Chris Fox</a></div>
-                          <small class="text-muted text-ellipsis">Designer, Blogger</small>
+                          <div><a href="#">{{ client.name }}</a></div>
+                          <small class="text-muted text-ellipsis">{{ client.reason }}</small>
                         </div>
                       </li>
-                      <li class="list-item">
-                        <a href="#" class="list-left">
-                          <span class="w-40 avatar purple">
-                            <span>M</span>
-                            <i class="on b-white bottom"></i>
-                        </span>
-                        </a>
-                        <div class="list-body">
-                          <div><a href="#">Mogen Polish</a></div>
-                          <small class="text-muted text-ellipsis">Writter, Mag Editor</small>
-                        </div>
-                      </li>
-                      <li class="list-item">
-                        <a href="#" class="list-left">
-                          <span class="w-40 avatar info">
-                            <span>J</span>
-                            <i class="off b-white bottom"></i>
-                        </span>
-                        </a>
-                        <div class="list-body">
-                          <div><a href="#">Joge Lucky</a></div>
-                          <small class="text-muted text-ellipsis">Art director, Movie Cut</small>
-                        </div>
-                      </li>
-                      <li class="list-item">
-                        <a href="#" class="list-left">
-                          <span class="w-40 avatar warning">
-                            <span>F</span>
-                            <i class="on b-white bottom"></i>
-                        </span>
-                        </a>
-                        <div class="list-body">
-                          <div><a href="#">Folisise Chosielie</a></div>
-                          <small class="text-muted text-ellipsis">Musician, Player</small>
-                        </div>
-                      </li>
+                        {% endfor %}
                     </ul>
                   </div>
               </div>
@@ -1150,34 +1052,15 @@
               <h3>Potential Projects</h3>
             </div>
             <ul class="list-group no-border m-b">
+                {% for project in potential_projects %}
                   <li class="list-group-item">
                     <a href="#" class="pull-left w-40 m-r"><img src="images/a8.jpg" class="img-responsive img-circle" alt="."></a>
                     <div class="clear">
-                      <a href="#" class="_500 block">Jonathan Doe</a>
-                      <span class="text-muted text-ellipsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                      <a href="#" class="_500 block">{{ project.name }}</a>
+                      <span class="text-muted text-ellipsis">{{ project.description }}</span>
                     </div>
                   </li>
-                  <li class="list-group-item">
-                    <a href="" class="pull-left w-40 m-r"><img src="images/a8.jpg" class="img-responsive img-circle" alt="."></a>
-                    <div class="clear">
-                      <a href="#" class="_500 block">Jack Michale</a>
-                      <span class="text-muted text-ellipsis">Sectetur adipiscing elit</span>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="" class="pull-left w-40 m-r"><img src="images/a8.jpg" class="img-responsive img-circle" alt="."></a>
-                    <div class="clear">
-                      <a href="#" class="_500 block">Jessi</a>
-                      <span class="text-muted text-ellipsis">Sectetur adipiscing elit</span>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="" class="pull-left w-40 m-r"><img src="images/a8.jpg" class="img-responsive img-circle" alt="."></a>
-                    <div class="clear">
-                      <a href="#" class="_500 block">Sodake</a>
-                      <span class="text-muted text-ellipsis">Vestibulum ullamcorper sodales nisi nec condimentum</span>
-                    </div>
-                  </li>
+                {% endfor %}
               </ul>
             </div>
 
@@ -1185,21 +1068,21 @@
               
                   <div class="box-header b-b">
                     <h3>Inspiration</h3>
+                      <a data-toggle="modal" data-target="#modal-inspiration"><span class="label success pull-right">+</span></a>
                   </div>
                   <div class="container text-center">
-                  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                      <div class="carousel-item active">
-                      <img class="img-responsive" src="images/a0.jpg"> 
+                      <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img class="img-responsive" src="{% static "images/a1.jpg" %}">
+                             </div>
+                            {% for inspiration in inspirations %}
+                          <div class="carousel-item">
+                          <img class="img-responsive" src="{{ inspiration.image.url }}">
+                          </div>
+                            {% endfor %}
+                        </div>
                       </div>
-                      <div class="carousel-item">
-                        <img class="img-responsive" src="images/a1.jpg"> 
-                      </div>
-                      <div class="carousel-item">
-                        <img class="img-responsive" src="images/a2.jpg"> 
-                      </div>
-                    </div>
-                  </div>
                   </div>
                   
             </div>
@@ -1413,7 +1296,7 @@
         </div>
       </div>
     </div>
-  <!-- ############ SWITHCHER END-->
+  <!-- ############ SWITCHER END-->
 <!-- MODALS -->
 <div class="modal fade" id="modal-potential-client">
   <div class="modal-dialog modal-lg">
@@ -1425,43 +1308,40 @@
           New Potential Client
         </div>
         <div class="modal-body">
-          <form class="form-horizontal">
+          <form class="form-horizontal" method="post">
+              {% csrf_token %}
+              <input type="text" name="modal-type" value="PotentialClientForm" class="form-control" hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" name="name">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Best way to contact:</label>
+                <label class="col-lg-2 form-control-label">Why?:</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="reason">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Why?</label>
+                <label class="col-lg-2 form-control-label">How would you get this client?</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="how_to_get_client">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Description</label>
-                <div class="col-lg-10">
-                    <div class="b-a">
-                      <div data-ui-jp="summernote" data-ui-options="{height: 150,
-                        toolbar: [
-                          ['style', ['bold', 'italic', 'underline', 'clear']],
-                          ['color', ['color']],
-                          ['para', ['ul', 'ol', 'paragraph']],
-                          ['height', ['height']]
-                        ]}">
-                  </div>
-                    </div>
+                <label class="col-lg-2 form-control-label">Best way to contact the client:</label>
+                 <div class="col-lg-8">
+                     <select class="form-control" name="best_way_to_contact">
+                         <option value="Phone Number">Phone Number</option>
+                         <option value="email">Email</option>
+                         <option value="Social media">Social Media</option>
+                     </select>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-lg-8 offset-lg-2">
-                    <button class="btn primary btn-sm p-x-md">Save</button>
+                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
                 </div>
             </div>
           </form>
@@ -1480,43 +1360,36 @@
           New Potential Project
         </div>
         <div class="modal-body">
-          <form class="form-horizontal">
+          <form class="form-horizontal" method="post">
+              {% csrf_token %}
+              <input type="text" name="modal-type" value="PotentialProjectForm" class="form-control" hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" name="name">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Why?</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="reason">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Profit opportunities:</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="profit_opportunities">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Description</label>
-                <div class="col-lg-10">
-                    <div class="b-a">
-                      <div data-ui-jp="summernote" data-ui-options="{height: 150,
-                        toolbar: [
-                          ['style', ['bold', 'italic', 'underline', 'clear']],
-                          ['color', ['color']],
-                          ['para', ['ul', 'ol', 'paragraph']],
-                          ['height', ['height']]
-                        ]}">
-                  </div>
-                    </div>
+                <label class="col-lg-2 form-control-label">Description:</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" name="description">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-lg-8 offset-lg-2">
-                    <button class="btn primary btn-sm p-x-md">Save</button>
+                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
                 </div>
             </div>
           </form>
@@ -1535,43 +1408,36 @@
           New Design Problem
         </div>
         <div class="modal-body">
-          <form class="form-horizontal">
+          <form class="form-horizontal" method="post">
+              {% csrf_token %}
+              <input type="text" name="modal-type" value="DesignProblemsForm" class="form-control" hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" name="name">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Priority:</label>
+                <label class="col-lg-2 form-control-label">Description:</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="description">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Potential solution:</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="potential_solution">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Description</label>
-                <div class="col-lg-10">
-                    <div class="b-a">
-                      <div data-ui-jp="summernote" data-ui-options="{height: 150,
-                        toolbar: [
-                          ['style', ['bold', 'italic', 'underline', 'clear']],
-                          ['color', ['color']],
-                          ['para', ['ul', 'ol', 'paragraph']],
-                          ['height', ['height']]
-                        ]}">
-                  </div>
-                    </div>
+                <label class="col-lg-2 form-control-label">Profit Opportunities:</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" name="profit_opportunities">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-lg-8 offset-lg-2">
-                    <button class="btn primary btn-sm p-x-md">Save</button>
+                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
                 </div>
             </div>
           </form>
@@ -1590,10 +1456,46 @@
           <h2>Amount saved</h2>
         </div>
         <div class="modal-body">
-          <h4>You should've saved &#8358;2250 by now.</h4>
+          <h4>You should've saved &#8358;{% widthratio amount_made 2 1 %} by now.</h4>
           <p>Re-adjust if this is not the case.</p>
 
-          <p><small>Your specified savings ratio is 50%.<br>You can change this in your settings.</small></p>
+          <p><small>Your specified savings ratio is {% widthratio 100 2 1 %}%.<br>You can change this in your settings.</small></p>
+        </div>
+      </div>
+    </div>
+</div>
+
+      <div class="modal fade" id="modal-inspiration">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header _600">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          New Potential Client
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <input type="text" name="modal-type" value="InspirationForm" class="form-control" hidden>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Name:</label>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" name="name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Image:</label>
+                <div class="col-lg-8">
+                    <input type="file" class="form-control" name="image">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-8 offset-lg-2">
+                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
+                </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -1606,32 +1508,32 @@
 
 <!-- build:js scripts/app.min.js -->
 <!-- jQuery -->
-  <script src="libs/jquery/dist/jquery.js"></script>
+  <script src="{% static "libs/jquery/dist/jquery.js" %}"></script>
 <!-- Bootstrap -->
-  <script src="libs/tether/dist/js/tether.min.js"></script>
-  <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="{% static "libs/tether/dist/js/tether.min.js" %}"></script>
+  <script src="{% static "libs/bootstrap/dist/js/bootstrap.js" %}"></script>
 <!-- core -->
-  <script src="libs/jQuery-Storage-API/jquery.storageapi.min.js"></script>
-  <script src="libs/PACE/pace.min.js"></script>
-  <script src="libs/jquery-pjax/jquery.pjax.js"></script>
-  <script src="libs/blockUI/jquery.blockUI.js"></script>
-  <script src="libs/jscroll/jquery.jscroll.min.js"></script>
+  <script src="{% static "libs/jQuery-Storage-API/jquery.storageapi.min.js" %}"></script>
+  <script src="{% static "libs/PACE/pace.min.js" %}"></script>
+  <script src="{% static "libs/jquery-pjax/jquery.pjax.js" %}"></script>
+  <script src="{% static "libs/blockUI/jquery.blockUI.js" %}"></script>
+  <script src="{% static "libs/jscroll/jquery.jscroll.min.js" %}"></script>
 
-  <script src="scripts/config.lazyload.js"></script>
-  <script src="scripts/ui-load.js"></script>
-  <script src="scripts/ui-jp.js"></script>
-  <script src="scripts/ui-include.js"></script>
-  <script src="scripts/ui-device.js"></script>
-  <script src="scripts/ui-form.js"></script>
-  <script src="scripts/ui-modal.js"></script>
-  <script src="scripts/ui-nav.js"></script>
-  <script src="scripts/ui-list.js"></script>
-  <script src="scripts/ui-screenfull.js"></script>
-  <script src="scripts/ui-scroll-to.js"></script>
-  <script src="scripts/ui-toggle-class.js"></script>
-  <script src="scripts/ui-taburl.js"></script>
-  <script src="scripts/app.js"></script>
-  <script src="scripts/ajax.js"></script>
+  <script src="{% static "scripts/config.lazyload.js" %}"></script>
+  <script src="{% static "scripts/ui-load.js" %}"></script>
+  <script src="{% static "scripts/ui-jp.js" %}"></script>
+  <script src="{% static "scripts/ui-include.js" %}"></script>
+  <script src="{% static "scripts/ui-device.js" %}"></script>
+  <script src="{% static "scripts/ui-form.js" %}"></script>
+  <script src="{% static "scripts/ui-modal.js" %}"></script>
+  <script src="{% static "scripts/ui-nav.js" %}"></script>
+  <script src="{% static "scripts/ui-list.js" %}"></script>
+  <script src="{% static "scripts/ui-screenfull.js" %}"></script>
+  <script src="{% static "scripts/ui-scroll-to.js" %}"></script>
+  <script src="{% static "scripts/ui-toggle-class.js" %}"></script>
+  <script src="{% static "scripts/ui-taburl.js" %}"></script>
+  <script src="{% static "scripts/app.js" %}"></script>
+  <script src="{% static "scripts/ajax.js" %}"></script>
 <!-- endbuild -->
 </body>
 </html>

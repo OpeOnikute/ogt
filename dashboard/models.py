@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from django.forms import ModelForm
 from django.db import models
 
 
@@ -90,3 +90,5 @@ class Inspiration(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
