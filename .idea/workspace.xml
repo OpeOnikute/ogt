@@ -2,14 +2,78 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2bbd4e2-f101-4ecd-b63e-d35042df75bb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dashboard/forms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/dashboard/base.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newjh/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newjh/admin.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newjh/apps.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newjh/migrations/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newjh/models.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newjh/tests.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newjh/views.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/map.vector.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/price.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/rtl.dashboard.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/signin.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/signup.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.arrow.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.box.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.button.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.color.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.dropdown.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.grid.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.icon.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.label.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.modal.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.nav.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.progress.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.social.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.sortable.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.streamline.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.timeline.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/dashboard/ui.widget.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/dashboard/app.client.potential.html" afterPath="$PROJECT_DIR$/templates/dashboard/potential_clients.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/dashboard/app.contact.html" afterPath="$PROJECT_DIR$/templates/dashboard/clients.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/dashboard/app.project.html" afterPath="$PROJECT_DIR$/templates/dashboard/projects.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/OGT.iml" afterPath="$PROJECT_DIR$/.idea/OGT.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/forms.py" afterPath="$PROJECT_DIR$/dashboard/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/models.py" afterPath="$PROJECT_DIR$/dashboard/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/urls.py" afterPath="$PROJECT_DIR$/dashboard/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/views.py" afterPath="$PROJECT_DIR$/dashboard/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/404.html" afterPath="$PROJECT_DIR$/templates/dashboard/404.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/505.html" afterPath="$PROJECT_DIR$/templates/dashboard/505.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/app.inbox.html" afterPath="$PROJECT_DIR$/templates/dashboard/app.inbox.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/app.message.html" afterPath="$PROJECT_DIR$/templates/dashboard/app.message.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/blank.html" afterPath="$PROJECT_DIR$/templates/dashboard/blank.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/chart.html" afterPath="$PROJECT_DIR$/templates/dashboard/chart.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/chartjs.html" afterPath="$PROJECT_DIR$/templates/dashboard/chartjs.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/dashboard.html" afterPath="$PROJECT_DIR$/templates/dashboard/dashboard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/datatable.html" afterPath="$PROJECT_DIR$/templates/dashboard/datatable.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/echarts-bar.html" afterPath="$PROJECT_DIR$/templates/dashboard/echarts-bar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/echarts-gauge-funnel.html" afterPath="$PROJECT_DIR$/templates/dashboard/echarts-gauge-funnel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/echarts-line.html" afterPath="$PROJECT_DIR$/templates/dashboard/echarts-line.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/echarts-map.html" afterPath="$PROJECT_DIR$/templates/dashboard/echarts-map.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/echarts-pie.html" afterPath="$PROJECT_DIR$/templates/dashboard/echarts-pie.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/echarts-radar-chord.html" afterPath="$PROJECT_DIR$/templates/dashboard/echarts-radar-chord.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/echarts-scatter.html" afterPath="$PROJECT_DIR$/templates/dashboard/echarts-scatter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/faq.html" afterPath="$PROJECT_DIR$/templates/dashboard/faq.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/footable.html" afterPath="$PROJECT_DIR$/templates/dashboard/footable.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/form.calendar.html" afterPath="$PROJECT_DIR$/templates/dashboard/form.calendar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/form.dropzone.html" afterPath="$PROJECT_DIR$/templates/dashboard/form.dropzone.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/form.editor.html" afterPath="$PROJECT_DIR$/templates/dashboard/form.editor.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/form.element.html" afterPath="$PROJECT_DIR$/templates/dashboard/form.element.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/form.layout.html" afterPath="$PROJECT_DIR$/templates/dashboard/form.layout.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/form.picker.html" afterPath="$PROJECT_DIR$/templates/dashboard/form.picker.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/form.select.html" afterPath="$PROJECT_DIR$/templates/dashboard/form.select.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/form.validation.html" afterPath="$PROJECT_DIR$/templates/dashboard/form.validation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/form.wizard.html" afterPath="$PROJECT_DIR$/templates/dashboard/form.wizard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/gallery.html" afterPath="$PROJECT_DIR$/templates/dashboard/gallery.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/invoice.html" afterPath="$PROJECT_DIR$/templates/dashboard/invoice.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/profile.html" afterPath="$PROJECT_DIR$/templates/dashboard/profile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/search.html" afterPath="$PROJECT_DIR$/templates/dashboard/search.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/setting.html" afterPath="$PROJECT_DIR$/templates/dashboard/setting.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/dashboard/static.html" afterPath="$PROJECT_DIR$/templates/dashboard/static.html" />
     </list>
     <ignored path="OGT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,55 +99,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OGT/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="6" lean-forward="false" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wsgi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OGT/wsgi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-              <folding>
-                <element signature="e#219#228#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OGT/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="42" lean-forward="false" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="manage.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <element signature="e#22#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dashboard/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="1" lean-forward="false" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+            <state relative-caret-position="51">
+              <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -91,23 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dashboard/views.py">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/dashboard/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-255">
-              <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/dashboard/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="35" />
+            <state relative-caret-position="153">
+              <caret line="12" column="60" lean-forward="false" selection-start-line="12" selection-start-column="60" selection-end-line="12" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -116,8 +124,70 @@
       <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/dashboard/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="1461" column="69" lean-forward="false" selection-start-line="1461" selection-start-column="69" selection-end-line="1461" selection-end-column="69" />
+            <state relative-caret-position="289">
+              <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/dashboard/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="projects.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/dashboard/projects.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="potential_clients.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/dashboard/potential_clients.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="36" lean-forward="false" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dashboard/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clients.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/dashboard/clients.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dashboard/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="47" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -126,25 +196,12 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dashboard/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state relative-caret-position="748">
+              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
-                <marker date="1487161449937" expanded="true" signature="509:634" ph="..." />
-                <marker date="1487161449937" expanded="true" signature="676:756" ph="..." />
-                <marker date="1487161449937" expanded="true" signature="693:756" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dashboard/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="74" column="24" lean-forward="false" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <marker date="1487247234597" expanded="true" signature="969:1060" ph="..." />
+                <marker date="1487247234597" expanded="true" signature="986:1060" ph="..." />
               </folding>
             </state>
           </provider>
@@ -161,24 +218,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>top c</find>
-      <find>colour</find>
-      <find>amoun</find>
-      <find>a0</find>
-      <find>static</find>
-      <find>DJANGO_</find>
-      <find>top</find>
-      <find>modal-design-problem</find>
-      <find>form</find>
-      <find>form class</find>
-      <find>&lt;form class=&quot;form-horizontal&quot; method=&quot;post&quot;&gt;</find>
-      <find>&lt;form class=&quot;form-horizontal&quot;&gt;</find>
-      <find>probe</find>
-      <find>potential</find>
       <find>potential_solut</find>
       <find>potential po</find>
       <find>Inspi</find>
       <find>potential pro</find>
+      <find>CONTENT</find>
+      <find>endblo</find>
+      <find>aside</find>
+      <find>app-b</find>
+      <find>summern</find>
+      <find>screenfull</find>
+      <find>app-body</find>
+      <find>bootstrap</find>
+      <find>New</find>
+      <find>summernote</find>
+      <find>summernot</find>
+      <find>summer</find>
+      <find>rita</find>
+      <find>modal-type</find>
+      <find>Judith</find>
+      <find>kygo</find>
+      <find>for</find>
+      <find>Client</find>
+      <find>Clients</find>
+      <find>contac</find>
+      <find>arrow</find>
+      <find>app-</find>
+      <find>conten</find>
+      <find>content</find>
+      <find>modal</find>
+      <find>&lt;div id=&quot;content&quot;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -187,7 +256,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dashboard/urls.py" />
         <option value="$PROJECT_DIR$/OGT/settings.py" />
         <option value="$PROJECT_DIR$/templates/dashboard/index.html" />
         <option value="$PROJECT_DIR$/dashboard/admin.py" />
@@ -195,7 +263,12 @@
         <option value="$PROJECT_DIR$/dashboard/models.py" />
         <option value="$PROJECT_DIR$/dashboard/forms.py" />
         <option value="$PROJECT_DIR$/dashboard/views.py" />
+        <option value="$PROJECT_DIR$/dashboard/urls.py" />
+        <option value="$PROJECT_DIR$/templates/dashboard/base.html" />
         <option value="$PROJECT_DIR$/templates/dashboard/dashboard.html" />
+        <option value="$PROJECT_DIR$/templates/dashboard/projects.html" />
+        <option value="$PROJECT_DIR$/templates/dashboard/potential_clients.html" />
+        <option value="$PROJECT_DIR$/templates/dashboard/clients.html" />
       </list>
     </option>
   </component>
@@ -207,7 +280,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="width" value="1370" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectView">
@@ -225,6 +299,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -247,13 +322,30 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ogt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="dashboard" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -270,6 +362,11 @@
         <option name="myModuleName" value="OGT" />
       </console-settings>
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\opeyemi.onikute\Documents\Personal\ogt\templates\dashboard" />
+    </key>
   </component>
   <component name="RunManager" selected="Django server.OGT">
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
@@ -384,6 +481,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -544,10 +647,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1370" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24524158" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5206795" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -571,13 +674,13 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329653" sideWeight="0.5206795" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5206795" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.4911374" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329653" sideWeight="0.47932053" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.47932053" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24524158" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -606,29 +709,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/OGT/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="6" lean-forward="false" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OGT/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-          <folding>
-            <element signature="e#219#228#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dashboard/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="82" lean-forward="false" selection-start-line="1" selection-start-column="66" selection-end-line="1" selection-end-column="82" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -636,7 +720,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="42" lean-forward="false" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-          <folding />
+          <folding>
+            <element signature="e#636#677#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -644,9 +730,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -690,9 +773,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -708,9 +789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-          <folding>
-            <element signature="e#219#228#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -718,7 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="82" lean-forward="false" selection-start-line="1" selection-start-column="66" selection-end-line="1" selection-end-column="82" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -726,7 +803,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="42" lean-forward="false" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-          <folding />
+          <folding>
+            <element signature="e#636#677#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -734,9 +813,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#22#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -780,9 +856,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -798,7 +872,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="82" lean-forward="false" selection-start-line="1" selection-start-column="66" selection-end-line="1" selection-end-column="82" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -806,7 +879,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="42" lean-forward="false" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-          <folding />
+          <folding>
+            <element signature="e#636#677#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -850,9 +925,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -868,7 +941,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -876,7 +948,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#636#677#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -904,9 +978,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1462">
           <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -914,17 +986,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="82" lean-forward="false" selection-start-line="1" selection-start-column="66" selection-end-line="1" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dashboard/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="1" lean-forward="false" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -940,17 +1001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-          <folding>
-            <element signature="e#219#228#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OGT/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="42" lean-forward="false" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -958,57 +1008,135 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OGT/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="51" lean-forward="false" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
           <folding>
-            <element signature="e#22#31#0" expanded="true" />
+            <element signature="e#636#677#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/dashboard/index.html">
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="35" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/forgot-password.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/block.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="228" column="16" lean-forward="false" selection-start-line="228" selection-start-column="16" selection-end-line="228" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/ui.social.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2805">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dashboard/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="47" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dashboard/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state relative-caret-position="748">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
-            <marker date="1487161449937" expanded="true" signature="509:634" ph="..." />
-            <marker date="1487161449937" expanded="true" signature="676:756" ph="..." />
-            <marker date="1487161449937" expanded="true" signature="693:756" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dashboard/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="74" column="24" lean-forward="false" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <marker date="1487247234597" expanded="true" signature="969:1060" ph="..." />
+            <marker date="1487247234597" expanded="true" signature="986:1060" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dashboard/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        <state relative-caret-position="270">
+          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dashboard/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="60" lean-forward="false" selection-start-line="12" selection-start-column="60" selection-end-line="12" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/clients.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/potential_clients.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="36" lean-forward="false" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/projects.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/dashboard/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="1461" column="69" lean-forward="false" selection-start-line="1461" selection-start-column="69" selection-end-line="1461" selection-end-column="69" />
+        <state relative-caret-position="289">
+          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
           <folding />
         </state>
       </provider>

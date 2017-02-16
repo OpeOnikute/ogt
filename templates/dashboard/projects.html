@@ -1,0 +1,839 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+
+{% block title %}| Projects{% endblock %}
+
+  <!-- content -->
+{% block content %}
+    <div class="app-header hidden-lg-up black lt b-b">
+          <div class="navbar" data-pjax>
+                <a data-toggle="modal" data-target="#aside" class="navbar-item pull-left hidden-lg-up p-r m-a-0">
+                  <i class="ion-navicon"></i>
+                </a>
+                <div class="navbar-item pull-left h5" id="pageTitle">Project</div>
+                <!-- nabar right -->
+                <ul class="nav navbar-nav pull-right">
+                  <li class="nav-item dropdown pos-stc-xs">
+                    <a class="nav-link" data-toggle="dropdown">
+                      <i class="ion-android-search w-24"></i>
+                    </a>
+                    <div class="dropdown-menu text-color w-md animated fadeInUp pull-right">
+                      <!-- search form -->
+                      <form class="navbar-form form-inline navbar-item m-a-0 p-x v-m" role="search">
+                        <div class="form-group l-h m-a-0">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search projects...">
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn white b-a no-shadow"><i class="fa fa-search"></i></button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <!-- / search form -->
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown pos-stc-xs">
+                    <a class="nav-link clear" data-toggle="dropdown">
+                      <i class="ion-android-notifications-none w-24"></i>
+                      <span class="label up p-a-0 danger"></span>
+                    </a>
+                    <!-- dropdown -->
+                    <div class="dropdown-menu pull-right w-xl animated fadeIn no-bg no-border no-shadow">
+                        <div class="scrollable" style="max-height: 220px">
+                          <ul class="list-group list-group-gap m-a-0">
+                            <li class="list-group-item dark-white box-shadow-z0 b">
+                              <span class="pull-left m-r">
+                                <img src="images/a0.jpg" alt="..." class="w-40 img-circle">
+                              </span>
+                              <span class="clear block">
+                                Use awesome <a href="#" class="text-primary">animate.css</a><br>
+                                <small class="text-muted">10 minutes ago</small>
+                              </span>
+                            </li>
+                            <li class="list-group-item dark-white box-shadow-z0 b">
+                              <span class="pull-left m-r">
+                                <img src="images/a1.jpg" alt="..." class="w-40 img-circle">
+                              </span>
+                              <span class="clear block">
+                                <a href="#" class="text-primary">Joe</a> Added you as friend<br>
+                                <small class="text-muted">2 hours ago</small>
+                              </span>
+                            </li>
+                            <li class="list-group-item dark-white text-color box-shadow-z0 b">
+                              <span class="pull-left m-r">
+                                <img src="images/a2.jpg" alt="..." class="w-40 img-circle">
+                              </span>
+                              <span class="clear block">
+                                <a href="#" class="text-primary">Danie</a> sent you a message<br>
+                                <small class="text-muted">1 day ago</small>
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    <!-- / dropdown -->
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link clear" data-toggle="dropdown">
+                      <span class="avatar w-32">
+                        <img src="images/a3.jpg" class="w-full rounded" alt="...">
+                      </span>
+                    </a>
+                    <div class="dropdown-menu w dropdown-menu-scale pull-right">
+                      <a class="dropdown-item" href="profile.html">
+                        <span>Profile</span>
+                      </a>
+                      <a class="dropdown-item" href="setting.html">
+                        <span>Settings</span>
+                      </a>
+                      <a class="dropdown-item" href="app.inbox.html">
+                        <span>Inbox</span>
+                      </a>
+                      <a class="dropdown-item" href="app.message.html">
+                        <span>Message</span>
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="docs.html">
+                        Need help?
+                      </a>
+                      <a class="dropdown-item" href="signin.html">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+                <!-- / navbar right -->
+          </div>
+    </div>
+    <div class="app-body">
+
+<!-- ############ PAGE START-->
+
+<div class="app-body-inner">
+	<div class="row-col">
+		<div class="col-xs-3 w-xl modal fade aside aside-lg" id="subnav">
+			<div class="row-col black b-r bg">
+				<div class="b-b">
+					<div class="navbar no-radius">
+					    <!-- nabar right -->
+					    <ul class="nav navbar-nav pull-right m-l">
+						    <li class="nav-item dropdown">
+						        <a class="nav-link" data-toggle="dropdown">
+						            <span class="btn btn-xs white rounded dropdown-toggle">
+						            	New
+						            </span>
+						        </a>
+						        <div class="dropdown-menu text-color pull-right" role="menu">
+								  <a class="dropdown-item" data-toggle="modal" data-target="#modal-client">
+								  	<i class="fa fa-inbox"></i>
+								  	New project
+								  </a>
+								  <a class="dropdown-item" data-toggle="modal" data-target="#modal-task">
+								  	<i class="fa fa-check-square-o"></i>
+								  	New task
+								  </a>
+								</div>
+						    </li>
+					    </ul>
+					    <!-- / navbar right -->
+					    <!-- link and dropdown -->
+					    <ul class="nav navbar-nav">
+					        <li class="nav-item">
+					          	<span class="navbar-item text-md">Projects</span>
+					        </li>
+					    </ul>
+					    <!-- / link and dropdown -->
+					</div>
+				</div>
+		      	<!-- flex content -->
+		      	<div class="row-row">
+			      	<div class="row-body scrollable hover">
+				      	<div class="row-inner">
+				      		<!-- left content -->
+				      		<div class="list" data-ui-list="b-r b-2x b-theme">
+                                    {% for project in projects %}
+				      			    <div class="list-item ">
+				      			      <div class="list-left">
+				      			        <span class="w-40 avatar circle lt">
+				      			            <span class="fa fa-twitter text-md"></span>
+				      			        </span>
+				      			      </div>
+				      			      <div class="list-body">
+				      			          <div class="pull-right dropdown">
+				      			            <a href="#" data-toggle="dropdown" class="text-muted"><i class="fa fa-fw fa-ellipsis-h"></i></a>
+				      			            <div class="dropdown-menu pull-right text-color" role="menu">
+				      			              <a class="dropdown-item">
+				      			              	<i class="fa fa-tag"></i>
+				      			              	Tag item
+				      			              </a>
+				      			              <a class="dropdown-item">
+				      			              	<i class="fa fa-pencil"></i>
+				      			              	Edit item
+				      			              </a>
+				      			              <a class="dropdown-item">
+				      			              	<i class="fa fa-trash"></i>
+				      			              	Delete item
+				      			              </a>
+				      			              <div class="dropdown-divider"></div>
+				      			              <a class="dropdown-item">
+				      			              	<i class="fa fa-ellipsis-h"></i>
+				      			              	More action
+				      			              </a>
+				      			            </div>
+				      			          </div>
+				      			        <div class="item-title">
+				      			          <a href="#" class="_500">{{ project.project_name }}</a>
+				      			        </div>
+				      			        <small class="block text-ellipsis">
+                                            <span class="text-xs">For: {{ project.client.name }}</span><br>
+				      			          <span class="text-xs">
+				      			              50
+				      			          </span> <span class="text-muted">completed</span>
+				      			        </small>
+
+				      			        <div class="progress-xxs m-y-sm lter progress w-sm">
+				      			            <div class="progress-bar success" data-toggle="tooltip" title="Finished: 44%" style="width: 19%;">
+				      			            </div>
+				      			        </div>
+				      			      </div>
+				      			    </div>
+                                    {% endfor %}
+
+				      			    <div class="list-item ">
+				      			      <div class="list-left">
+				      			        <span class="w-40 avatar circle lt">
+				      			            <span class="fa fa-tumblr text-md"></span>
+				      			        </span>
+				      			      </div>
+				      			      <div class="list-body">
+				      			          <div class="pull-right dropdown">
+				      			            <a href="#" data-toggle="dropdown" class="text-muted"><i class="fa fa-fw fa-ellipsis-h"></i></a>
+				      			            <div class="dropdown-menu pull-right text-color" role="menu">
+				      			              <a class="dropdown-item">
+				      			              	<i class="fa fa-tag"></i>
+				      			              	Tag item
+				      			              </a>
+				      			              <a class="dropdown-item">
+				      			              	<i class="fa fa-pencil"></i>
+				      			              	Edit item
+				      			              </a>
+				      			              <a class="dropdown-item">
+				      			              	<i class="fa fa-trash"></i>
+				      			              	Delete item
+				      			              </a>
+				      			              <div class="dropdown-divider"></div>
+				      			              <a class="dropdown-item">
+				      			              	<i class="fa fa-ellipsis-h"></i>
+				      			              	More action
+				      			              </a>
+				      			            </div>
+				      			          </div>
+				      			        <div class="item-title">
+				      			          <a href="#" class="_500">Tumblr theme</a>
+				      			        </div>
+				      			        <small class="block text-ellipsis">
+				      			            <span class="text-xs">
+				      			              8
+				      			            </span> <span class="text-muted">open tasks, </span>
+				      			          <span class="text-xs">
+				      			              5
+				      			          </span> <span class="text-muted">completed</span>
+				      			        </small>
+
+				      			        <div class="progress-xxs m-y-sm lter progress w-sm">
+				      			            <div class="progress-bar success" data-toggle="tooltip" title="Finished: 23%" style="width: 41%;">
+				      			            </div>
+				      			        </div>
+				      			      </div>
+				      			    </div>
+				        	</div>
+				        	<!-- / -->
+				      	</div>
+				    </div>
+		      	</div>
+		      	<!-- / -->
+			    <!-- footer -->
+			    <div class="p-a b-t clearfix">
+			      	<div class="btn-group pull-right">
+			            <a href="#" class="btn btn-xs white circle"><i class="fa fa-fw fa-angle-left"></i></a>
+			            <a href="#" class="btn btn-xs white circle"><i class="fa fa-fw fa-angle-right"></i></a>
+			        </div>
+			      	<span class="text-sm text-muted">Total: <strong>4</strong></span>
+			    </div>
+			    <!-- / -->
+		    </div>
+		</div>
+		<div class="col-xs-4 modal fade aside aside-sm" id="list">
+			<div class="row-col b-r light lt">
+				<div class="b-b">
+					<div class="navbar no-radius">
+						<a data-toggle="modal" data-target="#subnav" data-ui-modal class="navbar-item pull-left hidden-xl-up hidden-sm-down">
+							<span class="btn btn-sm btn-icon blue">
+					      		<i class="fa fa-th"></i>
+					        </span>
+					    </a>
+					    <!-- nabar right -->
+					    <ul class="nav navbar-nav pull-right m-l">
+						    <li class="nav-item dropdown">
+						        <a class="nav-link text-muted" href="#" data-toggle="dropdown">
+						        	<i class="fa fa-ellipsis-h"></i>
+						        </a>
+						        <div class="dropdown-menu pull-right text-color" role="menu">
+						          <a class="dropdown-item">
+						          	<i class="fa fa-tag"></i>
+						          	Tag item
+						          </a>
+						          <a class="dropdown-item">
+						          	<i class="fa fa-pencil"></i>
+						          	Edit item
+						          </a>
+						          <a class="dropdown-item">
+						          	<i class="fa fa-trash"></i>
+						          	Delete item
+						          </a>
+						          <div class="dropdown-divider"></div>
+						          <a class="dropdown-item">
+						          	<i class="fa fa-ellipsis-h"></i>
+						          	More action
+						          </a>
+						        </div>
+						    </li>
+					    </ul>
+					    <!-- / navbar right -->
+					    <!-- link and dropdown -->
+					    <ul class="nav navbar-nav">
+					        <li class="nav-item">
+					          	<span class="navbar-item m-r-0 text-md">Tasks</span>
+					        </li>
+					        <li class="nav-item">
+						        <a class="nav-link">
+						            <span class="label rounded">
+						            	55
+						            </span>
+						        </a>
+						    </li>
+					    </ul>
+					    <!-- / link and dropdown -->
+					</div>
+				</div>
+		      	<!-- flex content -->
+		      	<div class="row-row">
+			      	<div class="row-body scrollable hover">
+				      	<div class="row-inner">
+				      		<!-- content -->
+				      		<div class="list" data-ui-list="b-r b-2x b-theme">
+				      			<div class="list-item row-col">
+				      				<div class="col-xs">
+				      					<label class="md-check p-r-xs">
+							              <input type="checkbox">
+							              <i></i>
+							            </label>
+				      				</div>
+				      				<div class="list-body col-xs">
+				      					<a href="#" class="item-title _500">Wireframes for app landing page</a>
+				      					<div class="text-muted text-xs">
+				      						<i class="fa fa-clock-o"></i> 10:30 pm, 24 July
+				      					</div>
+				      					<div class="dropdown m-t-xs">
+				      						<a href="#" data-toggle="dropdown">
+				      							<span class="label warn rounded dropdown-toggle">In progress</span>
+				      						</a>
+				      						<div class="dropdown-menu">
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-accent"></i>Active
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-warn"></i>In progress
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-success"></i>Completed
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-muted"></i>Archived
+				      							</a>
+				      						</div>
+				      					</div>
+				      				</div>
+				      			</div>
+				      			<div class="list-item row-col">
+				      				<div class="col-xs">
+				      					<label class="md-check p-r-xs">
+							              <input type="checkbox">
+							              <i></i>
+							            </label>
+				      				</div>
+				      				<div class="list-body col-xs">
+				      					<a href="#" class="item-title _500">Backend development</a>
+				      					<div class="text-muted text-xs">
+				      						<i class="fa fa-clock-o"></i> 10:30 pm, 24 July
+				      					</div>
+				      					<div class="dropdown m-t-xs">
+				      						<a href="#" data-toggle="dropdown">
+				      							<span class="label accent rounded dropdown-toggle">Active</span>
+				      						</a>
+				      						<div class="dropdown-menu">
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-accent"></i>Active
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-warn"></i>In progress
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-success"></i>Completed
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-muted"></i>Archived
+				      							</a>
+				      						</div>
+				      					</div>
+				      				</div>
+				      			</div>
+				      			<div class="list-item row-col">
+				      				<div class="col-xs">
+				      					<label class="md-check p-r-xs">
+							              <input type="checkbox">
+							              <i></i>
+							            </label>
+				      				</div>
+				      				<div class="list-body col-xs">
+				      					<a href="#" class="item-title _500">Iconography and illustration style sheet</a>
+				      					<div class="text-muted text-xs">
+				      						<i class="fa fa-clock-o"></i> 11:30 pm, 20 July
+				      					</div>
+				      					<div class="dropdown m-t-xs">
+				      						<a href="#" data-toggle="dropdown">
+				      							<span class="label success rounded dropdown-toggle">Completed</span>
+				      						</a>
+				      						<div class="dropdown-menu">
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-accent"></i>Active
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-warn"></i>In progress
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-success"></i>Completed
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-muted"></i>Archived
+				      							</a>
+				      						</div>
+				      					</div>
+				      				</div>
+				      			</div>
+				      			<div class="list-item row-col">
+				      				<div class="col-xs">
+				      					<label class="md-check p-r-xs">
+							              <input type="checkbox">
+							              <i></i>
+							            </label>
+				      				</div>
+				      				<div class="list-body col-xs">
+				      					<a href="#" class="item-title _500">Design requirements documentation</a>
+				      					<div class="text-muted text-xs">
+				      						<i class="fa fa-clock-o"></i> 4:40 pm, 18 July
+				      					</div>
+				      					<div class="dropdown m-t-xs">
+				      						<a href="#" data-toggle="dropdown">
+				      							<span class="label success rounded dropdown-toggle">Completed</span>
+				      						</a>
+				      						<div class="dropdown-menu">
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-accent"></i>Active
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-warn"></i>In progress
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-success"></i>Completed
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-muted"></i>Archived
+				      							</a>
+				      						</div>
+				      					</div>
+				      				</div>
+				      			</div>
+				      			<div class="list-item row-col">
+				      				<div class="col-xs">
+				      					<label class="md-check p-r-xs">
+							              <input type="checkbox">
+							              <i></i>
+							            </label>
+				      				</div>
+				      				<div class="list-body col-xs">
+				      					<a href="#" class="item-title _500">Project teammates video meeting</a>
+				      					<div class="text-muted text-xs">
+				      						<i class="fa fa-clock-o"></i> 12:30 pm, 5 July
+				      					</div>
+				      					<div class="dropdown m-t-xs">
+				      						<a href="#" data-toggle="dropdown">
+				      							<span class="label rounded dropdown-toggle">Archived</span>
+				      						</a>
+				      						<div class="dropdown-menu">
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-accent"></i>Active
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-warn"></i>In progress
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-success"></i>Completed
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-muted"></i>Archived
+				      							</a>
+				      						</div>
+				      					</div>
+				      				</div>
+				      			</div>
+				      			<div class="list-item row-col">
+				      				<div class="col-xs">
+				      					<label class="md-check p-r-xs">
+							              <input type="checkbox">
+							              <i></i>
+							            </label>
+				      				</div>
+				      				<div class="list-body col-xs">
+				      					<a href="#" class="item-title _500">Kick-off meeting</a>
+				      					<div class="text-muted text-xs">
+				      						<i class="fa fa-clock-o"></i> 9:30 pm, 5 July
+				      					</div>
+				      					<div class="dropdown m-t-xs">
+				      						<a href="#" data-toggle="dropdown">
+				      							<span class="label rounded dropdown-toggle">Archived</span>
+				      						</a>
+				      						<div class="dropdown-menu">
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-accent"></i>Active
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-warn"></i>In progress
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-success"></i>Completed
+				      							</a>
+				      							<a class="dropdown-item" href="#">
+				      								<i class="fa fa-circle-o text-muted"></i>Archived
+				      							</a>
+				      						</div>
+				      					</div>
+				      				</div>
+				      			</div>
+				        	</div>
+				        	<!-- / -->
+				      	</div>
+				    </div>
+		      	</div>
+		      	<!-- / -->
+			    <!-- footer -->
+			    <div class="p-a b-t clearfix">
+			      	<div class="btn-group pull-right">
+			            <a href="#" class="btn btn-xs white circle"><i class="fa fa-fw fa-angle-left"></i></a>
+			            <a href="#" class="btn btn-xs white circle"><i class="fa fa-fw fa-angle-right"></i></a>
+			        </div>
+			      	<span class="text-sm text-muted">Completed: <strong>10</strong>, In Progress: <strong>5</strong></span>
+			    </div>
+			    <!-- / -->
+		    </div>
+		</div>
+		<div class="col-xs-5" id="detail">
+			<div class="row-col white b-r">
+				<div class="b-b">
+					<div class="navbar no-radius">
+
+					    <!-- nabar right -->
+					    <ul class="nav navbar-nav pull-right m-l">
+						    <li class="nav-item dropdown">
+						        <a class="nav-link">
+						            <span class="label warn rounded">
+						            	24
+						            </span>
+						        </a>
+						    </li>
+					    </ul>
+					    <!-- / navbar right -->
+
+						<a data-toggle="modal" data-target="#subnav" data-ui-modal class="navbar-item pull-left hidden-md-up">
+							<span class="btn btn-sm btn-icon blue">
+					      		<i class="fa fa-th"></i>
+					        </span>
+					    </a>
+					    <a data-toggle="modal" data-target="#list" data-ui-modal class="navbar-item pull-left hidden-md-up">
+					    	<span class="btn btn-sm btn-icon btn-default">
+					      		<i class="fa fa-list"></i>
+					      	</span>
+					    </a>
+					    <span class="navbar-item text-md text-ellipsis">Activities</span>
+					</div>
+				</div>
+		      	<!-- flex content -->
+		      	<div class="row-row">
+			      	<div class="row-body scrollable hover">
+				      	<div class="row-inner">
+					      	<!-- content -->
+					      	<div class="p-a">
+					      		<div class="streamline streamline-theme m-b">
+						          <div class="sl-item b-primary">
+						            <div class="sl-content">
+						              <div class="sl-date text-muted">Just now</div>
+						              <p>Finished task <a href="#" class="text-info">#features 4</a>.</p>
+						            </div>
+						          </div>
+						          <div class="sl-item b-success">
+						            <div class="sl-content">
+						              <div class="sl-date text-muted">11:30</div>
+						              <p><a href="#">@Jessi</a> uploaded a file <a href="#" class="text-info">documentation.pdf</a></p>
+						            </div>
+						          </div>
+						          <div class="sl-item b-info">
+						            <div class="sl-content">
+						              <div class="sl-date text-muted">10:30</div>
+						              <p>Call to customer <a href="#" class="text-info">Jacob</a> and discuss the detail.</p>
+						            </div>
+						          </div>
+						          <div class="sl-item b-warn">
+						            <div class="sl-content">
+						              <div class="sl-date text-muted">3 days ago</div>
+						              <p><a href="#" class="text-info">Jessi</a> commented your post.</p>
+						            </div>
+						          </div>
+						          <div class="sl-item b-warning">
+						            <div class="sl-content">
+						              <div class="sl-date text-muted">Thu, 10 Mar</div>
+						              <p><a href="#" class="text-info">Jessi</a> report a issue #2122.</p>
+						            </div>
+						          </div>
+						          <div class="sl-item">
+						            <div class="sl-content">
+						              <div class="sl-date text-muted">Sat, 5 Mar</div>
+						              <p>Prepare for presentation</p>
+						            </div>
+						          </div>
+						          <div class="sl-item">
+						            <div class="sl-content">
+						              <div class="sl-date text-muted">Sun, 11 Feb</div>
+						              <p><a href="#" class="text-info">Jessi</a> assign you a task <a href="#" class="text-info">Mockup Design</a>.</p>
+						            </div>
+						          </div>
+						          <div class="sl-item">
+						            <div class="sl-content">
+						              <div class="sl-date text-muted">Thu, 17 Jan</div>
+						              <p>Task created</p>
+						            </div>
+						          </div>
+						        </div>
+					      	</div>
+					        <!-- / -->
+					    </div>
+			      	</div>
+			    </div>
+		      	<!-- footer -->
+		      	<div class="p-a p-y-sm b-t">
+				    <form>
+				        <div class="input-group b-a b-transparent">
+				          	<input type="text" class="form-control no-border" placeholder="What are you doing">
+				          	<span class="input-group-btn">
+				            	<button class="btn no-bg no-shadow" type="button">
+				            		<i class="fa fa-send text-success"></i>
+				            	</button>
+				          	</span>
+				        </div>
+				    </form>
+				</div>
+				<!--  -->
+		    </div>
+		</div>
+		<div class="col-xs w-80" id="sidenav">
+			<div class="row-col bg">
+		      	<!-- flex content -->
+		      	<div class="row-row">
+			      	<div class="row-body scrollable hover">
+				      	<div class="row-inner">
+					      	<!-- content -->
+					      	<div class="p-y text-center">
+					      		<div>
+							      	<a href="#" class="inline">
+							      		<span class="circle w-40 avatar success">
+							      			M
+							      		</span>
+							      	</a>
+							    </div>
+							    <div>
+							      	<a href="#" class="inline">
+							      		<span class="circle w-40 avatar info">
+							      			RD
+							      		</span>
+							      	</a>
+							    </div>
+							    <div>
+							      	<a href="#" class="inline">
+							      		<span class="circle w-40 avatar">
+							      			<img src="images/a2.jpg" alt=".">
+							      		</span>
+							      	</a>
+							    </div>
+							    <div>
+							      	<a href="#" class="inline">
+							      		<span class="circle w-40 avatar">
+							      			<img src="images/a3.jpg" alt=".">
+							      		</span>
+							      	</a>
+							    </div>
+							    <div>
+							      	<a href="#" class="inline">
+							      		<span class="circle w-40 avatar grey">
+							      			S
+							      		</span>
+							      	</a>
+							    </div>
+					      	</div>
+					    </div>
+			      	</div>
+			    </div>
+		      	<!-- / -->
+		      	<!-- footer -->
+			    <div class="p-y text-center">
+			        <a href="#" class="md-btn md-mini md-fab primary"><i class="fa fa-plus"></i></a>
+			    </div>
+			    <!-- / -->
+		    </div>
+		</div>
+	</div>
+</div>
+    </div>
+{% endblock %}
+<!-- ############ PAGE END-->
+
+{% block modals %}
+<!-- NEW CLIENT MODAL -->
+<div class="modal fade" id="modal-client">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header _600">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          New Project
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" method="post">
+          {% csrf_token %}
+              <input type="text" name="modal-type" value="JobForm" class="form-control" hidden>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Name:</label>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" name="project_name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Client:</label>
+                <div class="col-lg-8">
+                    <select name="client" class="form-control">
+                        {% for client in clients %}
+                        <option value={{ client.id }}>{{ client.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+              <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Start Date:</label>
+                <div class="col-lg-8">
+                    <input type="date" class="form-control" name="date">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Price:</label>
+                <div class="col-lg-10">
+                    <div class="b-a">
+                      <div class="col-lg-8">
+                        <input type="number" class="form-control" name="price">
+                      </div>
+                    </div>
+                </div>
+            </div>
+          <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Payment Status:</label>
+                <div class="col-lg-10">
+                    <div class="b-a">
+                      <div class="col-lg-8">
+                        <select name="payment_status" class="form-control">
+                            <option value='Paid'>Paid</option>
+                            <option value='Unpaid'>Unpaid</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
+            </div>
+             <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Completed?</label>
+                <div class="col-lg-10">
+                    <div class="b-a">
+                      <div class="col-lg-8">
+                        <select name="completion_status" class="form-control">
+                            <option value='Yes'>Yes</option>
+                            <option value='No'>No</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-8 offset-lg-2">
+                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-task">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header _600">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          New Task
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Name:</label>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Title:</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Description</label>
+                <div class="col-lg-10">
+                    <div class="b-a">
+                      <div data-ui-jp="summernote" data-ui-options="{height: 150,
+                        toolbar: [
+                          ['style', ['bold', 'italic', 'underline', 'clear']],
+                          ['color', ['color']],
+                          ['para', ['ul', 'ol', 'paragraph']],
+                          ['height', ['height']]
+                        ]}">
+                  </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-8 offset-lg-2">
+                    <button class="btn primary btn-sm p-x-md">Save</button>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- END MODAL -->
+{% endblock %}
+<!-- ############ LAYOUT END-->

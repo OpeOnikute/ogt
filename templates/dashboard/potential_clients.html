@@ -1,0 +1,245 @@
+{% extends "dashboard/base.html" %}
+{% load staticfiles %}
+
+{% block title %}| Potential Clients{% endblock %}
+
+
+<div class="app-body">
+
+<!-- ############ PAGE START-->
+{% block content %}
+<div class="app-body-inner">
+	<div class="row-col">
+		<div class="white bg b-b">
+			<div class="navbar no-radius box-shadow-z1">
+				<a data-toggle="modal" data-target="#subnav" data-ui-modal class="navbar-item pull-left hidden-lg-up">
+					<span class="btn btn-sm btn-icon info">
+			      		<i class="fa fa-th"></i>
+			        </span>
+			    </a>
+			    <a data-toggle="modal" data-target="#list" data-ui-modal class="navbar-item pull-left hidden-md-up">
+			    	<span class="btn btn-sm btn-icon white">
+			      		<i class="fa fa-list"></i>
+			      	</span>
+			    </a>
+			    <!-- nabar right -->
+			    <ul class="nav navbar-nav pull-right m-l">
+				    <li class="nav-item dropdown">
+				        <a class="nav-link text-muted" href="#" data-toggle="dropdown">
+				        	<i class="fa fa-ellipsis-h"></i>
+				        </a>
+				        <div class="dropdown-menu pull-right text-color" role="menu">
+				          <a class="dropdown-item">
+				          	<i class="fa fa-tag"></i>
+				          	Tag item
+				          </a>
+				          <a class="dropdown-item">
+				          	<i class="fa fa-pencil"></i>
+				          	Edit item
+				          </a>
+				          <a class="dropdown-item">
+				          	<i class="fa fa-trash"></i>
+				          	Delete item
+				          </a>
+				          <div class="dropdown-divider"></div>
+				          <a class="dropdown-item">
+				          	<i class="fa fa-ellipsis-h"></i>
+				          	More action
+				          </a>
+				        </div>
+				    </li>
+			    </ul>
+			    <!-- / navbar right -->
+			    <!-- link and dropdown -->
+			    <ul class="nav navbar-nav">
+			        <li class="nav-item">
+			          	<span class="navbar-item text-md">Potential Clients</span>
+			        </li>
+			        <li class="nav-item">
+				        <a class="nav-link text-muted" data-toggle="modal" data-target="#modal-new" title="New client">
+				            <span class="">
+				            	<i class="fa fa-fw fa-plus"></i>
+				            	<span class="hidden-sm-down">New potential client</span>
+				            </span>
+				        </a>
+			        </li>
+			    </ul>
+			    <!-- / link and dropdown -->
+			</div>
+		</div>
+		<div class="row-row">
+			<div class="row-col">
+				<div class="col-xs modal fade aside aside-sm  b-r" id="list">
+					<div class="row-col">
+						<div class="row-row">
+							<div class="row-col">
+								<!-- col -->
+								<!-- <div class="col-xs w-40 white bg b-r">
+									<div class="row-col">
+										<div class="row-row">
+									      	<div class="row-body scrollable hover">
+										      	<div class="row-inner">
+										      		<div class="text-center text-sm p-y-sm">
+														<a href="#" class="block text-muted">A</a>
+														<a href="#" class="block text-muted active text-primary _600">B</a>
+														<a href="#" class="block text-muted">C</a>
+														<a href="#" class="block text-muted">D</a>
+														<a href="#" class="block text-muted">E</a>
+														<a href="#" class="block text-muted">F</a>
+														<a href="#" class="block text-muted">G</a>
+
+														<a href="#" class="block text-muted">H</a>
+														<a href="#" class="block text-muted">I</a>
+														<a href="#" class="block text-muted">J</a>
+														<a href="#" class="block text-muted">K</a>
+														<a href="#" class="block text-muted">L</a>
+														<a href="#" class="block text-muted">M</a>
+														<a href="#" class="block text-muted">N</a>
+
+														<a href="#" class="block text-muted">O</a>
+														<a href="#" class="block text-muted">P</a>
+														<a href="#" class="block text-muted">Q</a>
+														<a href="#" class="block text-muted">R</a>
+														<a href="#" class="block text-muted">S</a>
+														<a href="#" class="block text-muted">T</a>
+
+														<a href="#" class="block text-muted">U</a>
+														<a href="#" class="block text-muted">V</a>
+														<a href="#" class="block text-muted">W</a>
+														<a href="#" class="block text-muted">X</a>
+														<a href="#" class="block text-muted">Y</a>
+														<a href="#" class="block text-muted">Z</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div> -->
+								<!-- col -->
+								<div class="col-xs">
+									<div class="row-col white bg">
+								      	<!-- flex content -->
+								      	<div class="row-row">
+									      	<div class="row-body scrollable hover">
+										      	<div class="row-inner">
+										      		<!-- left content -->
+
+										      		<div class="list"  data-ui-list="b-r b-3x b-primary" data-ui-list-target="#" data-ui-list-target-class="show">
+                                                        {% for client in potential_clients %}
+                                                        <div class="list-item" data-ui-list-item-target="#{{ client.id }}" data-ui-list-target-class="show" >
+										      			      <div class="list-left">
+										      			        <span class="w-40 avatar circle blue-grey">
+										      			            R
+										      			        </span>
+										      			      </div>
+										      			      <div class="list-body">
+										      			          <div class="pull-right dropdown">
+										      			            <a href="#" data-toggle="dropdown" class="text-muted"><i class="fa fa-fw fa-ellipsis-v"></i></a>
+										      			            <div class="dropdown-menu pull-right text-color" role="menu">
+										      			              <a class="dropdown-item">
+										      			              	<i class="fa fa-tag"></i>
+										      			              	Tag item
+										      			              </a>
+										      			              <a class="dropdown-item">
+										      			              	<i class="fa fa-pencil"></i>
+										      			              	Edit item
+										      			              </a>
+										      			              <a class="dropdown-item">
+										      			              	<i class="fa fa-trash"></i>
+										      			              	Delete item
+										      			              </a>
+										      			              <div class="dropdown-divider"></div>
+										      			              <a class="dropdown-item">
+										      			              	<i class="fa fa-ellipsis-h"></i>
+										      			              	More action
+										      			              </a>
+										      			            </div>
+										      			          </div>
+										      			        <div class="item-title">
+										      			          <a href="#" class="_500">{{ client.name }}</a>
+										      			        </div>
+										      			        <small class="block text-muted text-ellipsis">
+										      			            {{ client.reason }}
+										      			        </small>
+										      			      </div>
+										      			    </div>
+                                                        {% endfor %}
+                                                    </div>
+										        	<!-- / -->
+										      	</div>
+										    </div>
+								      	</div>
+								      	<!-- / -->
+								    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>
+</div>
+    </div>
+{% endblock %}
+
+{% block modals %}
+<div class="modal fade" id="modal-new">
+	<div class="modal-dialog modal-lg">
+	  	<div class="modal-content">
+	  		<div class="modal-header _600">
+	  			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+	  			New Potential Client
+	  		</div>
+	  		<div class="modal-body">
+			    <form class="form-horizontal" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="modal-type" value="PotentialClientForm" class="form-control" hidden>
+				    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">Name:</label>
+				        <div class="col-lg-8">
+					        <input type="text" class="form-control" name="name">
+				        </div>
+				    </div>
+				    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">Why this person?</label>
+				        <div class="col-lg-8">
+				          	<input type="text" class="form-control" name="reason">
+				        </div>
+				    </div>
+				    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">How can you get this person?</label>
+				        <div class="col-lg-10">
+				          	<div class="col-lg-8">
+				          	    <input type="text" class="form-control" name="how_to_get_client">
+				            </div>
+				        </div>
+				    </div>
+                    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">What's the best way to contact this person?</label>
+				        <div class="col-lg-10">
+				          	<div class="col-lg-8">
+                                <select class="form-control" name="best_way_to_contact">
+                                    <option value="email">Email</option>
+                                    <option value="Phone Number">Phone Number</option>
+                                    <option value="Social media">Social Media</option>
+                                </select>
+				            </div>
+				        </div>
+				    </div>
+				    <div class="form-group row">
+				        <div class="col-lg-8 offset-lg-2">
+				          	<button type="submit" class="btn primary btn-sm p-x-md">Save</button>
+				        </div>
+				    </div>
+			    </form>
+		    </div>
+	  	</div>
+  	</div>
+</div>
+{% endblock %}
+<!-- ############ PAGE END-->
+
+

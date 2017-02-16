@@ -1,5 +1,5 @@
 from django import forms
-from .models import DesignProblems, PotentialClient, PotentialProject, Inspiration
+from .models import Job, DesignProblems, PotentialClient, PotentialProject, Inspiration, Client
 
 
 class DesignProblemsForm(forms.ModelForm):
@@ -29,3 +29,16 @@ class InspirationForm(forms.ModelForm):
         model = Inspiration
         fields = ('name', 'image')
 
+
+class JobForm(forms.ModelForm):
+
+    class Meta:
+        model = Job
+        fields = ('client', 'project_name', 'price', 'payment_status', 'completion_status')
+
+
+class ClientForm(forms.ModelForm):
+
+    class Meta:
+        model = Client
+        fields = ('name', 'email', 'phone_number')
