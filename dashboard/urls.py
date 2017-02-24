@@ -5,6 +5,7 @@ app_name = "dashboard"
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^login/', views.loginView, name='login'),
+    url(r'^logout/', views.logoutView, name='logout'),
     url(r'^signup/', views.signupView, name='signup'),
     url(r'^projects/', views.projects, name='projects'),
     url(r'^clients/', views.clients, name='clients'),

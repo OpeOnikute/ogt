@@ -2,7 +2,7 @@ import operator
 import django.core.exceptions as DjangoExceptions
 from actstream import action
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from .models import Job, Client, DesignProblems, PotentialClient, PotentialProject, Inspiration, Task
@@ -31,9 +31,16 @@ def loginView(request):
     return render(request, 'dashboard/login.html')
 
 
+def logoutView(request):
+
+    logout(request)
+    return HttpResponseRedirect(reverse('dashboard:index'))
+
+
+
 def signupView(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('dashboard:index'))
+        return HttpResponseRedirect(reverse('dashboard:login'))
 
     signupForm = SignUpForm()
 
