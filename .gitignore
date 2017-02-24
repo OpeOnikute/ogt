@@ -1,2 +1,4 @@
+*.pyc
 
-C:\Users\opeyemi.onikute\Documents\Personal\ogt\.idea
+.idea/
+.pyc

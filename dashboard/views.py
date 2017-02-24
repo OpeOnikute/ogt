@@ -1,7 +1,56 @@
 import operator
+import django.core.exceptions as DjangoExceptions
+from actstream import action
 from django.shortcuts import render
-from .models import Job, Client, DesignProblems, PotentialClient, PotentialProject, Inspiration
-from .forms import DesignProblemsForm, PotentialClientForm, PotentialProjectForm, InspirationForm, JobForm, ClientForm
+from django.contrib.auth import authenticate, login
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from .models import Job, Client, DesignProblems, PotentialClient, PotentialProject, Inspiration, Task
+from .forms import *
+
+
+def loginView(request):
+
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('dashboard:index'))
+
+    context = {}
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse('dashboard:index'))
+        else:
+            context['userNotFound'] = 'Sorry, this user does not exist.'
+            return render(request, 'dashboard/login.html', context)
+
+    return render(request, 'dashboard/login.html')
+
+
+def signupView(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('dashboard:index'))
+
+    signupForm = SignUpForm()
+
+    context = {
+        'form': signupForm,
+    }
+
+    if request.method == 'POST':
+        signupForm = SignUpForm(request.POST)
+        if signupForm.is_valid():
+           # ksdbk
+            pass
+        else:
+            context['form'] = signupForm
+            return render(request, 'dashboard/login.html', context)
+
+    return render(request, 'dashboard/signup.html', context)
 
 
 def get_total_amount_from_client(client):
@@ -37,7 +86,7 @@ def save_new_job(data, files):
         real_model = eval(modal_type.strip('Form'))
 
         try:
-            already_existing_instance, created = real_model.objects.get_or_create(project_name=data['project_name'])
+            already_existing_instance, created = real_model.objects.get(project_name=data['project_name'])
         except:
             already_existing_instance = real_model()
 
@@ -63,12 +112,16 @@ def save_modal_data(data, files):
     """
     modal_type = data["modal-type"]
 
-    if modal_type in ['DesignProblemsForm', 'PotentialClientForm', 'PotentialProjectForm', 'InspirationForm', 'ClientForm']:
+    if modal_type in ['DesignProblemsForm', 'PotentialClientForm', 'PotentialProjectForm', 'InspirationForm',
+                      'ClientForm', 'TaskForm']:
 
         modal_model = eval(modal_type)
         real_model = eval(modal_type.strip('Form'))
 
-        already_existing_instance, created = real_model.objects.get_or_create(name=data['name'])
+        try:
+            already_existing_instance = real_model.objects.get(name=data['name'])
+        except:
+            already_existing_instance = real_model()
 
         form_object = modal_model(data, files, instance=already_existing_instance)
 
@@ -82,6 +135,14 @@ def save_modal_data(data, files):
 
 
 def index(request):
+
+    # Make the user log in
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('dashboard:login'))
+
+    # RandClient = Client.objects.get(id=1)
+    randJob = Job.objects.get(id=2)
+    # action.send(randJob, verb='is now linked to', target=RandClient)
     fulfilled_jobs = Job.objects.filter(payment_status='Paid')
     amount_made = float()
     for job in fulfilled_jobs:
@@ -97,8 +158,10 @@ def index(request):
     inspirations = Inspiration.objects.all()
 
     if request.method == 'POST':
-        response = save_modal_data(request.POST, request.FILES)
+        save_modal_data(request.POST, request.FILES)
+
     context = {
+        'request': request,
         'amount_made': amount_made,
         'total_completed_jobs': total_completed_jobs,
         'total_uncompleted_jobs': total_uncompleted_jobs,
@@ -108,6 +171,7 @@ def index(request):
         'potential_projects': potential_projects,
         'inspirations': inspirations,
         'top_clients': top_clients,
+        'randJob': randJob,
     }
     return render(request, 'dashboard/dashboard.html', context)
 
@@ -116,13 +180,20 @@ def projects(request):
 
     all_projects = Job.objects.all()
     clients = Client.objects.all()
+    tasks = Task.objects.all().order_by('date')
+
     context = {
+        'request': request,
         'projects': all_projects,
         'clients': clients,
+        'tasks': tasks,
     }
 
     if request.method == 'POST':
-        response=save_new_job(request.POST, request.FILES)
+        if request.POST['modal-type'] == 'JobForm':
+            save_new_job(request.POST, request.FILES)
+        elif request.POST['modal-type'] == 'TaskForm':
+            save_modal_data(request.POST, request.FILES)
 
     return render(request, 'dashboard/projects.html', context)
 
@@ -131,6 +202,7 @@ def clients(request):
 
     clients = Client.objects.all()
     context = {
+        'request': request,
         'clients': clients,
     }
 
@@ -144,6 +216,7 @@ def potential_clients(request):
 
     potential_clients = PotentialClient.objects.all()
     context = {
+        'request': request,
         'potential_clients': potential_clients,
     }
 
@@ -151,3 +224,15 @@ def potential_clients(request):
         save_modal_data(request.POST, request.FILES)
 
     return render(request, 'dashboard/potential_clients.html', context)
+
+
+def update_task(request, task_id, status):
+
+    try:
+        task = Task.objects.get(id=task_id)
+        task.status = status
+        task.save()
+    except:
+        print "Task not found. Sorry"
+
+    return HttpResponseRedirect(reverse('dashboard:projects'))

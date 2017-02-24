@@ -1,0 +1,90 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>OGT | Login</title>
+  <meta name="description" content="Responsive, Bootstrap, BS4" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="196x196" href="{% static 'images/logo.png' %}">
+
+  <!-- style -->
+  <link rel="stylesheet" href="{% static 'css/animate.css/animate.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/glyphicons/glyphicons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/font-awesome/css/font-awesome.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/material-design-icons/material-design-icons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/ionicons/css/ionicons.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/simple-line-icons/css/simple-line-icons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/bootstrap/dist/css/bootstrap.min.css' %}" type="text/css" />
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+  <!-- build:css css/styles/app.min.css -->
+  <link rel="stylesheet" href="{% static 'css/styles/app.css' %}" type="text/css' %}" />
+  <link rel="stylesheet" href="{% static 'css/styles/style.css' %}" type="text/css' %}" />
+  <!-- endbuild -->
+  <link rel="stylesheet" href="{% static 'css/styles/font.css' %}" type="text/css' %}" />
+</head>
+<body style="background-color: #F6FAFB;">
+  <div class="app text-center" id="app" >
+
+<!-- ############ LAYOUT START-->
+
+      <div class="container text-center">
+  <div class="b-t">
+    <div class="center-block w-xxl w-auto-xs p-y-md text-center">
+      <div class="p-a-md">
+          <div class="container">
+              <span class="hidden-folded inline">OGT</span>
+        <form name="form" method="post">
+            {% csrf_token %}
+            {% if userNotFound %}
+            <div class="form-group">
+            {{ userNotFound }}
+          </div>
+            {% endif %}
+          <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="Username" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+          </div>
+          <div class="m-b-md">
+            <label class="md-check">
+              <input type="checkbox"><i class="primary"></i> Keep me signed in
+            </label>
+          </div>
+          <button type="submit" class="btn btn-lg black p-x-lg">Sign in</button>
+        </form>
+        <div class="m-y">
+          <a href="#" class="_600">Forgot password?</a>
+        </div>
+        <div>
+          Do not have an account? 
+          <a href="{% url 'dashboard:signup' %}" class="text-primary _600">Sign up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+      </div>
+<!-- ############ LAYOUT END-->
+  </div>
+
+  <script type="text/javascript">
+		jQuery(document).ready(function(){
+			$('#id_username').addClass('form-control');
+			$('#id_password').addClass('form-control');
+		});
+	</script>
+
+
+<!-- endbuild -->
+</body>
+</html>

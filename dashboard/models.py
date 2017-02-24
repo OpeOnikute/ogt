@@ -92,3 +92,24 @@ class Inspiration(models.Model):
         return self.name
 
 
+class Task(models.Model):
+
+    completed = 'completed'
+    pending = 'pending'
+    blocked = 'blocked'
+    client_review = 'Client Review'
+
+    status_choices = (
+        (completed, 'completed'),
+        (pending, 'pending'),
+        (blocked, 'blocked'),
+        (client_review, 'Client Review'),
+    )
+    name = models.CharField(max_length=40, null=False, blank=False)
+    description = models.CharField(max_length=140, null=False, blank=False)
+    status = models.CharField(max_length=20, null=False, blank=False, choices=status_choices)
+    project = models.ForeignKey('Job', on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True, null=False, blank=False)
+
+    def __unicode__(self):
+        return 'Task: ' + str(self.description)

@@ -96,7 +96,7 @@
                       <a class="dropdown-item" href="docs.html">
                         Need help?
                       </a>
-                      <a class="dropdown-item" href="signin.html">Sign out</a>
+                      <a class="dropdown-item" href="login.html">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -306,7 +306,7 @@
 					        <li class="nav-item">
 						        <a class="nav-link">
 						            <span class="label rounded">
-						            	55
+						            	{{ tasks|length }}
 						            </span>
 						        </a>
 						    </li>
@@ -320,7 +320,8 @@
 				      	<div class="row-inner">
 				      		<!-- content -->
 				      		<div class="list" data-ui-list="b-r b-2x b-theme">
-				      			<div class="list-item row-col">
+				      			{% for task in tasks %}
+                                <div class="list-item row-col">
 				      				<div class="col-xs">
 				      					<label class="md-check p-r-xs">
 							              <input type="checkbox">
@@ -328,196 +329,32 @@
 							            </label>
 				      				</div>
 				      				<div class="list-body col-xs">
-				      					<a href="#" class="item-title _500">Wireframes for app landing page</a>
+				      					<a href="#" class="item-title _500">{{ task.description }}</a>
 				      					<div class="text-muted text-xs">
-				      						<i class="fa fa-clock-o"></i> 10:30 pm, 24 July
+				      						<i class="fa fa-clock-o"></i>{{ task.date|date:'D M ,Y' }}
 				      					</div>
 				      					<div class="dropdown m-t-xs">
 				      						<a href="#" data-toggle="dropdown">
-				      							<span class="label warn rounded dropdown-toggle">In progress</span>
+				      							<span class="label warn rounded dropdown-toggle">{{ task.status }}</span>
 				      						</a>
 				      						<div class="dropdown-menu">
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-accent"></i>Active
+				      							<a class="dropdown-item" href="{% url 'dashboard:update_task' task.id 'completed' %}">
+				      								<i class="fa fa-circle-o text-accent"></i>Completed
 				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-warn"></i>In progress
+				      							<a class="dropdown-item" href="{% url 'dashboard:update_task' task.id 'pending' %}">
+				      								<i class="fa fa-circle-o text-warn"></i>Pending
 				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-success"></i>Completed
+				      							<a class="dropdown-item" href="{% url 'dashboard:update_task' task.id 'blocked' %}">
+				      								<i class="fa fa-circle-o text-success"></i>Blocked
 				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-muted"></i>Archived
+				      							<a class="dropdown-item" href="{% url 'dashboard:update_task' task.id 'Client Review' %}">
+				      								<i class="fa fa-circle-o text-muted"></i>Client review
 				      							</a>
 				      						</div>
 				      					</div>
 				      				</div>
 				      			</div>
-				      			<div class="list-item row-col">
-				      				<div class="col-xs">
-				      					<label class="md-check p-r-xs">
-							              <input type="checkbox">
-							              <i></i>
-							            </label>
-				      				</div>
-				      				<div class="list-body col-xs">
-				      					<a href="#" class="item-title _500">Backend development</a>
-				      					<div class="text-muted text-xs">
-				      						<i class="fa fa-clock-o"></i> 10:30 pm, 24 July
-				      					</div>
-				      					<div class="dropdown m-t-xs">
-				      						<a href="#" data-toggle="dropdown">
-				      							<span class="label accent rounded dropdown-toggle">Active</span>
-				      						</a>
-				      						<div class="dropdown-menu">
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-accent"></i>Active
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-warn"></i>In progress
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-success"></i>Completed
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-muted"></i>Archived
-				      							</a>
-				      						</div>
-				      					</div>
-				      				</div>
-				      			</div>
-				      			<div class="list-item row-col">
-				      				<div class="col-xs">
-				      					<label class="md-check p-r-xs">
-							              <input type="checkbox">
-							              <i></i>
-							            </label>
-				      				</div>
-				      				<div class="list-body col-xs">
-				      					<a href="#" class="item-title _500">Iconography and illustration style sheet</a>
-				      					<div class="text-muted text-xs">
-				      						<i class="fa fa-clock-o"></i> 11:30 pm, 20 July
-				      					</div>
-				      					<div class="dropdown m-t-xs">
-				      						<a href="#" data-toggle="dropdown">
-				      							<span class="label success rounded dropdown-toggle">Completed</span>
-				      						</a>
-				      						<div class="dropdown-menu">
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-accent"></i>Active
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-warn"></i>In progress
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-success"></i>Completed
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-muted"></i>Archived
-				      							</a>
-				      						</div>
-				      					</div>
-				      				</div>
-				      			</div>
-				      			<div class="list-item row-col">
-				      				<div class="col-xs">
-				      					<label class="md-check p-r-xs">
-							              <input type="checkbox">
-							              <i></i>
-							            </label>
-				      				</div>
-				      				<div class="list-body col-xs">
-				      					<a href="#" class="item-title _500">Design requirements documentation</a>
-				      					<div class="text-muted text-xs">
-				      						<i class="fa fa-clock-o"></i> 4:40 pm, 18 July
-				      					</div>
-				      					<div class="dropdown m-t-xs">
-				      						<a href="#" data-toggle="dropdown">
-				      							<span class="label success rounded dropdown-toggle">Completed</span>
-				      						</a>
-				      						<div class="dropdown-menu">
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-accent"></i>Active
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-warn"></i>In progress
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-success"></i>Completed
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-muted"></i>Archived
-				      							</a>
-				      						</div>
-				      					</div>
-				      				</div>
-				      			</div>
-				      			<div class="list-item row-col">
-				      				<div class="col-xs">
-				      					<label class="md-check p-r-xs">
-							              <input type="checkbox">
-							              <i></i>
-							            </label>
-				      				</div>
-				      				<div class="list-body col-xs">
-				      					<a href="#" class="item-title _500">Project teammates video meeting</a>
-				      					<div class="text-muted text-xs">
-				      						<i class="fa fa-clock-o"></i> 12:30 pm, 5 July
-				      					</div>
-				      					<div class="dropdown m-t-xs">
-				      						<a href="#" data-toggle="dropdown">
-				      							<span class="label rounded dropdown-toggle">Archived</span>
-				      						</a>
-				      						<div class="dropdown-menu">
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-accent"></i>Active
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-warn"></i>In progress
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-success"></i>Completed
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-muted"></i>Archived
-				      							</a>
-				      						</div>
-				      					</div>
-				      				</div>
-				      			</div>
-				      			<div class="list-item row-col">
-				      				<div class="col-xs">
-				      					<label class="md-check p-r-xs">
-							              <input type="checkbox">
-							              <i></i>
-							            </label>
-				      				</div>
-				      				<div class="list-body col-xs">
-				      					<a href="#" class="item-title _500">Kick-off meeting</a>
-				      					<div class="text-muted text-xs">
-				      						<i class="fa fa-clock-o"></i> 9:30 pm, 5 July
-				      					</div>
-				      					<div class="dropdown m-t-xs">
-				      						<a href="#" data-toggle="dropdown">
-				      							<span class="label rounded dropdown-toggle">Archived</span>
-				      						</a>
-				      						<div class="dropdown-menu">
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-accent"></i>Active
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-warn"></i>In progress
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-success"></i>Completed
-				      							</a>
-				      							<a class="dropdown-item" href="#">
-				      								<i class="fa fa-circle-o text-muted"></i>Archived
-				      							</a>
-				      						</div>
-				      					</div>
-				      				</div>
-				      			</div>
+                                {% endfor %}
 				        	</div>
 				        	<!-- / -->
 				      	</div>
@@ -796,37 +633,51 @@
           New Task
         </div>
         <div class="modal-body">
-          <form class="form-horizontal">
+          <form class="form-horizontal" method="post">
+              {% csrf_token %}
+              <input type="text" name="modal-type" value="TaskForm" class="form-control" hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" name="name">
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Title:</label>
+              <div class="form-group row">
+              <label class="col-lg-2 form-control-label">Description:</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control">
+                  <input type="text" class="form-control" name="description">
+                </div>
+            </div>
+              <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Project</label>
+                <div class="col-lg-8">
+                    <select class="form-control" name="project">
+                        {% for project in projects %}
+                        <option value="{{ project.id }}">{{ project.project_name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Description</label>
-                <div class="col-lg-10">
-                    <div class="b-a">
-                      <div data-ui-jp="summernote" data-ui-options="{height: 150,
-                        toolbar: [
-                          ['style', ['bold', 'italic', 'underline', 'clear']],
-                          ['color', ['color']],
-                          ['para', ['ul', 'ol', 'paragraph']],
-                          ['height', ['height']]
-                        ]}">
-                  </div>
-                    </div>
+                <label class="col-lg-2 form-control-label">Status:</label>
+                <div class="col-lg-8">
+                    <select class="form-control" name="status">
+                        <option value="completed">Completed</option>
+                        <option value="pending">Pending</option>
+                        <option value="blocked">Blocked</option>
+                        <option value="Client Review">Client Review</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Date:</label>
+                <div class="col-lg-8">
+                  <input type="date" class="form-control" name="date">
+                </div>
+            </div>
+              <div class="form-group row">
                 <div class="col-lg-8 offset-lg-2">
-                    <button class="btn primary btn-sm p-x-md">Save</button>
+                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
                 </div>
             </div>
           </form>

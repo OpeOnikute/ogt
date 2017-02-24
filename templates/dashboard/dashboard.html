@@ -1,5 +1,6 @@
 {% extends "dashboard/base.html" %}
-{% load staticfiles %}
+{% load staticfiles %}{% load i18n %}
+{% load activity_tags %}
 {% block title %}| Dashboard{% endblock %}
 {% block content %}
   <!-- content -->
@@ -41,7 +42,7 @@
                           <ul class="list-group list-group-gap m-a-0">
                             <li class="list-group-item dark-white box-shadow-z0 b">
                               <span class="pull-left m-r">
-                                <img src="images/a0.jpg" alt="..." class="w-40 img-circle">
+                                <img src="{% static 'images/a0.jpg' %}" alt="..." class="w-40 img-circle">
                               </span>
                               <span class="clear block">
                                 Use awesome <a href="#" class="text-primary">animate.css</a><br>
@@ -50,7 +51,7 @@
                             </li>
                             <li class="list-group-item dark-white box-shadow-z0 b">
                               <span class="pull-left m-r">
-                                <img src="images/a1.jpg" alt="..." class="w-40 img-circle">
+                                <img src="{% static 'images/a1.jpg' %}" alt="..." class="w-40 img-circle">
                               </span>
                               <span class="clear block">
                                 <a href="#" class="text-primary">Joe</a> Added you as friend<br>
@@ -59,7 +60,7 @@
                             </li>
                             <li class="list-group-item dark-white text-color box-shadow-z0 b">
                               <span class="pull-left m-r">
-                                <img src="images/a2.jpg" alt="..." class="w-40 img-circle">
+                                <img src="{% static 'images/a2.jpg' %}" alt="..." class="w-40 img-circle">
                               </span>
                               <span class="clear block">
                                 <a href="#" class="text-primary">Danie</a> sent you a message<br>
@@ -74,9 +75,10 @@
                   <li class="nav-item dropdown">
                     <a class="nav-link clear" data-toggle="dropdown">
                       <span class="avatar w-32">
-                        <img src="images/a3.jpg" class="w-full rounded" alt="...">
+                        <img src="{% static 'images/a3.jpg' %}" class="w-full rounded" alt="...">
                       </span>
                     </a>
+                      {% if request.user.is_authenticated %}
                     <div class="dropdown-menu w dropdown-menu-scale pull-right">
                       <a class="dropdown-item" href="profile.html">
                         <span>Profile</span>
@@ -91,11 +93,22 @@
                         <span>Message</span>
                       </a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="docs.html">
+                      <a class="dropdown-item" href="#">
                         Need help?
                       </a>
-                      <a class="dropdown-item" href="signin.html">Sign out</a>
+                      <a class="dropdown-item" href="#">Sign out</a>
                     </div>
+                      {% else %}
+                          <div class="dropdown-menu w dropdown-menu-scale pull-right">
+                              <a class="dropdown-item" href="#">
+                                <span>Login</span>
+                              </a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">
+                                Need help?
+                              </a>
+                          </div>
+                      {% endif %}
                   </li>
                 </ul>
                 <!-- / navbar right -->
@@ -616,13 +629,16 @@
 	        <div class="p-a">
 	        	<h6 class="text-muted m-a-0">Activities</h6>
 	        </div>
+            {% activity_stream 'actor' randJob %}
 	        <div class="streamline streamline-theme m-b">
+                {% for action in stream %}
 	          <div class="sl-item b-success">
 	            <div class="sl-content">
-	              <div>Finished task <a href="#" class="text-info">#features 4</a>.</div>
-	              <div class="sl-date text-muted">Just now</div>
+	              <div>{% display_action action %}</div>
+	              <div class="sl-date text-muted">{{ action.timestamp|timesince }} {% trans "ago" %}</div>
 	            </div>
 	          </div>
+                {% endfor %}
 	          <div class="sl-item b-success active">
 	            <div class="sl-content">
 	              <div><a href="#">@Jessi</a> uploaded a file <a href="#" class="text-info">documentation.pdf</a></div>
@@ -907,7 +923,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-          New Potential Client
+          New Inspiration
         </div>
         <div class="modal-body">
           <form class="form-horizontal" method="post" enctype="multipart/form-data">

@@ -1,5 +1,13 @@
 from django import forms
-from .models import Job, DesignProblems, PotentialClient, PotentialProject, Inspiration, Client
+from django.contrib.auth.models import User
+from .models import Job, DesignProblems, PotentialClient, PotentialProject, Inspiration, Client, Task
+
+
+class SignUpForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password')
 
 
 class DesignProblemsForm(forms.ModelForm):
@@ -42,3 +50,11 @@ class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = ('name', 'email', 'phone_number')
+
+
+class TaskForm(forms.ModelForm):
+
+    class Meta:
+        model = Task
+        fields = ('description', 'status', 'project', 'project')
+
