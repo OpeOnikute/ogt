@@ -629,16 +629,16 @@
 	        <div class="p-a">
 	        	<h6 class="text-muted m-a-0">Activities</h6>
 	        </div>
-            {% activity_stream 'actor' randJob %}
-	        <div class="streamline streamline-theme m-b">
-                {% for action in stream %}
-	          <div class="sl-item b-success">
-	            <div class="sl-content">
-	              <div>{% display_action action %}</div>
-	              <div class="sl-date text-muted">{{ action.timestamp|timesince }} {% trans "ago" %}</div>
-	            </div>
-	          </div>
-                {% endfor %}
+{#            {% activity_stream 'actor' randJob %}#}
+{#	        <div class="streamline streamline-theme m-b">#}
+{#                {% for action in stream %}#}
+{#	          <div class="sl-item b-success">#}
+{#	            <div class="sl-content">#}
+{#	              <div>{% display_action action %}</div>#}
+{#	              <div class="sl-date text-muted">{{ action.timestamp|timesince }} {% trans "ago" %}</div>#}
+{#	            </div>#}
+{#	          </div>#}
+{#                {% endfor %}#}
 	          <div class="sl-item b-success active">
 	            <div class="sl-content">
 	              <div><a href="#">@Jessi</a> uploaded a file <a href="#" class="text-info">documentation.pdf</a></div>

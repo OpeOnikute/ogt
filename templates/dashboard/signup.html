@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>OGT | Login</title>
+  <title>OGT | Sign Up</title>
   <meta name="description" content="Responsive, Bootstrap, BS4" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,20 +59,8 @@
             <div class="form-group">
                 {{ form.as_p }}
             </div>
-          <div class="m-b-md">
-            <label class="md-check">
-              <input type="checkbox"><i class="primary"></i> Keep me signed in
-            </label>
-          </div>
-          <button type="submit" class="btn btn-lg black p-x-lg">Sign in</button>
+          <button type="submit" class="btn btn-lg black p-x-lg">Sign Up</button>
         </form>
-        <div class="m-y">
-          <a href="#" class="_600">Forgot password?</a>
-        </div>
-        <div>
-          Do not have an account?
-          <a href="{% url 'dashboard:signup' %}" class="text-primary _600">Sign up</a>
-        </div>
       </div>
     </div>
   </div>
@@ -85,6 +73,9 @@
 		jQuery(document).ready(function(){
 			$('#id_username').addClass('form-control');
 			$('#id_password').addClass('form-control');
+			$('#id_last_name').addClass('form-control');
+			$('#id_first_name').addClass('form-control');
+			$('#id_email').addClass('form-control');
 		});
 	</script>
 

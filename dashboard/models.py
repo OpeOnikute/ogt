@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+from OGT import settings
+from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.db import models
 
@@ -19,6 +21,7 @@ class Job(models.Model):
         (No, 'No'),
     )
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     client = models.ForeignKey('Client', on_delete=models.CASCADE)
     project_name = models.CharField(max_length=20, null=False)
     start_date = models.DateField(auto_now_add=True, null=False, blank=False)
@@ -32,6 +35,7 @@ class Job(models.Model):
 
 class Client(models.Model):
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=20, null=False, blank=False)
     email = models.CharField(max_length=50, null=False, blank=False)
     phone_number = models.DecimalField(max_digits=11, decimal_places=0, null=True, blank=True)
@@ -52,6 +56,8 @@ class PotentialClient(models.Model):
                 (phone_number, 'Phone Number'),
                 (social_media, 'Social media')
     )
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=20, null=False, blank=False)
     reason = models.TextField(max_length=140, null=True)
     how_to_get_client = models.TextField(max_length=140, null=True)
@@ -63,6 +69,7 @@ class PotentialClient(models.Model):
 
 class PotentialProject(models.Model):
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=40, null=False, blank=False)
     description = models.TextField(max_length=140, null=True)
     reason = models.TextField(max_length=140, null=True)
@@ -74,6 +81,7 @@ class PotentialProject(models.Model):
 
 class DesignProblems(models.Model):
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=40, null=False, blank=False)
     description = models.TextField(max_length=140, null=True)
     potential_solution = models.TextField(max_length=140, null=True)
@@ -85,6 +93,7 @@ class DesignProblems(models.Model):
 
 class Inspiration(models.Model):
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, null=False, blank=False)
     image = models.FileField(upload_to='inspiration/%Y/%m/%d')
 
@@ -105,6 +114,8 @@ class Task(models.Model):
         (blocked, 'blocked'),
         (client_review, 'Client Review'),
     )
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=40, null=False, blank=False)
     description = models.CharField(max_length=140, null=False, blank=False)
     status = models.CharField(max_length=20, null=False, blank=False, choices=status_choices)

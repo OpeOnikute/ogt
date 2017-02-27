@@ -1,6 +1,6 @@
 import operator
 import django.core.exceptions as DjangoExceptions
-from actstream import action
+# from actstream import action
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
@@ -37,7 +37,6 @@ def logoutView(request):
     return HttpResponseRedirect(reverse('dashboard:index'))
 
 
-
 def signupView(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('dashboard:login'))
@@ -51,11 +50,10 @@ def signupView(request):
     if request.method == 'POST':
         signupForm = SignUpForm(request.POST)
         if signupForm.is_valid():
-           # ksdbk
-            pass
+           return HttpResponseRedirect(reverse('dashboard:index'))
         else:
             context['form'] = signupForm
-            return render(request, 'dashboard/login.html', context)
+            return render(request, 'dashboard/signup.html', context)
 
     return render(request, 'dashboard/signup.html', context)
 
@@ -138,7 +136,8 @@ def save_modal_data(data, files):
             save_it.save()
         else:
             print 'Form invalid!'
-            print form_object.errors
+            print form_object.error
+            s
 
 
 def index(request):
@@ -148,7 +147,7 @@ def index(request):
         return HttpResponseRedirect(reverse('dashboard:login'))
 
     # RandClient = Client.objects.get(id=1)
-    randJob = Job.objects.get(id=2)
+    # randJob = Job.objects.get(id=2)
     # action.send(randJob, verb='is now linked to', target=RandClient)
     fulfilled_jobs = Job.objects.filter(payment_status='Paid')
     amount_made = float()
@@ -178,7 +177,7 @@ def index(request):
         'potential_projects': potential_projects,
         'inspirations': inspirations,
         'top_clients': top_clients,
-        'randJob': randJob,
+        # 'randJob': randJob,
     }
     return render(request, 'dashboard/dashboard.html', context)
 
