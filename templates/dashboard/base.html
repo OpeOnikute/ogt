@@ -253,7 +253,25 @@
     </div>
   <!-- / -->
 
-   {% block modals %}{% endblock %}
+   {% block modals %}
+        {#the confirm delete modal is used in more than one place#}
+       <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirm Action</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Confirm</a>
+                </div>
+            </div>
+        </div>
+       </div>
+   {% endblock %}
 
   <!-- ############ SWITHCHER START-->
     <div id="switcher">
@@ -335,8 +353,6 @@
 
 
 <!-- ############ LAYOUT END-->
-{% block base_scripts %}
-  {% endblock %}
 <!-- build:js scripts/app.min.js -->
 <!-- jQuery -->
   <script src="{% static "libs/jquery/dist/jquery.js" %}"></script>
@@ -365,6 +381,14 @@
   <script src="{% static "scripts/ui-taburl.js" %}"></script>
   <script src="{% static "scripts/app.js" %}"></script>
   <script src="{% static "scripts/ajax.js" %}"></script>
+  {% block base_scripts %}
+    {#the script to add the url to confirm delete button is used in more than one place also #}
+      <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    </script>
+  {% endblock %}
 <!-- endbuild -->
 </body>
 </html>

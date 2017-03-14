@@ -44,13 +44,6 @@
               <span class="hidden-folded inline">OGT</span>
         <form name="form" method="post">
             {% csrf_token %}
-
-             {% if userNotFound %}
-            <div class="form-group text-error">
-                <p>{{ userNotFound }}</p>
-            </div>
-            {% endif %}
-
              {% if form.non_field_errors %}
             <div class="form-group text-error">
                 {{ form.non_field_errors }}

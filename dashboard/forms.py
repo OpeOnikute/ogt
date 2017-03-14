@@ -14,47 +14,47 @@ class DesignProblemsForm(forms.ModelForm):
 
     class Meta:
         model = DesignProblems
-        fields = ('name', 'description', 'potential_solution', 'profit_opportunities')
+        fields = ('user', 'name', 'description', 'potential_solution', 'profit_opportunities')
 
 
 class PotentialClientForm(forms.ModelForm):
 
     class Meta:
         model = PotentialClient
-        fields = ('name', 'reason', 'how_to_get_client', 'best_way_to_contact')
+        fields = ('user', 'name', 'reason', 'how_to_get_client', 'best_way_to_contact')
 
 
 class PotentialProjectForm(forms.ModelForm):
 
     class Meta:
         model = PotentialProject
-        fields = ('name', 'description', 'reason', 'profit_opportunities')
+        fields = ('user', 'name', 'description', 'reason', 'profit_opportunities')
 
 
 class InspirationForm(forms.ModelForm):
 
     class Meta:
         model = Inspiration
-        fields = ('name', 'image')
+        fields = ('user', 'name', 'image')
 
 
 class JobForm(forms.ModelForm):
 
     class Meta:
         model = Job
-        fields = ('client', 'project_name', 'price', 'payment_status', 'completion_status')
+        fields = ('user', 'client', 'project_name', 'price', 'payment_status', 'completion_status')
 
 
 class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ('name', 'email', 'phone_number')
+        fields = ('user', 'name', 'email', 'phone_number')
 
 
 class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('description', 'status', 'project', 'project')
+        fields = ('user', 'description', 'status', 'job')
 

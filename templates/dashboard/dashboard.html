@@ -629,22 +629,16 @@
 	        <div class="p-a">
 	        	<h6 class="text-muted m-a-0">Activities</h6>
 	        </div>
-{#            {% activity_stream 'actor' randJob %}#}
-{#	        <div class="streamline streamline-theme m-b">#}
-{#                {% for action in stream %}#}
-{#	          <div class="sl-item b-success">#}
-{#	            <div class="sl-content">#}
-{#	              <div>{% display_action action %}</div>#}
-{#	              <div class="sl-date text-muted">{{ action.timestamp|timesince }} {% trans "ago" %}</div>#}
-{#	            </div>#}
-{#	          </div>#}
-{#                {% endfor %}#}
-	          <div class="sl-item b-success active">
+	        <div class="streamline streamline-theme m-b">
+                {% activity_stream 'actor' user %}
+                {% for action in stream %}
+	          <div class="sl-item b-success">
 	            <div class="sl-content">
-	              <div><a href="#">@Jessi</a> uploaded a file <a href="#" class="text-info">documentation.pdf</a></div>
-	              <div class="sl-date text-muted">11:30</div>
+	              <div>{% display_action action %}</div>
+	              <div class="sl-date text-muted">{{ action.timestamp|timesince }} {% trans "ago" %}</div>
 	            </div>
 	          </div>
+                {% endfor %}
 	          <div class="sl-item b-info">
 	            <div class="sl-content">
 	              <div>Call to customer <a href="#" class="text-info">Jacob</a> and discuss the detail.</div>
@@ -658,17 +652,6 @@
 	            </div>
 	          </div>
 	          <div class="sl-item">
-	            <div class="sl-content">
-	              <div><a href="#" class="text-info">Jessi</a> report a issue #2122.</div>
-	              <div class="sl-date text-muted">Thu, 10 Mar</div>
-	            </div>
-	          </div>
-	          <div class="sl-item">
-	            <div class="sl-content">
-	              <div>Prepare for presentation</div>
-	              <div class="sl-date text-muted">Sat, 5 Mar</div>
-	            </div>
-	          </div>
 	        </div>
         </div>
 	</div>
@@ -761,7 +744,8 @@
         <div class="modal-body">
           <form class="form-horizontal" method="post">
               {% csrf_token %}
-              <input type="text" name="modal-type" value="PotentialClientForm" class="form-control" hidden>
+              <input type="text" name="modal-type" value="PotentialClientForm" hidden>
+              <input type="number" name="user" value="{{ user.id }}"  hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">
@@ -814,6 +798,7 @@
           <form class="form-horizontal" method="post">
               {% csrf_token %}
               <input type="text" name="modal-type" value="PotentialProjectForm" class="form-control" hidden>
+              <input type="number" name="user" value="{{ user.id }}"  hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">
@@ -862,6 +847,7 @@
           <form class="form-horizontal" method="post">
               {% csrf_token %}
               <input type="text" name="modal-type" value="DesignProblemsForm" class="form-control" hidden>
+              <input type="number" name="user" value="{{ user.id }}"  hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">
@@ -928,7 +914,8 @@
         <div class="modal-body">
           <form class="form-horizontal" method="post" enctype="multipart/form-data">
               {% csrf_token %}
-              <input type="text" name="modal-type" value="InspirationForm" class="form-control" hidden>
+              <input type="text" name="modal-type" value="InspirationForm" hidden>
+              <input type="number" name="user" value="{{ user.id }}"  hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">

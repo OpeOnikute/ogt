@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 from OGT import settings
 from django.contrib.auth.models import User
-from django.forms import ModelForm
 from django.db import models
+from constants import ResponseMessages, Status
 
 
 class Job(models.Model):
@@ -103,24 +103,49 @@ class Inspiration(models.Model):
 
 class Task(models.Model):
 
-    completed = 'completed'
-    pending = 'pending'
-    blocked = 'blocked'
-    client_review = 'Client Review'
-
     status_choices = (
-        (completed, 'completed'),
-        (pending, 'pending'),
-        (blocked, 'blocked'),
-        (client_review, 'Client Review'),
+        ('completed', 'Completed'),
+        ('pending', 'Pending'),
+        ('blocked', 'Blocked'),
+        ('Client Review', 'Client Review'),
+    )
+
+    yes_no = (
+        ('yes', 'Yes'),
+        ('no', 'No')
     )
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=40, null=False, blank=False)
     description = models.CharField(max_length=140, null=False, blank=False)
     status = models.CharField(max_length=20, null=False, blank=False, choices=status_choices)
-    project = models.ForeignKey('Job', on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True, null=False, blank=False)
+    job = models.ForeignKey('Job', on_delete=models.CASCADE)
+    created_at = models.DateField(auto_now_add=True, null=False, blank=False)
+    archived = models.CharField(max_length=10, null=False, blank=False, choices=yes_no, default="no")
+    archived_at = models.DateField(auto_now_add=False, null=True, blank=True)
+
+    @classmethod
+    def getAllProjectsAndTheirTasks(cls, user):
+
+        all_tasks = cls.objects.select_related().filter(user=user, archived="no")
+        all_jobs = Job.objects.filter(user=user)
+
+        jobs_aggregation = []
+
+        if len(all_jobs) > 0:
+            for job in all_jobs:
+                # Append (job_object, no_of_tasks, no_of_completed_tasks)
+                total_tasks = len(all_tasks.filter(job=job.id))
+                total_completed_tasks = len(all_tasks.filter(job=job.id, status=Status.completed))
+                total_uncompleted_tasks = total_tasks - total_completed_tasks
+                jobs_aggregation.append([job, total_tasks, total_completed_tasks, total_uncompleted_tasks])
+
+            response = {"status": "success", "data": jobs_aggregation}
+            return response
+
+        else:
+            response = {"status": "error", "message": ResponseMessages.NO_JOBS_FOUND}
+            return response
 
     def __unicode__(self):
-        return 'Task: ' + str(self.description)
+        return str(self.description)

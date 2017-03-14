@@ -264,12 +264,13 @@
 	  			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
-	  			New Contact
+	  			New Client
 	  		</div>
 	  		<div class="modal-body">
 			    <form class="form-horizontal" method="post">
                     {% csrf_token %}
                     <input type="text" name="modal-type" value="ClientForm" class="form-control" hidden>
+                    <input type="number" name="user" value="{{ user.id }}"  hidden>
 				    <div class="form-group row">
 				        <label class="col-lg-2 form-control-label">Name:</label>
 				        <div class="col-lg-8">

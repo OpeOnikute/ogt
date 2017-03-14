@@ -1,5 +1,6 @@
 {% extends "dashboard/base.html" %}
-{% load staticfiles %}
+{% load staticfiles %}{% load i18n %}
+{% load activity_tags %}
 
 {% block title %}| Projects{% endblock %}
 
@@ -149,7 +150,7 @@
 				      	<div class="row-inner">
 				      		<!-- left content -->
 				      		<div class="list" data-ui-list="b-r b-2x b-theme">
-                                    {% for project in projects %}
+                                    {% for project, noOfTasks, noOfCompletedTasks, noOfUncompletedTasks in project_aggregation %}
 				      			    <div class="list-item ">
 				      			      <div class="list-left">
 				      			        <span class="w-40 avatar circle lt">
@@ -160,22 +161,9 @@
 				      			          <div class="pull-right dropdown">
 				      			            <a href="#" data-toggle="dropdown" class="text-muted"><i class="fa fa-fw fa-ellipsis-h"></i></a>
 				      			            <div class="dropdown-menu pull-right text-color" role="menu">
-				      			              <a class="dropdown-item">
-				      			              	<i class="fa fa-tag"></i>
-				      			              	Tag item
-				      			              </a>
-				      			              <a class="dropdown-item">
+				      			              <a data-href="{% url 'dashboard:delete_action' 'project' project.id %}" data-toggle="modal" data-target="#confirm-delete" class="dropdown-item">
 				      			              	<i class="fa fa-pencil"></i>
-				      			              	Edit item
-				      			              </a>
-				      			              <a class="dropdown-item">
-				      			              	<i class="fa fa-trash"></i>
-				      			              	Delete item
-				      			              </a>
-				      			              <div class="dropdown-divider"></div>
-				      			              <a class="dropdown-item">
-				      			              	<i class="fa fa-ellipsis-h"></i>
-				      			              	More action
+				      			              	Delete Project
 				      			              </a>
 				      			            </div>
 				      			          </div>
@@ -185,13 +173,16 @@
 				      			        <small class="block text-ellipsis">
                                             <span class="text-xs">For: {{ project.client.name }}</span><br>
 				      			          <span class="text-xs">
-				      			              50
+				      			              {{ noOfUncompletedTasks }}
+				      			            </span> <span class="text-muted">open tasks, </span>
+                                            <span class="text-xs">
+				      			              {{ noOfCompletedTasks }}
 				      			          </span> <span class="text-muted">completed</span>
 				      			        </small>
 
-				      			        <div class="progress-xxs m-y-sm lter progress w-sm">
-				      			            <div class="progress-bar success" data-toggle="tooltip" title="Finished: 44%" style="width: 19%;">
-				      			            </div>
+                                          <div class="progress-xxs m-y-sm lter progress w-sm">
+				      			            <div class="progress-bar success" role="progressbar" style="width: {% widthratio noOfCompletedTasks noOfTasks 100 %}%;">
+                                            </div>
 				      			        </div>
 				      			      </div>
 				      			    </div>
@@ -203,48 +194,8 @@
 				      			            <span class="fa fa-tumblr text-md"></span>
 				      			        </span>
 				      			      </div>
-				      			      <div class="list-body">
-				      			          <div class="pull-right dropdown">
-				      			            <a href="#" data-toggle="dropdown" class="text-muted"><i class="fa fa-fw fa-ellipsis-h"></i></a>
-				      			            <div class="dropdown-menu pull-right text-color" role="menu">
-				      			              <a class="dropdown-item">
-				      			              	<i class="fa fa-tag"></i>
-				      			              	Tag item
-				      			              </a>
-				      			              <a class="dropdown-item">
-				      			              	<i class="fa fa-pencil"></i>
-				      			              	Edit item
-				      			              </a>
-				      			              <a class="dropdown-item">
-				      			              	<i class="fa fa-trash"></i>
-				      			              	Delete item
-				      			              </a>
-				      			              <div class="dropdown-divider"></div>
-				      			              <a class="dropdown-item">
-				      			              	<i class="fa fa-ellipsis-h"></i>
-				      			              	More action
-				      			              </a>
-				      			            </div>
-				      			          </div>
-				      			        <div class="item-title">
-				      			          <a href="#" class="_500">Tumblr theme</a>
-				      			        </div>
-				      			        <small class="block text-ellipsis">
-				      			            <span class="text-xs">
-				      			              8
-				      			            </span> <span class="text-muted">open tasks, </span>
-				      			          <span class="text-xs">
-				      			              5
-				      			          </span> <span class="text-muted">completed</span>
-				      			        </small>
-
-				      			        <div class="progress-xxs m-y-sm lter progress w-sm">
-				      			            <div class="progress-bar success" data-toggle="tooltip" title="Finished: 23%" style="width: 41%;">
-				      			            </div>
-				      			        </div>
-				      			      </div>
 				      			    </div>
-				        	</div>
+    				        	</div>
 				        	<!-- / -->
 				      	</div>
 				    </div>
@@ -270,34 +221,6 @@
 					      		<i class="fa fa-th"></i>
 					        </span>
 					    </a>
-					    <!-- nabar right -->
-					    <ul class="nav navbar-nav pull-right m-l">
-						    <li class="nav-item dropdown">
-						        <a class="nav-link text-muted" href="#" data-toggle="dropdown">
-						        	<i class="fa fa-ellipsis-h"></i>
-						        </a>
-						        <div class="dropdown-menu pull-right text-color" role="menu">
-						          <a class="dropdown-item">
-						          	<i class="fa fa-tag"></i>
-						          	Tag item
-						          </a>
-						          <a class="dropdown-item">
-						          	<i class="fa fa-pencil"></i>
-						          	Edit item
-						          </a>
-						          <a class="dropdown-item">
-						          	<i class="fa fa-trash"></i>
-						          	Delete item
-						          </a>
-						          <div class="dropdown-divider"></div>
-						          <a class="dropdown-item">
-						          	<i class="fa fa-ellipsis-h"></i>
-						          	More action
-						          </a>
-						        </div>
-						    </li>
-					    </ul>
-					    <!-- / navbar right -->
 					    <!-- link and dropdown -->
 					    <ul class="nav navbar-nav">
 					        <li class="nav-item">
@@ -311,6 +234,22 @@
 						        </a>
 						    </li>
 					    </ul>
+                        <ul class="nav navbar-nav pull-right m-l">
+						    <li class="nav-item">
+                                 <a class="nav-link" href="{% url 'dashboard:archived_tasks' %}">
+						            <span class="navbar-item m-r-0 text-md">
+                                        <p><strong>Archived</strong></p>
+                                    </span>
+						        </a>
+                            </li>
+                             <li class="nav-item">
+						        <a class="nav-link">
+						            <span class="label rounded">
+						            	{{ tasks_archived|length }}
+						            </span>
+						        </a>
+						    </li>
+                        </ul>
 					    <!-- / link and dropdown -->
 					</div>
 				</div>
@@ -320,8 +259,28 @@
 				      	<div class="row-inner">
 				      		<!-- content -->
 				      		<div class="list" data-ui-list="b-r b-2x b-theme">
-				      			{% for task in tasks %}
+                               {% if tasks|length == 0 %}
+                                   <div class="list-item row-col">
+                                       <div class="list-body">
+                                           <p><small>No  tasks to show.</small></p>
+                                       </div>
+                                   </div>
+                               {% endif %}
+                                {% for task in tasks %}
                                 <div class="list-item row-col">
+                                     <div class="pull-right dropdown">
+				      			            <a href="#" data-toggle="dropdown" class="text-muted"><i class="fa fa-fw fa-ellipsis-h"></i></a>
+				      			            <div class="dropdown-menu pull-right text-color" role="menu">
+				      			              <a data-href="{% url 'dashboard:delete_action' 'task' task.id %}" data-toggle="modal" data-target="#confirm-delete" class="dropdown-item">
+				      			              	<i class="fa fa-pencil"></i>
+				      			              	Delete Task
+				      			              </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a data-href="{% url 'dashboard:archive_action' 'archive' 'task' task.id %}" data-toggle="modal" data-target="#confirm-delete" class="dropdown-item">
+				      			              	<i class="fa fa-archive"></i>
+                                                </a>
+				      			            </div>
+				      			          </div>
 				      				<div class="col-xs">
 				      					<label class="md-check p-r-xs">
 							              <input type="checkbox">
@@ -331,24 +290,32 @@
 				      				<div class="list-body col-xs">
 				      					<a href="#" class="item-title _500">{{ task.description }}</a>
 				      					<div class="text-muted text-xs">
-				      						<i class="fa fa-clock-o"></i>{{ task.date|date:'D M ,Y' }}
+				      						<i class="fa fa-clock-o"></i>{{ task.date|date:'d M ,Y' }}
 				      					</div>
 				      					<div class="dropdown m-t-xs">
 				      						<a href="#" data-toggle="dropdown">
+                                                {% if task.status == "completed"  %}
+				      							<span class="label success rounded dropdown-toggle">{{ task.status }}</span>
+                                                {% elif task.status == "pending"  %}
+  				      							<span class="label warning rounded dropdown-toggle">{{ task.status }}</span>
+                                              {% elif task.status == "blocked"  %}
+ 				      							<span class="label danger rounded dropdown-toggle">{{ task.status }}</span>
+                                               {% elif task.status == "Client"  %}
 				      							<span class="label warn rounded dropdown-toggle">{{ task.status }}</span>
+                                                {% endif %}
 				      						</a>
 				      						<div class="dropdown-menu">
-				      							<a class="dropdown-item" href="{% url 'dashboard:update_task' task.id 'completed' %}">
-				      								<i class="fa fa-circle-o text-accent"></i>Completed
+				      							<a class="dropdown-item" href="{% url 'dashboard:update_action' 'task' task.id 'completed' %}">
+				      								<i class="fa fa-circle-o text-success"></i>Completed
 				      							</a>
-				      							<a class="dropdown-item" href="{% url 'dashboard:update_task' task.id 'pending' %}">
-				      								<i class="fa fa-circle-o text-warn"></i>Pending
+				      							<a class="dropdown-item" href="{% url 'dashboard:update_action' 'task' task.id 'pending' %}">
+				      								<i class="fa fa-circle-o text-warning"></i>Pending
 				      							</a>
-				      							<a class="dropdown-item" href="{% url 'dashboard:update_task' task.id 'blocked' %}">
-				      								<i class="fa fa-circle-o text-success"></i>Blocked
+				      							<a class="dropdown-item" href="{% url 'dashboard:update_action' 'task' task.id 'blocked' %}">
+				      								<i class="fa fa-circle-o text-danger"></i>Blocked
 				      							</a>
-				      							<a class="dropdown-item" href="{% url 'dashboard:update_task' task.id 'Client Review' %}">
-				      								<i class="fa fa-circle-o text-muted"></i>Client review
+				      							<a class="dropdown-item" href="{% url 'dashboard:update_action' 'task' task.id 'Client Review' %}">
+				      								<i class="fa fa-circle-o text-warn"></i>Client review
 				      							</a>
 				      						</div>
 				      					</div>
@@ -367,7 +334,9 @@
 			            <a href="#" class="btn btn-xs white circle"><i class="fa fa-fw fa-angle-left"></i></a>
 			            <a href="#" class="btn btn-xs white circle"><i class="fa fa-fw fa-angle-right"></i></a>
 			        </div>
-			      	<span class="text-sm text-muted">Completed: <strong>10</strong>, In Progress: <strong>5</strong></span>
+			      	<span class="text-sm text-muted">Completed: <strong>{{ tasks_completed|length }}</strong>, Pending: <strong>{{ tasks_pending|length }}</strong>,
+                        Total: <strong>{{ tasks|length }}</strong>
+                    </span>
 			    </div>
 			    <!-- / -->
 		    </div>
@@ -409,54 +378,51 @@
 					      	<!-- content -->
 					      	<div class="p-a">
 					      		<div class="streamline streamline-theme m-b">
+                                    {% activity_stream 'actor' user %}
+                                    {% for action in stream %}
+                                  <div class="sl-item b-success">
+                                    <div class="sl-content">
+                                      <div>{% display_action action %}</div>
+                                      <div class="sl-date text-muted">{{ action.timestamp|timesince }} {% trans "ago" %}</div>
+                                    </div>
+                                  </div>
+                                    {% endfor %}
 						          <div class="sl-item b-primary">
-						            <div class="sl-content">
-						              <div class="sl-date text-muted">Just now</div>
-						              <p>Finished task <a href="#" class="text-info">#features 4</a>.</p>
-						            </div>
-						          </div>
-						          <div class="sl-item b-success">
-						            <div class="sl-content">
-						              <div class="sl-date text-muted">11:30</div>
-						              <p><a href="#">@Jessi</a> uploaded a file <a href="#" class="text-info">documentation.pdf</a></p>
-						            </div>
-						          </div>
-						          <div class="sl-item b-info">
-						            <div class="sl-content">
-						              <div class="sl-date text-muted">10:30</div>
-						              <p>Call to customer <a href="#" class="text-info">Jacob</a> and discuss the detail.</p>
-						            </div>
-						          </div>
-						          <div class="sl-item b-warn">
-						            <div class="sl-content">
-						              <div class="sl-date text-muted">3 days ago</div>
-						              <p><a href="#" class="text-info">Jessi</a> commented your post.</p>
-						            </div>
-						          </div>
-						          <div class="sl-item b-warning">
-						            <div class="sl-content">
-						              <div class="sl-date text-muted">Thu, 10 Mar</div>
-						              <p><a href="#" class="text-info">Jessi</a> report a issue #2122.</p>
-						            </div>
-						          </div>
-						          <div class="sl-item">
-						            <div class="sl-content">
-						              <div class="sl-date text-muted">Sat, 5 Mar</div>
-						              <p>Prepare for presentation</p>
-						            </div>
-						          </div>
-						          <div class="sl-item">
-						            <div class="sl-content">
-						              <div class="sl-date text-muted">Sun, 11 Feb</div>
-						              <p><a href="#" class="text-info">Jessi</a> assign you a task <a href="#" class="text-info">Mockup Design</a>.</p>
-						            </div>
-						          </div>
-						          <div class="sl-item">
-						            <div class="sl-content">
-						              <div class="sl-date text-muted">Thu, 17 Jan</div>
-						              <p>Task created</p>
-						            </div>
-						          </div>
+{#						            <div class="sl-content">#}
+{#						              <div class="sl-date text-muted">Just now</div>#}
+{#						              <p>Finished task <a href="#" class="text-info">#features 4</a>.</p>#}
+{#						            </div>#}
+{#						          </div>#}
+{#						          <div class="sl-item b-success">#}
+{#						            <div class="sl-content">#}
+{#						              <div class="sl-date text-muted">11:30</div>#}
+{#						              <p><a href="#">@Jessi</a> uploaded a file <a href="#" class="text-info">documentation.pdf</a></p>#}
+{#						            </div>#}
+{#						          </div>#}
+{#						          <div class="sl-item b-info">#}
+{#						            <div class="sl-content">#}
+{#						              <div class="sl-date text-muted">10:30</div>#}
+{#						              <p>Call to customer <a href="#" class="text-info">Jacob</a> and discuss the detail.</p>#}
+{#						            </div>#}
+{#						          </div>#}
+{#						          <div class="sl-item b-warn">#}
+{#						            <div class="sl-content">#}
+{#						              <div class="sl-date text-muted">3 days ago</div>#}
+{#						              <p><a href="#" class="text-info">Jessi</a> commented your post.</p>#}
+{#						            </div>#}
+{#						          </div>#}
+{#						          <div class="sl-item b-warning">#}
+{#						            <div class="sl-content">#}
+{#						              <div class="sl-date text-muted">Thu, 10 Mar</div>#}
+{#						              <p><a href="#" class="text-info">Jessi</a> report a issue #2122.</p>#}
+{#						            </div>#}
+{#						          </div>#}
+{#						          <div class="sl-item">#}
+{#						            <div class="sl-content">#}
+{#						              <div class="sl-date text-muted">Thu, 17 Jan</div>#}
+{#						              <p>Task created</p>#}
+{#						            </div>#}
+{#						          </div>#}
 						        </div>
 					      	</div>
 					        <!-- / -->
@@ -537,6 +503,7 @@
 	</div>
 </div>
     </div>
+    </div>
 {% endblock %}
 <!-- ############ PAGE END-->
 
@@ -555,6 +522,7 @@
           <form class="form-horizontal" method="post">
           {% csrf_token %}
               <input type="text" name="modal-type" value="JobForm" class="form-control" hidden>
+              <input type="number" name="user" value="{{ user.id }}"  hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">
@@ -636,6 +604,7 @@
           <form class="form-horizontal" method="post">
               {% csrf_token %}
               <input type="text" name="modal-type" value="TaskForm" class="form-control" hidden>
+              <input type="number" name="user" value="{{ user.id }}"  hidden>
             <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Name:</label>
                 <div class="col-lg-8">
@@ -651,7 +620,7 @@
               <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Project</label>
                 <div class="col-lg-8">
-                    <select class="form-control" name="project">
+                    <select class="form-control" name="job">
                         {% for project in projects %}
                         <option value="{{ project.id }}">{{ project.project_name }}</option>
                         {% endfor %}
@@ -685,6 +654,14 @@
       </div>
     </div>
 </div>
+
+
 <!-- END MODAL -->
 {% endblock %}
 <!-- ############ LAYOUT END-->
+
+{#SCRIPTS#}
+{% block base_scripts %}
+
+{% endblock %}
+{#END SCRIPTS#}
