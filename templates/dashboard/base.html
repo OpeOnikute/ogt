@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="{% static "css/styles/font.css" %}" type="text/css" />
 
   <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
+    {% block header_scripts %}{% endblock %}
 </head>
 <body>
   <div class="app" id="app">
@@ -77,11 +77,11 @@
                 </a>
               </li>
               <li>
-                <a href="{% url 'dashboard:index' %}" class="b-info">
+                <a href="{% url 'dashboard:messaging' %}" class="b-info">
                   <span class="nav-icon text-white no-fade">
                     <i class="ion-email"></i>
                   </span>
-                  <span class="nav-text">Inbox</span>
+                  <span class="nav-text">Messaging</span>
                 </a>
               </li>
                <li>
@@ -98,6 +98,14 @@
                     <i class="ion-person-add"></i>
                   </span>
                   <span class="nav-text">Potential Clients</span>
+                </a>
+              </li>
+                <li>
+                <a href="{% url 'dashboard:pricing' %}" class="b-default">
+                  <span class="nav-icon">
+                    <i class="ion-cash"></i>
+                  </span>
+                  <span class="nav-text">Pricing</span>
                 </a>
               </li>
 
@@ -217,7 +225,7 @@
             <a class="dropdown-item" href="app.inbox.html">
               <span>Inbox</span>
             </a>
-            <a class="dropdown-item" href="app.message.html">
+            <a class="dropdown-item" href="messaging.html">
               <span>Message</span>
             </a>
             <div class="dropdown-divider"></div>
@@ -242,19 +250,15 @@
   <!-- / -->
 
   <!-- content -->
-  <div id="content" class="app-content box-shadow-z2 bg pjax-container" role="main">
 {% block content %}
 
 {% endblock %}
-  </div>
 
 <!-- ############ PAGE END-->
 
     </div>
   <!-- / -->
-
-   {% block modals %}
-        {#the confirm delete modal is used in more than one place#}
+   {#the confirm delete modal is used in more than one place#}
        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -271,9 +275,10 @@
             </div>
         </div>
        </div>
+   {% block modals %}
    {% endblock %}
 
-  <!-- ############ SWITHCHER START-->
+  <!-- ############ SWITCHER START-->
     <div id="switcher">
       <div class="switcher dark-white" id="sw-theme">
         <a href="#" data-ui-toggle-class="active" data-ui-target="#sw-theme" class="dark-white sw-btn">

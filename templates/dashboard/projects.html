@@ -6,6 +6,7 @@
 
   <!-- content -->
 {% block content %}
+  <div id="content" class="app-content box-shadow-z2 pjax-container" role="main">
     <div class="app-header hidden-lg-up black lt b-b">
           <div class="navbar" data-pjax>
                 <a data-toggle="modal" data-target="#aside" class="navbar-item pull-left hidden-lg-up p-r m-a-0">
@@ -90,7 +91,7 @@
                       <a class="dropdown-item" href="app.inbox.html">
                         <span>Inbox</span>
                       </a>
-                      <a class="dropdown-item" href="app.message.html">
+                      <a class="dropdown-item" href="messaging.html">
                         <span>Message</span>
                       </a>
                       <div class="dropdown-divider"></div>
@@ -161,7 +162,11 @@
 				      			          <div class="pull-right dropdown">
 				      			            <a href="#" data-toggle="dropdown" class="text-muted"><i class="fa fa-fw fa-ellipsis-h"></i></a>
 				      			            <div class="dropdown-menu pull-right text-color" role="menu">
-				      			              <a data-href="{% url 'dashboard:delete_action' 'project' project.id %}" data-toggle="modal" data-target="#confirm-delete" class="dropdown-item">
+				      			              <a data-href="{% url 'dashboard:quote' 1 %}" data-toggle="modal" data-target="#modal-generate-quote" class="dropdown-item">
+				      			              	<i class="fa fa-pencil"></i>
+				      			              	Generate Quote
+				      			              </a>
+                                                <a data-href="{% url 'dashboard:delete_action' 'project' project.id %}" data-toggle="modal" data-target="#confirm-delete" class="dropdown-item">
 				      			              	<i class="fa fa-pencil"></i>
 				      			              	Delete Project
 				      			              </a>
@@ -264,7 +269,7 @@
                                        <div class="list-body">
                                            <p><small>No  tasks to show.</small></p>
                                        </div>
-                                   </div>
+                                   </div>pyth
                                {% endif %}
                                 {% for task in tasks %}
                                 <div class="list-item row-col">
@@ -655,6 +660,59 @@
     </div>
 </div>
 
+<div class="modal fade" id="modal-generate-quote">
+	<div class="modal-dialog modal-lg">
+	  	<div class="modal-content">
+	  		<div class="modal-header _600">
+	  			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+	  			Generate Quote
+	  		</div>
+	  		<div class="modal-body">
+			    <form class="form-horizontal" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="modal-type" value="GenerateQuote" class="form-control" hidden>
+                    <input type="number" name="user" value="{{ user.id }}"  hidden>
+				    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">Project:</label>
+				        <div class="col-lg-8">
+                        <select class="form-control" name="job">
+                            {% for project in projects %}
+                            <option value="{{ project.id }}">{{ project.project_name }}</option>
+                            {% endfor %}
+                        </select>
+				        </div>
+				    </div>
+				    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">Items:</label>
+				        <div class="col-lg-8">
+				          	<input type="number"  step="0.01" class="form-control" name="price">
+				        </div>
+				    </div>
+				    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">Client:</label>
+				        <div class="col-lg-10">
+				          	<div class="col-lg-8">
+                                <select name="client" class="form-control">
+                                    {% for client in clients %}
+                                    <option value={{ client.id }}>{{ client.name }}</option>
+                                    {% endfor %}
+                                </select>
+				            </div>
+				        </div>
+				    </div>
+				    <div class="form-group row">
+				        <div class="col-lg-8 offset-lg-2">
+				          	<button type="submit" class="btn primary btn-sm p-x-md" onclick="generateQuote()">Save</button>
+				        </div>
+				    </div>
+			    </form>
+		    </div>
+	  	</div>
+  	</div>
+</div>
+    </div>
 
 <!-- END MODAL -->
 {% endblock %}
@@ -662,6 +720,13 @@
 
 {#SCRIPTS#}
 {% block base_scripts %}
-
+    <script type="text/javascript">
+        function generateQuote() {
+        jQuery("<iframe>")                             // create a new iframe element
+            .hide()                               // make it invisible
+            .attr("src", "{% url 'dashboard:quote' 1 %}") // point the iframe to the page you want to print
+            .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+    }
+    </script>
 {% endblock %}
 {#END SCRIPTS#}

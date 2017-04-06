@@ -2,7 +2,12 @@
 {% load staticfiles %}{% load i18n %}
 {% load activity_tags %}
 {% block title %}| Dashboard{% endblock %}
+{% block header_scripts %}
+    <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
+{% endblock %}
+
 {% block content %}
+    <div id="content" class="app-content box-shadow-z2 pjax-container" role="main">
   <!-- content -->
     <div class="app-header white bg b-b">
           <div class="navbar" data-pjax>
@@ -89,7 +94,7 @@
                       <a class="dropdown-item" href="app.inbox.html">
                         <span>Inbox</span>
                       </a>
-                      <a class="dropdown-item" href="app.message.html">
+                      <a class="dropdown-item" href="messaging.html">
                         <span>Message</span>
                       </a>
                       <div class="dropdown-divider"></div>
@@ -938,6 +943,8 @@
       </div>
     </div>
 </div>
+    </div>
+    </div>
 <!-- MODALS END -->
 {% endblock %}
 

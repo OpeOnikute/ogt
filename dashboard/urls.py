@@ -3,13 +3,16 @@ from . import views
 
 app_name = "dashboard"
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^login/', views.loginView, name='login'),
-    url(r'^logout/', views.logoutView, name='logout'),
-    url(r'^signup/', views.signupView, name='signup'),
-    url(r'^projects/', views.projects, name='projects'),
-    url(r'^clients/', views.clients, name='clients'),
-    url(r'^potential_clients/', views.potential_clients, name='potential_clients'),
+    url(r'^$', views.index_view, name='index'),
+    url(r'^login/', views.login_view, name='login'),
+    url(r'^logout/', views.logout_view, name='logout'),
+    url(r'^signup/', views.signup_view, name='signup'),
+    url(r'^projects/', views.projects_view, name='projects'),
+    url(r'^clients/', views.clients_view, name='clients'),
+    url(r'^pricing/', views.pricing_view, name='pricing'),
+    url(r'^messaging/', views.messaging_view, name='messaging'),
+    url(r'^quote/(?P<project_id>[-\w]+)', views.generate_quote_view, name='quote'),
+    url(r'^potential_clients/', views.potential_clients_view, name='potential_clients'),
     url(r'^archive/tasks', views.archived_tasks_view, name='archived_tasks'),
     url(r'^actions/update/(?P<param_type>[-\w]+)/(?P<param_id>[-\w]+)/(?P<new_value>[-\w]+)',
         views.update_action,

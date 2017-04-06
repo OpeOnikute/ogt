@@ -1,0 +1,269 @@
+{% extends 'dashboard/base.html' %}
+{% load staticfiles %}
+
+{% block title %} | Messaging{% endblock %}
+
+{% block content %}
+<!-- content -->
+  <div id="content" class="app-content box-shadow-z2 pjax-container" role="main">
+    <div class="app-header hidden-lg-up black lt b-b">
+          <div class="navbar" data-pjax>
+                <a data-toggle="modal" data-target="#aside" class="navbar-item pull-left hidden-lg-up p-r m-a-0">
+                  <i class="ion-navicon"></i>
+                </a>
+                <div class="navbar-item pull-left h5" id="pageTitle">Messages</div>
+                <!-- navbar right -->
+                <ul class="nav navbar-nav pull-right">
+                  <li class="nav-item dropdown pos-stc-xs">
+                    <a class="nav-link" data-toggle="dropdown">
+                      <i class="ion-android-search w-24"></i>
+                    </a>
+                    <div class="dropdown-menu text-color w-md animated fadeInUp pull-right">
+                      <!-- search form -->
+                      <form class="navbar-form form-inline navbar-item m-a-0 p-x v-m" role="search">
+                        <div class="form-group l-h m-a-0">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search projects...">
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn white b-a no-shadow"><i class="fa fa-search"></i></button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <!-- / search form -->
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown pos-stc-xs">
+                    <a class="nav-link clear" data-toggle="dropdown">
+                      <i class="ion-android-notifications-none w-24"></i>
+                      <span class="label up p-a-0 danger"></span>
+                    </a>
+                    <!-- dropdown -->
+                    <div class="dropdown-menu pull-right w-xl animated fadeIn no-bg no-border no-shadow">
+                        <div class="scrollable" style="max-height: 220px">
+                          <ul class="list-group list-group-gap m-a-0">
+                            <li class="list-group-item dark-white box-shadow-z0 b">
+                              <span class="pull-left m-r">
+                                <img src="images/a0.jpg" alt="..." class="w-40 img-circle">
+                              </span>
+                              <span class="clear block">
+                                Use awesome <a href="#" class="text-primary">animate.css</a><br>
+                                <small class="text-muted">10 minutes ago</small>
+                              </span>
+                            </li>
+                            <li class="list-group-item dark-white box-shadow-z0 b">
+                              <span class="pull-left m-r">
+                                <img src="images/a1.jpg" alt="..." class="w-40 img-circle">
+                              </span>
+                              <span class="clear block">
+                                <a href="#" class="text-primary">Joe</a> Added you as friend<br>
+                                <small class="text-muted">2 hours ago</small>
+                              </span>
+                            </li>
+                            <li class="list-group-item dark-white text-color box-shadow-z0 b">
+                              <span class="pull-left m-r">
+                                <img src="images/a2.jpg" alt="..." class="w-40 img-circle">
+                              </span>
+                              <span class="clear block">
+                                <a href="#" class="text-primary">Danie</a> sent you a message<br>
+                                <small class="text-muted">1 day ago</small>
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    <!-- / dropdown -->
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link clear" data-toggle="dropdown">
+                      <span class="avatar w-32">
+                        <img src="images/a3.jpg" class="w-full rounded" alt="...">
+                      </span>
+                    </a>
+                    <div class="dropdown-menu w dropdown-menu-scale pull-right">
+                      <a class="dropdown-item" href="profile.html">
+                        <span>Profile</span>
+                      </a>
+                      <a class="dropdown-item" href="setting.html">
+                        <span>Settings</span>
+                      </a>
+                      <a class="dropdown-item" href="app.inbox.html">
+                        <span>Inbox</span>
+                      </a>
+                      <a class="dropdown-item" href="messaging.html">
+                        <span>Message</span>
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="docs.html">
+                        Need help?
+                      </a>
+                      <a class="dropdown-item" href="login.html">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+                <!-- / navbar right -->
+          </div>
+    </div>
+    <div class="app-body">
+
+<!-- ############ PAGE START-->
+
+<div class="app-body-inner">
+	<div class="row-col">
+		<div class="col-xs-3 w-lg modal fade aside aside-sm" id="list">
+			<div class="row-col success">
+				<!-- header -->
+				<div>
+					<div class="p-a">
+				      	<form>
+				            <div class="input-group input-group-sm p-x-sm dker rounded">
+				              	<input type="text" class="form-control no-bg no-border text-white" placeholder="Search" required="">
+				              	<span class="input-group-btn">
+				                	<button class="btn no-bg no-border no-shadow" type="button"><i class="fa fa-search"></i></button>
+				              	</span>
+				            </div>
+				        </form>
+				    </div>
+				    <div class="nav text-center p-b">
+				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Add Contact"><i class="ion-person-add"></i></a>
+				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Contacts"><i class="ion-person-stalker"></i></a>
+				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Chat"><i class="ion-chatbubble"></i></a>
+				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Location"><i class="ion-location"></i></a>
+				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Plugins"><i class="ion-grid"></i></a>
+				    </div>
+			    </div>
+			    <!-- / -->
+		      	<!-- flex content -->
+		      	<div class="row-row">
+			      	<div class="row-body scrollable hover">
+				      	<div class="row-inner">
+				      		<!-- left content -->
+				      		<div class="list inset" data-ui-list="active">
+				      			<div class="p-x text-dark m-t m-b-sm text-sm">Messages</div>
+				      			    <div class="list-item ">
+				      			      <div class="list-left">
+				      			        <span class="w-40 avatar circle indigo">
+				      			          <i class="on b-white avatar-right"></i>
+				      			            <img src="images/a6.jpg" alt=".">
+				      			        </span>
+				      			      </div>
+				      			      <div class="list-body">
+				      			            <span class="pull-right text-xs label rounded lt">
+				      			              8
+				      			            </span>
+				      			        <div class="item-title">
+				      			          <a href="#" class="_500">Fifth Harmony</a>
+				      			        </div>
+				      			        <small class="block text-muted text-ellipsis">
+				      			            Send you a invitation to SWO
+				      			        </small>
+				      			      </div>
+				      			    </div>
+				      			    <div class="list-item ">
+				      			      <div class="list-left">
+				      			        <span class="w-40 avatar circle light-blue">
+				      			          <i class="off b-white avatar-right"></i>
+				      			            <img src="images/a1.jpg" alt=".">
+				      			        </span>
+				      			      </div>
+				      			      <div class="list-body">
+				      			            <span class="pull-right text-xs label rounded lt">
+				      			              30
+				      			            </span>
+				      			        <div class="item-title">
+				      			          <a href="#" class="_500">Kygo</a>
+				      			        </div>
+				      			        <small class="block text-muted text-ellipsis">
+				      			            What&#x27;s the project progress now
+				      			        </small>
+				      			      </div>
+				      			    </div>
+				      			    <div class="list-item ">
+				      			      <div class="list-left">
+				      			        <span class="w-40 avatar circle teal">
+				      			          <i class="on b-white avatar-right"></i>
+				      			            <img src="images/a7.jpg" alt=".">
+				      			        </span>
+				      			      </div>
+				      			      <div class="list-body">
+				      			        <div class="item-title">
+				      			          <a href="#" class="_500">RYD</a>
+				      			        </div>
+				      			        <small class="block text-muted text-ellipsis">
+				      			            Added you to repo
+				      			        </small>
+				      			      </div>
+				      			    </div>
+				      			    <div class="list-item ">
+				      			      <div class="list-left">
+				      			        <span class="w-40 avatar circle blue">
+				      			          <i class="on b-white avatar-right"></i>
+				      			            <img src="images/a9.jpg" alt=".">
+				      			        </span>
+				      			      </div>
+				      			      <div class="list-body">
+				      			        <div class="item-title">
+				      			          <a href="#" class="_500">Postiljonen</a>
+				      			        </div>
+				      			        <small class="block text-muted text-ellipsis">
+				      			            Looking for some client-work
+				      			        </small>
+				      			      </div>
+				      			    </div>
+				      			    <div class="list-item ">
+				      			      <div class="list-left">
+				      			        <span class="w-40 avatar circle grey">
+				      			          <i class="on b-white avatar-right"></i>
+				      			            <img src="images/a0.jpg" alt=".">
+				      			        </span>
+				      			      </div>
+				      			      <div class="list-body">
+				      			        <div class="item-title">
+				      			          <a href="#" class="_500">Summerella</a>
+				      			        </div>
+				      			        <small class="block text-muted text-ellipsis">
+				      			            Send you a message
+				      			        </small>
+				      			      </div>
+				      			    </div>
+				        	
+				        		<div class="p-x text-dark m-t m-b-sm text-sm">Groups</div>
+				        		<div class="list-item">
+			      			      	<div class="list-left">
+				      			        <span class="w-40 avatar circle">
+				      			            <span class="w-40 avatar lter">WG</span>
+				      			        </span>
+			      			      	</div>
+			      			      	<div class="list-body">
+				      			        <a href="#" class="_500">Work group</a>
+				      			        <small class="block text-muted text-ellipsis">
+				      			            32 persons
+				      			        </small>
+			      			      	</div>
+			      			    </div>
+				        	</div>
+				        	<!-- / -->
+				      	</div>
+				    </div>
+		      	</div>
+		      	<!-- / -->
+			    <!-- footer -->
+			    <div class="p-x-md p-y">
+			      	<a class="pull-right btn btn-xs rounded dk">
+			            <i class="fa fa-plus"></i>
+			        </a>
+			      	<span class="text-sm text-muted">Messages: 90+</span>
+			    </div>
+			    <!-- / -->
+		    </div>
+		</div>
+		<div class="col-xs-6" id="detail">
+		    </div>
+		</div>
+	</div>
+</div>
+
+<!-- ############ PAGE END-->
+  </div>
+  <!-- / -->
+{% endblock %}

@@ -7,9 +7,11 @@ from django.http import HttpResponseRedirect
 from .forms import *
 from constants import Status
 from .models import Job, Client, DesignProblems, PotentialClient, PotentialProject, Inspiration, Task
+from .libs.utils import ErrorLogHelper
+from .libs.emails import EmailHelper
 
 
-def loginView(request):
+def login_view(request):
 
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('dashboard:index'))
@@ -31,28 +33,36 @@ def loginView(request):
     return render(request, 'dashboard/login.html')
 
 
-def logoutView(request):
+def logout_view(request):
 
     logout(request)
     return HttpResponseRedirect(reverse('dashboard:index'))
 
 
-def signupView(request):
+def signup_view(request):
+
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('dashboard:login'))
 
-    signupForm = SignUpForm()
+    signup_form = SignUpForm()
+    profile_form = UserProfileForm()
 
     context = {
-        'form': signupForm,
+        'form': signup_form,
+        'profile_form': profile_form
     }
 
     if request.method == 'POST':
-        signupForm = SignUpForm(request.POST)
-        if signupForm.is_valid():
-           return HttpResponseRedirect(reverse('dashboard:index'))
+        signup_form = SignUpForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+
+        if signup_form.is_valid() and profile_form.is_valid():
+            signup_form.save()
+            profile_form.save()
+            return HttpResponseRedirect(reverse('dashboard:index'))
         else:
-            context['form'] = signupForm
+            context['form'] = signup_form
+            context['profile_form'] = profile_form
             return render(request, 'dashboard/signup.html', context)
 
     return render(request, 'dashboard/signup.html', context)
@@ -110,40 +120,41 @@ def save_new_job(request, data):
             print form_object.errors
 
 
-def save_modal_data(request, data, files):
+def save_form_data(request, data, files):
     """
         We are using different modals, so this function determines which modal it is and saves it's parameters.
+    :param request:
     :param data:
     :param files:
     :return string:
     """
-    modal_type = data["modal-type"]
+    form_type = data["modal-type"]
 
-    if modal_type in ['DesignProblemsForm', 'PotentialClientForm', 'PotentialProjectForm', 'InspirationForm',
-                      'ClientForm', 'TaskForm']:
+    if form_type in ['DesignProblemsForm', 'PotentialClientForm', 'PotentialProjectForm', 'InspirationForm',
+                    'ClientForm', 'TaskForm', 'ItemPriceForm']:
 
-        modal_model = eval(modal_type)
-        real_model = eval(modal_type.strip('Form'))
+        form_model = eval(form_type)
+        real_model = eval(form_type.strip('Form'))
 
         try:
             already_existing_instance = real_model.objects.get(name=data['name'])
         except:
             already_existing_instance = real_model()
 
-        form_object = modal_model(data, files, instance=already_existing_instance)
+        form_object = form_model(data, files, instance=already_existing_instance)
 
         if form_object.is_valid():
             print 'valid!'
             save_it = form_object.save(commit=False)
             save_it.save()
-            verb_text = "just added a new " + modal_type.strip('Form')
+            verb_text = "just added a new " + form_type.strip('Form')
             action.send(request.user, verb= verb_text, target=already_existing_instance)
         else:
             print 'Form invalid!'
             print form_object.errors
 
 
-def index(request):
+def index_view(request):
 
     # Make the user log in
     if not request.user.is_authenticated():
@@ -164,7 +175,7 @@ def index(request):
     inspirations = Inspiration.objects.filter(user=request.user)
 
     if request.method == 'POST':
-        save_modal_data(request, request.POST, request.FILES)
+        save_form_data(request, request.POST, request.FILES)
 
     context = {
         'user': request.user,
@@ -183,7 +194,7 @@ def index(request):
     return render(request, 'dashboard/dashboard.html', context)
 
 
-def projects(request):
+def projects_view(request):
 
     # Make the user log in
     if not request.user.is_authenticated():
@@ -193,7 +204,7 @@ def projects(request):
     clients = Client.objects.filter(user=request.user)
     tasks = Task.objects.filter(user=request.user, archived="no")
     tasks_completed = tasks.filter(user=request.user, status=Status.completed)
-    tasks_pending = tasks.filter(user=request.user, status=Status.pending )
+    tasks_pending = tasks.filter(user=request.user, status=Status.pending)
 
     context = {
         'tasks': tasks,
@@ -217,12 +228,12 @@ def projects(request):
         if request.POST['modal-type'] == 'JobForm':
             save_new_job(request, request.POST)
         elif request.POST['modal-type'] == 'TaskForm':
-            save_modal_data(request, request.POST, request.FILES)
+            save_form_data(request, request.POST, request.FILES)
 
     return render(request, 'dashboard/projects.html', context)
 
 
-def clients(request):
+def clients_view(request):
 
     # Make the user log in
     if not request.user.is_authenticated():
@@ -236,12 +247,12 @@ def clients(request):
     }
 
     if request.method == 'POST':
-        save_modal_data(request, request.POST, request.FILES)
+        save_form_data(request, request.POST, request.FILES)
 
     return render(request, 'dashboard/clients.html', context)
 
 
-def potential_clients(request):
+def potential_clients_view(request):
 
     # Make the user log in
     if not request.user.is_authenticated():
@@ -255,7 +266,7 @@ def potential_clients(request):
     }
 
     if request.method == 'POST':
-        save_modal_data(request, request.POST, request.FILES)
+        save_form_data(request, request.POST, request.FILES)
 
     return render(request, 'dashboard/potential_clients.html', context)
 
@@ -273,6 +284,49 @@ def archived_tasks_view(request):
     }
 
     return render(request, 'dashboard/archived_tasks.html', context)
+
+
+def pricing_view(request):
+
+    # Make the user log in
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('dashboard:login'))
+
+    items = ItemPrice.objects.filter(user=request.user)
+
+    context = {
+        'user': request.user,
+        'request': request,
+        'items': items,
+    }
+
+    if request.method == 'POST':
+        save_form_data(request, request.POST, request.FILES)
+
+    return render(request, 'dashboard/pricing.html', context)
+
+
+def messaging_view(request):
+
+    context = {}
+
+    return render(request, 'dashboard/messaging.html', context)
+
+
+def generate_quote_view(request, project_id=None):
+
+    context = {
+        'request': request
+    }
+
+    try:
+        project = Job.objects.get(id=project_id, user=request.user)
+        context['project'] = project
+    except Exception, e:
+        print e
+        pass
+
+    return render(request, 'dashboard/invoice.html', context)
 
 
 def update_action(request, param_type, param_id, new_value):

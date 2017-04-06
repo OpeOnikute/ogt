@@ -16,5 +16,4 @@ class DashboardConfig(AppConfig):
         registry.register(self.get_model('Inspiration'))
         registry.register(self.get_model('Client'))
         registry.register(self.get_model('Task'))
-
-
+        registry.register(self.get_model('ItemPrice'))

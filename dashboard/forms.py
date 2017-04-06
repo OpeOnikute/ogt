@@ -1,13 +1,22 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Job, DesignProblems, PotentialClient, PotentialProject, Inspiration, Client, Task
+from .models import Job, DesignProblems, PotentialClient, PotentialProject, Inspiration, Client, Task, ItemPrice, Profile
 
 
 class SignUpForm(forms.ModelForm):
+
     password = forms.CharField(widget=forms.PasswordInput())
+
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
+
+
+class UserProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ('address', 'phone_number')
 
 
 class DesignProblemsForm(forms.ModelForm):
@@ -58,3 +67,9 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ('user', 'description', 'status', 'job')
 
+
+class ItemPriceForm(forms.ModelForm):
+
+    class Meta:
+        model = ItemPrice
+        fields = ('user', 'name', 'price', 'description')
