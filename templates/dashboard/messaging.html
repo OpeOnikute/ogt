@@ -44,7 +44,7 @@
                           <ul class="list-group list-group-gap m-a-0">
                             <li class="list-group-item dark-white box-shadow-z0 b">
                               <span class="pull-left m-r">
-                                <img src="images/a0.jpg" alt="..." class="w-40 img-circle">
+                                <img src="" alt="..." class="w-40 img-circle">
                               </span>
                               <span class="clear block">
                                 Use awesome <a href="#" class="text-primary">animate.css</a><br>
@@ -53,7 +53,7 @@
                             </li>
                             <li class="list-group-item dark-white box-shadow-z0 b">
                               <span class="pull-left m-r">
-                                <img src="images/a1.jpg" alt="..." class="w-40 img-circle">
+                                <img src="" alt="..." class="w-40 img-circle">
                               </span>
                               <span class="clear block">
                                 <a href="#" class="text-primary">Joe</a> Added you as friend<br>
@@ -62,7 +62,7 @@
                             </li>
                             <li class="list-group-item dark-white text-color box-shadow-z0 b">
                               <span class="pull-left m-r">
-                                <img src="images/a2.jpg" alt="..." class="w-40 img-circle">
+                                <img src="" alt="..." class="w-40 img-circle">
                               </span>
                               <span class="clear block">
                                 <a href="#" class="text-primary">Danie</a> sent you a message<br>
@@ -77,7 +77,7 @@
                   <li class="nav-item dropdown">
                     <a class="nav-link clear" data-toggle="dropdown">
                       <span class="avatar w-32">
-                        <img src="images/a3.jpg" class="w-full rounded" alt="...">
+                        <img src="" class="w-full rounded" alt="...">
                       </span>
                     </a>
                     <div class="dropdown-menu w dropdown-menu-scale pull-right">
@@ -125,145 +125,387 @@
 				        </form>
 				    </div>
 				    <div class="nav text-center p-b">
-				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Add Contact"><i class="ion-person-add"></i></a>
-				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Contacts"><i class="ion-person-stalker"></i></a>
-				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Chat"><i class="ion-chatbubble"></i></a>
-				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Location"><i class="ion-location"></i></a>
-				    	<a href="#" class="nav-link m-x" data-toggle="tooltip" title="Plugins"><i class="ion-grid"></i></a>
-				    </div>
+				    	<a id="go-overview" class="nav-link m-x" data-toggle="tooltip" title="Overview"><i class="ion-navigate"></i></a>
+				    	<a id="go-add-client" class="nav-link m-x" onclick="trigger_save_action('#add-client-modal')"><i class="ion-person-add"></i></a>
+				    	<a id="go-clients" class="nav-link m-x" data-toggle="tooltip" title="Clients"><i class="ion-person-stalker"></i></a>
+				    	<a id="go-chat" class="nav-link m-x" data-toggle="tooltip" title="Send Messages"><i class="ion-chatbubble"></i></a>
+				    	</div>
 			    </div>
 			    <!-- / -->
 		      	<!-- flex content -->
-		      	<div class="row-row">
+                <!-- Overview nav starts -->
+		      	<div class="row-row" id="overview-nav">
 			      	<div class="row-body scrollable hover">
 				      	<div class="row-inner">
 				      		<!-- left content -->
 				      		<div class="list inset" data-ui-list="active">
-				      			<div class="p-x text-dark m-t m-b-sm text-sm">Messages</div>
+				      			<div class="p-x text-dark m-t m-b-sm text-sm">Sent Messages</div>
+                                {% if sent_messages %}
+                                    {% for message_to_client, no_of_messages_to_client in sent_messages %}
 				      			    <div class="list-item ">
 				      			      <div class="list-left">
-				      			        <span class="w-40 avatar circle indigo">
-				      			          <i class="on b-white avatar-right"></i>
-				      			            <img src="images/a6.jpg" alt=".">
+				      			        <span class="w-40 avatar circle">
+				      			            <span class="w-40 avatar indigo">{{ message_to_client.client.name|make_list|first|capfirst }}</span>
 				      			        </span>
-				      			      </div>
+			      			      	</div>
 				      			      <div class="list-body">
 				      			            <span class="pull-right text-xs label rounded lt">
-				      			              8
+				      			              {{ no_of_messages_to_client }}
 				      			            </span>
 				      			        <div class="item-title">
-				      			          <a href="#" class="_500">Fifth Harmony</a>
+				      			          <a href="#" class="_500">{{ message_to_client.client.name }}</a>
 				      			        </div>
 				      			        <small class="block text-muted text-ellipsis">
-				      			            Send you a invitation to SWO
+				      			            {{ message_to_client.subject }}
 				      			        </small>
 				      			      </div>
 				      			    </div>
-				      			    <div class="list-item ">
-				      			      <div class="list-left">
-				      			        <span class="w-40 avatar circle light-blue">
-				      			          <i class="off b-white avatar-right"></i>
-				      			            <img src="images/a1.jpg" alt=".">
-				      			        </span>
-				      			      </div>
+                                {% endfor %}
+                                {% else %}
+                                    <div class="list-item ">
 				      			      <div class="list-body">
-				      			            <span class="pull-right text-xs label rounded lt">
-				      			              30
-				      			            </span>
-				      			        <div class="item-title">
-				      			          <a href="#" class="_500">Kygo</a>
-				      			        </div>
 				      			        <small class="block text-muted text-ellipsis">
-				      			            What&#x27;s the project progress now
+                                       You don't have sent any messages yet. Click the chat icon above to send one!
 				      			        </small>
 				      			      </div>
 				      			    </div>
-				      			    <div class="list-item ">
-				      			      <div class="list-left">
-				      			        <span class="w-40 avatar circle teal">
-				      			          <i class="on b-white avatar-right"></i>
-				      			            <img src="images/a7.jpg" alt=".">
-				      			        </span>
-				      			      </div>
-				      			      <div class="list-body">
-				      			        <div class="item-title">
-				      			          <a href="#" class="_500">RYD</a>
-				      			        </div>
-				      			        <small class="block text-muted text-ellipsis">
-				      			            Added you to repo
-				      			        </small>
-				      			      </div>
-				      			    </div>
-				      			    <div class="list-item ">
-				      			      <div class="list-left">
-				      			        <span class="w-40 avatar circle blue">
-				      			          <i class="on b-white avatar-right"></i>
-				      			            <img src="images/a9.jpg" alt=".">
-				      			        </span>
-				      			      </div>
-				      			      <div class="list-body">
-				      			        <div class="item-title">
-				      			          <a href="#" class="_500">Postiljonen</a>
-				      			        </div>
-				      			        <small class="block text-muted text-ellipsis">
-				      			            Looking for some client-work
-				      			        </small>
-				      			      </div>
-				      			    </div>
-				      			    <div class="list-item ">
-				      			      <div class="list-left">
-				      			        <span class="w-40 avatar circle grey">
-				      			          <i class="on b-white avatar-right"></i>
-				      			            <img src="images/a0.jpg" alt=".">
-				      			        </span>
-				      			      </div>
-				      			      <div class="list-body">
-				      			        <div class="item-title">
-				      			          <a href="#" class="_500">Summerella</a>
-				      			        </div>
-				      			        <small class="block text-muted text-ellipsis">
-				      			            Send you a message
-				      			        </small>
-				      			      </div>
-				      			    </div>
-				        	
-				        		<div class="p-x text-dark m-t m-b-sm text-sm">Groups</div>
-				        		<div class="list-item">
+                                {% endif %}
+				        	    </div>
+
+                            	<div class="p-x text-dark m-t m-b-sm text-sm">Drafts</div>
+				        		{% if user_drafts %}
+                                {% for draft in user_drafts %}
+                                <div class="list-item">
 			      			      	<div class="list-left">
 				      			        <span class="w-40 avatar circle">
-				      			            <span class="w-40 avatar lter">WG</span>
+				      			            <span class="w-40 avatar lter">O</span>
 				      			        </span>
 			      			      	</div>
 			      			      	<div class="list-body">
-				      			        <a href="#" class="_500">Work group</a>
+				      			        <a href="#" class="_500">{{ draft.client.name }}</a>
 				      			        <small class="block text-muted text-ellipsis">
-				      			            32 persons
+				      			            {{ draft.subject }}
 				      			        </small>
 			      			      	</div>
 			      			    </div>
-				        	</div>
+                                {% endfor %}
+                                {% else %}
+                                    <div class="list-item ">
+				      			      <div class="list-body">
+				      			        <small class="block text-muted text-ellipsis">
+                                       You don't have any drafts.
+				      			        </small>
+				      			      </div>
+				      			    </div>
+                                {% endif %}
 				        	<!-- / -->
 				      	</div>
 				    </div>
 		      	</div>
+                <!-- Overview nav ends -->
+
+                <!-- Contacts nav starts -->
+                <div class="row-row" id="contacts-nav" style="display: none;">
+			      	<div class="row-body scrollable hover">
+				      	<div class="row-inner">
+				      		<!-- left content -->
+				      		<div class="list inset" data-ui-list="active" id="client-list">
+				      			<div class="p-x text-dark m-t m-b-sm text-sm">Clients</div>
+                                {% if user_clients %}
+                                    {% for client in user_clients %}
+				      			    <div class="list-item ">
+				      			      <div class="list-left">
+				      			        <span class="w-40 avatar circle">
+				      			            <span class="w-40 avatar indigo" id="{{ client.id }}">{{ client.name|make_list|first|capfirst }}</span>
+				      			        </span>
+                                      </div>
+				      			      <div class="list-body">
+				      			            <span class="pull-right text-xs label rounded lt">
+				      			              {{ client.get_number_of_messages_to_client }}
+				      			            </span>
+				      			        <div class="item-title">
+				      			          <a id="{{ client.id }}" class="_500">{{ client.name }}</a>
+				      			        </div>
+				      			        <small id="{{ client.id }}" class="block text-muted text-ellipsis">
+				      			            {{ client.email }}
+				      			        </small>
+				      			      </div>
+				      			    </div>
+                                {% endfor %}
+                                {% else %}
+                                    <div class="list-item ">
+				      			      <div class="list-body">
+				      			        <small class="block text-muted text-ellipsis">
+                                       You don't have any clients yet. Click the icon above to add one!
+				      			        </small>
+				      			      </div>
+				      			    </div>
+                                {% endif %}
+				        	    </div>
+				        	<!-- / -->
+				      	</div>
+				    </div>
+                </div>
+                <!-- Contacts nav ends -->
+
 		      	<!-- / -->
 			    <!-- footer -->
 			    <div class="p-x-md p-y">
 			      	<a class="pull-right btn btn-xs rounded dk">
 			            <i class="fa fa-plus"></i>
 			        </a>
-			      	<span class="text-sm text-muted">Messages: 90+</span>
+			      	<span class="text-sm text-muted">Sent Messages: {{ sent_messages|length }}</span>
 			    </div>
 			    <!-- / -->
 		    </div>
 		</div>
-		<div class="col-xs-6" id="detail">
+
+      <!-- Overview detail starts -->
+		<div class="col-xs-6 indigo" id="over-view-detail">
+            <div class="row text-center" style="padding: 250px 0;">
+                <h1 style="padding: 15px; letter-spacing: 12px;">OGT</h1>
+                <h5 style="letter-spacing: 8px;">Messaging</h5>
+            </div>
+        </div>
+        <!-- Overview detail ends -->
+
+        <!-- Chat detail starts-->
+		<div class="col-xs-6" id="chat-detail" style="display: none;">
+			<div class="row-col dark-light">
+				<!-- header -->
+				<div class="dark-white b-b">
+					<div class="navbar">
+
+					    <!-- nabar right -->
+					    <ul class="nav navbar-nav pull-right m-l">
+					        <li class="nav-item">
+						        <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Phone Call">
+						            <span class="btn btn-sm btn-icon rounded success">
+							      		<i class="fa fa-phone"></i>
+							        </span>
+						        </a>
+					        </li>
+					        <li class="nav-item">
+						        <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Face Call">
+						            <span class="btn btn-sm btn-icon rounded success">
+							      		<i class="fa fa-video-camera"></i>
+							        </span>
+						        </a>
+					        </li>
+					    </ul>
+					    <!-- / navbar right -->
+
+						<a data-toggle="modal" data-target="#profile" data-ui-modal class="m-r-0 m-l navbar-item pull-right hidden-lg-up">
+							<span class="btn btn-sm btn-icon rounded success">
+					      		<i class="ion-person"></i>
+					        </span>
+					    </a>
+					    <a data-toggle="modal" data-target="#list" data-ui-modal class="navbar-item pull-left hidden-md-up">
+					    	<span class="btn btn-sm btn-icon success">
+					      		<i class="fa fa-list"></i>
+					      	</span>
+					    </a>
+
+				        <span class="navbar-item text-md text-ellipsis">
+				        	Pablo Nouvelle
+				        </span>
+					</div>
+				</div>
+				<!-- / -->
+				<!-- flex content -->
+				<div class="row-row">
+					<div class="row-body">
+						<div class="row-inner">
+							<!-- content -->
+							<div class="p-a-md">
+					            <div class="m-b">
+					              <a href="#" class="pull-left w-40 m-r-sm">
+					              	<img src="" alt="." class="w-full img-circle">
+					              </a>
+					              <div class="clear">
+					              	<div>
+						                <div class="p-a p-y-sm success inline rounded">
+						                  Hi John, What's up...
+						                </div>
+					                </div>
+					                <div class="m-t-xs">
+						                <div class="p-a p-y-sm success inline rounded">
+						                  hmm...
+						                </div>
+					                </div>
+					                <div class="text-muted text-xs m-t-xs"><i class="fa fa-ok text-success"></i> 2 minutes ago</div>
+					              </div>
+					            </div>
+					            <div class="m-b">
+					              <a href="#" class="pull-right w-40 m-l-sm">
+					              	<img src="" class="w-full img-circle" alt=".">
+					              </a>
+					              <div class="clear text-right">
+					                <div class="p-a p-y-sm dark-white inline rounded text-left">
+					                  Lorem ipsum dolor soe rooke..
+					                </div>
+					                <div class="text-muted text-xs m-t-xs">1 minutes ago</div>
+					              </div>
+					            </div>
+					            <div class="m-b">
+					              <a href="#" class="pull-left w-40 m-r-sm">
+					              	<img src="" alt="." class="w-full img-circle">
+					              </a>
+					              <div class="clear">
+					                <div class="p-a p-y-sm success inline rounded">
+					                  Good!
+					                </div>
+					                <div class="text-muted text-xs m-t-xs"><i class="fa fa-ok text-success"></i> 5 seconds ago</div>
+					              </div>
+					            </div>
+					            <div class="m-b">
+					              <a href="#" class="pull-right w-40 m-l-sm">
+					              	<img src="" class="w-full img-circle" alt=".">
+					              </a>
+					              <div class="clear text-right">
+					              	<div>
+						                <div class="p-a p-y-sm dark-white inline rounded text-left">
+						                  Dlor soe isep slie gosese..
+						                </div>
+					                </div>
+					                <div class="m-t-xs">
+						                <div class="p-a p-y-sm dark-white inline rounded text-left">
+						                  Loris aspim..
+						                </div>
+					                </div>
+					                <div class="text-muted text-xs m-t-xs">3 seconds ago</div>
+					              </div>
+					            </div>
+					            <div class="m-b">
+					              <a href="#" class="pull-left w-40 m-r-sm">
+					              	<img src="" alt="." class="w-full img-circle">
+					              </a>
+					              <div class="clear">
+					              	<div>
+						                <div class="p-a p-y-sm success inline rounded text-left">
+						                  Typing...
+						                </div>
+					                </div>
+					                <div class="text-muted text-xs m-t-xs"><i class="fa fa-ok text-success"></i> Just now</div>
+					              </div>
+					            </div>
+					        </div>
+							<!-- / -->
+						</div>
+					</div>
+				</div>
+				<!-- / -->
+				<div class="p-a b-t dark-white">
+				    <form method="post" action="">
+                        {% csrf_token %}
+				        <div class="input-group">
+				          	<input type="text" class="form-control" placeholder="Say something">
+				          	<span class="input-group-btn">
+				            	<button class="btn white b-a no-shadow" type="button">
+				            		<i class="fa fa-send text-success"></i>
+				            	</button>
+				          	</span>
+				        </div>
+				    </form>
+				</div>
 		    </div>
 		</div>
-	</div>
-</div>
+    <!-- Overview detail ends -->
 
+        <!-- Contacts detail starts -->
+		<div class="col-xs-6 indigo" id="contacts-detail" style="display: none;">
+            <div class="row text-center" style="padding: 200px 0;" id="contacts-detail-overview">
+                <h1 style="padding: 15px; letter-spacing: 12px;">OGT</h1>
+                <h5 style="letter-spacing: 8px;">Contacts</h5>
+            </div>
+            <div class="row text-center" style="padding: 50px 0; display: none;" id="contacts-detail-full">
+                <img src="{% static 'images/logo.png' %}">
+                <h1 style="padding: 15px; letter-spacing: 12px;" id="contacts-detail-name"></h1>
+                <h5 style="letter-spacing: 8px;" id="contacts-detail-email"></h5>
+                <p style="letter-spacing: 8px;" id="contacts-detail-phone_number"></p>
+            </div>
+        </div>
+        <!-- Contacts detail ends -->
+        </div>
+    </div>
 <!-- ############ PAGE END-->
   </div>
+  </div>
   <!-- / -->
+{% endblock %}
+
+{% block base_scripts %}
+    <script>
+        jQuery(document).ready(
+            function(){
+
+                 function show_overview(){
+                     $('#overview-nav').show();
+                    $('#over-view-detail').show();
+                    $('#contacts-nav').hide();
+                    $('#contacts-detail').hide();
+                    $('#chat-detail').hide();
+                 }
+
+                 function show_contacts(){
+                     $('#overview-nav').hide();
+                     $('#over-view-detail').hide();
+                     $('#chat-detail').hide();
+                     $('#contacts-nav').show();
+                     $('#contacts-detail').show();
+                 }
+
+                 function show_chats(){
+                     $('#overview-nav').show();
+                     $('#chat-detail').show();
+                     $('#over-view-detail').hide();
+                     $('#contacts-nav').hide();
+                     $('#contacts-detail').hide();
+                 }
+
+                 $('#go-overview').click( function() {
+                    show_overview();
+                 });
+
+                $('#go-clients').click( function() {
+                    show_contacts();
+                });
+
+                 $('#client-list').click(
+                     function(e){
+                         var user_id = e.target.id;
+                         var queryUrl = "/dashboard/client/" + user_id;
+
+                         var request = $.ajax({
+                             url : window.location.origin + queryUrl,
+                             method : "GET"
+                         });
+
+                         request.success(function(response) {
+                             var client_name = response.data.name;
+                             var client_phone_number = response.data.phone_number;
+                             var client_email = response.data.email;
+
+                             $('#contacts-detail-name').html(client_name);
+                             $('#contacts-detail-email').html(client_email);
+                             $('#contacts-detail-phone_number').html(client_phone_number);
+
+                             $('#contacts-detail-overview').hide();
+                             $('#contacts-detail-full').show();
+                         });
+
+                         request.error(function(data){
+                            console.log('error');
+                         });
+                 });
+
+                $('#go-chat').click( function() {
+                  show_chats();
+                });
+
+                $('#go-add-client').click( function() {
+                });
+            }
+        );
+    </script>
 {% endblock %}

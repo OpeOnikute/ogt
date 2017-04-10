@@ -55,7 +55,6 @@
       </div>
       <div data-flex class="hide-scroll">
           <nav class="scroll nav-stacked nav-stacked-rounded nav-color">
-
             <ul class="nav" data-ui-nav>
               <li class="nav-header hidden-folded">
                 <span class="text-xs">Main</span>
@@ -275,6 +274,51 @@
             </div>
         </div>
        </div>
+  <div class="modal fade" id="add-client-modal">
+	<div class="modal-dialog modal-lg">
+	  	<div class="modal-content">
+	  		<div class="modal-header _600">
+	  			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+	  			New Client
+	  		</div>
+	  		<div class="modal-body">
+                <div id="add-client-modal-error-display" style="display: none;">
+                    <p><small>The form was invalid. Please correct the following issues:</small></p>
+                </div>
+			    <form class="form-horizontal" method="post" id="add-client-form">
+                    {% csrf_token %}
+                    <input type="text" name="modal-type" value="ClientForm" class="form-control" hidden>
+                    <input type="number" name="user" value="{{ user.id }}"  hidden>
+				    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">Name:</label>
+				        <div class="col-lg-8">
+					        <input type="text" class="form-control" name="name">
+				        </div>
+				    </div>
+				    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">Email:</label>
+				        <div class="col-lg-8">
+				          	<input type="email" class="form-control" name="email">
+				        </div>
+				    </div>
+				    <div class="form-group row">
+				        <label class="col-lg-2 form-control-label">Phone number:</label>
+                        <div class="col-lg-8">
+                            <input type="tel" class="form-control" name="phone_number">
+                        </div>
+				    </div>
+				    <div class="form-group row">
+				        <div class="col-lg-8 offset-lg-2">
+				          	<button type="submit" class="btn primary btn-sm p-x-md">Save</button>
+				        </div>
+				    </div>
+			    </form>
+		    </div>
+	  	</div>
+  	</div>
+</div>
    {% block modals %}
    {% endblock %}
 
@@ -386,13 +430,70 @@
   <script src="{% static "scripts/ui-taburl.js" %}"></script>
   <script src="{% static "scripts/app.js" %}"></script>
   <script src="{% static "scripts/ajax.js" %}"></script>
-  {% block base_scripts %}
-    {#the script to add the url to confirm delete button is used in more than one place also #}
+   {#the script to add the url to confirm delete button is used in more than one place also #}
       <script>
+
+          function trigger_save_action(modal_id){
+            $(modal_id).modal("toggle");
+
+            //Find the form inside the modal
+            var modal_form_id = $(modal_id).find("form").selector;
+
+            if(modal_form_id){
+                 $(modal_form_id).on('submit', function(e){
+                    e.preventDefault();
+                    var form_inputs = this.elements;
+                    var form_data = {};
+
+                    jQuery.each(form_inputs, function(index, val){
+                        //populate the form data
+                        var input_name = val.name;
+                        form_data[input_name] = val.value;
+                    });
+
+                    var response = $.ajax({
+                        url: "{% url 'dashboard:ajax_save_form' %}",
+                        type: "POST",
+                        data: form_data
+                    });
+
+                    response.success(function(json_response){
+
+                        if (json_response.status == "success"){
+                            //Close the modal
+                            $(modal_id).modal("toggle");
+
+                            //TO-DO: Trigger the success modal
+                        } else {
+
+                            if( typeof json_response.message === 'object'){
+
+                                jQuery.each(json_response.message, function(field, error){
+
+                                    var error_message = field + ": " + error[0];
+
+                                    $(modal_id + "-error-display").show();
+                                    $(modal_id + "-error-display").append('<p>' + error_message + '</p>');
+                                });
+                            }
+                        }
+                    });
+
+                    response.error(function(){
+                        console.log("error");
+                    })
+                 });
+            }
+            else {
+                $(modal_id).modal("toggle");
+            }
+          }
+
         $('#confirm-delete').on('show.bs.modal', function(e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
         });
     </script>
+  {% block base_scripts %}
   {% endblock %}
 <!-- endbuild -->
 </body>

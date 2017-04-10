@@ -1,12 +1,12 @@
-import operator
+import json
 from actstream import action
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from .forms import *
 from constants import Status
-from .models import Job, Client, DesignProblems, PotentialClient, PotentialProject, Inspiration, Task
+from .models import Job, Client, DesignProblems, PotentialClient, PotentialProject, Inspiration, Task, SentEmailsLog, EmailDraft
 from .libs.utils import ErrorLogHelper
 from .libs.emails import EmailHelper
 
@@ -68,30 +68,11 @@ def signup_view(request):
     return render(request, 'dashboard/signup.html', context)
 
 
-def get_total_amount_from_client(client):
-    clients_jobs = Job.objects.filter(client=client)
-    total_amount = float()
-    for job in clients_jobs:
-        total_amount += float(job.price)
-    return total_amount
-
-
-def get_top_clients(request):
-    clients = Client.objects.filter(user=request.user)
-    clients_dict = {}
-
-    for client in clients:
-        money_from_client = get_total_amount_from_client(client)
-        clients_dict[client.name] = money_from_client
-
-    return sorted(clients_dict.items(), key=operator.itemgetter(1), reverse=True)
-
-
 def save_new_job(request, data):
     """
          We are using different modals, so this function determines which modal it is and saves it's parameters.
         :param data:
-        :param files:
+        :param request:
         :return string:
     """
     modal_type = data["modal-type"]
@@ -102,8 +83,9 @@ def save_new_job(request, data):
 
         try:
             already_existing_instance = real_model.objects.get(project_name=data['project_name'])
-        except:
+        except Exception, e:
             already_existing_instance = real_model()
+            ErrorLogHelper.log_error(e, 'save_form_data')
 
         form_object = modal_model(data, instance=already_existing_instance)
         # print form_object.as_p()
@@ -118,6 +100,80 @@ def save_new_job(request, data):
         else:
             print 'Form invalid!'
             print form_object.errors
+
+
+def ajax_save_form_data(request):
+
+    if request.method == "POST":
+        data = request.POST
+        files = request.FILES
+
+        form_type = data["modal-type"]
+
+        if form_type in ['DesignProblemsForm', 'PotentialClientForm', 'PotentialProjectForm', 'InspirationForm',
+                         'ClientForm', 'TaskForm', 'ItemPriceForm']:
+
+            form_model = eval(form_type)
+            real_model = eval(form_type.strip('Form'))
+
+            try:
+                already_existing_instance = real_model.objects.get(name=data['name'])
+            except Exception, e:
+                already_existing_instance = real_model()
+                ErrorLogHelper.log_error(e, 'save_form_data')
+
+            form_object = form_model(data, files, instance=already_existing_instance)
+
+            if form_object.is_valid():
+                form_target_name = form_type.strip('Form')
+                save_it = form_object.save(commit=False)
+                save_it.save()
+                verb_text = "just added a new " + form_target_name
+                action.send(request.user, verb=verb_text, target=already_existing_instance)
+
+                response = {
+                    'status': "success",
+                    'message': form_target_name + " saved successfully."
+                }
+
+                return HttpResponse(
+                    json.dumps(response),
+                    content_type="application/json"
+                )
+
+            else:
+                response = {
+                    'status': "error",
+                    'message': form_object.errors
+                }
+
+                return HttpResponse(
+                    json.dumps(response),
+                    content_type="application/json"
+                )
+
+        else:
+            response = {
+                'status': "error",
+                'message': "Invalid form type entered."
+            }
+
+            return HttpResponse(
+                json.dumps(response),
+                content_type="application/json"
+            )
+
+    else:
+
+        response = {
+            'status': "error",
+            "message": "This endpoint only accepts POST requests."
+        }
+
+        return HttpResponse(
+            json.dumps(response),
+            content_type="application/json"
+        )
 
 
 def save_form_data(request, data, files):
@@ -138,8 +194,9 @@ def save_form_data(request, data, files):
 
         try:
             already_existing_instance = real_model.objects.get(name=data['name'])
-        except:
+        except Exception, e:
             already_existing_instance = real_model()
+            ErrorLogHelper.log_error(e, 'save_form_data')
 
         form_object = form_model(data, files, instance=already_existing_instance)
 
@@ -160,18 +217,20 @@ def index_view(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('dashboard:login'))
 
-    fulfilled_jobs = Job.objects.filter(payment_status='Paid', user=request.user)
-    amount_made = float()
-    for job in fulfilled_jobs:
-        amount_made += float(job.price)
+    all_jobs = Job.objects.filter(user=request.user)
+    no_of_clients = Client.get_user_clients(user=request.user, length=True)
+    top_clients = Client.get_top_clients(request.user)
 
-    total_completed_jobs = len(Job.objects.filter(completion_status='Yes', user=request.user))
-    total_uncompleted_jobs = len(Job.objects.filter(completion_status='No', user=request.user))
-    no_of_clients = len(Client.objects.filter(user=request.user))
-    top_clients = get_top_clients(request)
+    amount_made = Job.get_total_amount_made_by_user(request.user)
+
+    total_completed_jobs = len(all_jobs.filter(completion_status='Yes'))
+    total_uncompleted_jobs = len(all_jobs.filter(completion_status='No'))
+
     design_problems = DesignProblems.objects.filter(user=request.user)
+
     potential_clients = PotentialClient.objects.filter(user=request.user)
     potential_projects = PotentialProject.objects.filter(user=request.user)
+
     inspirations = Inspiration.objects.filter(user=request.user)
 
     if request.method == 'POST':
@@ -191,6 +250,7 @@ def index_view(request):
         'top_clients': top_clients,
         # 'randJob': randJob,
     }
+
     return render(request, 'dashboard/dashboard.html', context)
 
 
@@ -203,8 +263,8 @@ def projects_view(request):
     all_projects = Job.objects.filter(user=request.user)
     clients = Client.objects.filter(user=request.user)
     tasks = Task.objects.filter(user=request.user, archived="no")
-    tasks_completed = tasks.filter(user=request.user, status=Status.completed)
-    tasks_pending = tasks.filter(user=request.user, status=Status.pending)
+    tasks_completed = tasks.filter(status=Status.completed)
+    tasks_pending = tasks.filter(status=Status.pending)
 
     context = {
         'tasks': tasks,
@@ -240,6 +300,7 @@ def clients_view(request):
         return HttpResponseRedirect(reverse('dashboard:login'))
 
     clients = Client.objects.filter(user=request.user)
+
     context = {
         'user': request.user,
         'request': request,
@@ -252,6 +313,37 @@ def clients_view(request):
     return render(request, 'dashboard/clients.html', context)
 
 
+def get_client(request, client_id):
+
+    try:
+        client = Client.objects.get(id=client_id)
+        client_number = None
+
+        if client.phone_number is not None:
+            client_number = int(client.phone_number)
+
+        response = {
+            "status": "success",
+            "data": {
+                "name": client.name,
+                "phone_number": client_number,
+                "email": client.email
+            }
+        }
+
+        return HttpResponse(
+            json.dumps(response),
+            content_type="application/json"
+        )
+
+    except Exception, e:
+        ErrorLogHelper.log_error(e, 'get_client')
+        return HttpResponse(
+            json.dumps({"status": "error", "message": str(e)}),
+            content_type="application/json"
+        )
+
+
 def potential_clients_view(request):
 
     # Make the user log in
@@ -259,6 +351,7 @@ def potential_clients_view(request):
         return HttpResponseRedirect(reverse('dashboard:login'))
 
     potential_clients = PotentialClient.objects.filter(user=request.user)
+
     context = {
         'user': request.user,
         'request': request,
@@ -310,10 +403,20 @@ def messaging_view(request):
 
     context = {}
 
+    try:
+        sent_messages = SentEmailsLog.get_user_sent_messages(request.user)
+        user_clients = Client.get_user_clients(request.user)
+        user_drafts = EmailDraft.get_user_drafts(request.user)
+        context['sent_messages'] = sent_messages
+        context['user_clients'] = user_clients
+        context['user_drafts'] = user_drafts
+    except Exception, e:
+        ErrorLogHelper.log_error(e, 'messaging_view')
+
     return render(request, 'dashboard/messaging.html', context)
 
 
-def generate_quote_view(request, project_id=None):
+def generate_quote_view(request, project_id):
 
     context = {
         'request': request
@@ -323,8 +426,7 @@ def generate_quote_view(request, project_id=None):
         project = Job.objects.get(id=project_id, user=request.user)
         context['project'] = project
     except Exception, e:
-        print e
-        pass
+        ErrorLogHelper.log_error(e, 'generate_quote_view')
 
     return render(request, 'dashboard/invoice.html', context)
 
@@ -347,7 +449,7 @@ def update_action(request, param_type, param_id, new_value):
             task.save()
 
         except Exception, e:
-            print "Task not found. Sorry"
+            ErrorLogHelper.log_error(e, 'update_action')
 
     return HttpResponseRedirect(reverse('dashboard:projects'))
 
@@ -369,7 +471,7 @@ def delete_action(request, param_type, param_id):
             Job.delete(project)
 
         except Exception, e:
-            print "Project not found. Sorry"
+            ErrorLogHelper.log_error(e, 'delete_action')
 
     elif param_type == "task":
         print "Task!"
@@ -384,7 +486,8 @@ def delete_action(request, param_type, param_id):
             Task.delete(task)
 
         except Exception, e:
-            print e
+            # TODO: Tell the user that the action failed
+            ErrorLogHelper.log_error(e, 'delete_action')
 
     return HttpResponseRedirect(reverse('dashboard:projects'))
 
@@ -416,8 +519,6 @@ def archive_action(request, action_type, param_type, param_id):
             task.save()
 
         except Exception, e:
-            # The most common exception would be that the task wasn't found
-            print e
+            ErrorLogHelper.log_error(e, 'archive_action')
 
     return HttpResponseRedirect(reverse('dashboard:projects'))
-
