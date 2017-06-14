@@ -1,4 +1,3 @@
-# To store all the constants
 
 
 class Status:
@@ -15,5 +14,5 @@ class ResponseMessages:
     def __init__(self):
         pass
 
-    NO_JOBS_FOUND = "No jobs found."
+    NO_JOBS_FOUND = "Looks like you don\'t have any project yet."
 

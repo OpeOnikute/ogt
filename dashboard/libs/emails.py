@@ -1,5 +1,6 @@
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.utils import encoding
 from OGT import settings
 from dashboard.libs.utils import ErrorLogHelper
 from dashboard.models import SentEmailsLog
@@ -55,7 +56,7 @@ class EmailHelper:
 
             return False
 
-    def send_email_with_attachments(self, request, client, subject, message, from_email, attachments):
+    def send_email_with_attachments(self, request, client, subject, message, attachments, from_email=settings.EMAIL_HOST_USER):
         """
         Sends a simple text mail with attachments
         :param request:
@@ -67,8 +68,11 @@ class EmailHelper:
         :return:
         """
 
-        if type(attachments) != list:
-            return False
+        # print type(encoding.smart_bytes(attachments))
+        # # for attachment in attachments:
+        # #     print json.loads(attachment)
+        # #
+        # return False
 
         try:
             mail = EmailMessage(
@@ -79,7 +83,7 @@ class EmailHelper:
                 reply_to=[from_email]
             )
 
-            for attachment in attachments:
+            for attachment in attachments.values():
                 mail.attach(attachment.name, attachment.read(), attachment.content_type)
 
             mail.send()
@@ -103,6 +107,7 @@ class EmailHelper:
             return True
 
         except Exception, e:
+            print e
             ErrorLogHelper.log_error(error_message=e, calling_function="EmailHelper.send_email_with_attachments")
 
             return False

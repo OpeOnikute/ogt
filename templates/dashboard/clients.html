@@ -3,10 +3,10 @@
 
 {% block title %}| Clients{% endblock %}
 
-
+{% block content %}
+  <div id="content" class="app-content box-shadow-z2 pjax-container" role="main">
 <div class="app-body">
 <!-- ############ PAGE START-->
-{% block content %}
 <div class="app-body-inner">
 	<div class="row-col">
 		<div class="white bg b-b">
@@ -57,7 +57,7 @@
 			        <li class="nav-item">
 				        <a class="nav-link text-muted" data-toggle="modal" data-target="#add-client-modal" title="New client">
 				            <span class="">
-				            	<i class="fa fa-fw fa-plus"></i>s
+				            	<i class="fa fa-fw fa-plus"></i>
 				            	<span class="hidden-sm-down">New client</span>
 				            </span>
 				        </a>

@@ -6505,3 +6505,31 @@ textarea.md-input {
       box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
       -webkit-transition: all 0.2s;
       transition: all 0.2s; }
+
+/* Custom styles here */
+.select_client{
+    width: 20%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.thumbnail-close{
+    color: rgba(120, 130, 140, 0.7);
+    position: absolute;
+    top: 2px;
+    right: 14px;
+    z-index: 100;
+}
+
+.thumbnail-wrap{
+    position: relative;
+    width: 100px;
+    max-height: 70px;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.thumbnail-img{
+  height: 60px;
+}

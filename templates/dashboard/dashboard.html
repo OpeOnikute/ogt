@@ -747,43 +747,44 @@
           New Potential Client
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" method="post">
+          <form class="form-horizontal ajax-update" method="post">
               {% csrf_token %}
+              <div class="error_wrap"></div>
               <input type="text" name="modal-type" value="PotentialClientForm" hidden>
               <input type="number" name="user" value="{{ user.id }}"  hidden>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Name:</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control" name="name">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Why?:</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="reason">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">How would you get this client?</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="how_to_get_client">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Best way to contact the client:</label>
-                 <div class="col-lg-8">
-                     <select class="form-control" name="best_way_to_contact">
-                         <option value="Phone Number">Phone Number</option>
-                         <option value="email">Email</option>
-                         <option value="Social media">Social Media</option>
-                     </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-8 offset-lg-2">
-                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
-                </div>
-            </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Name:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="name" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Why?:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="reason" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">How would you get this client?</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="how_to_get_client" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Best way to contact the client:</label>
+                  <div class="col-lg-8">
+                      <select class="form-control" name="best_way_to_contact">
+                          <option value="Phone Number">Phone Number</option>
+                          <option value="email">Email</option>
+                          <option value="Social media">Social Media</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <div class="col-lg-8 offset-lg-2">
+                      <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
+                  </div>
+              </div>
           </form>
         </div>
       </div>
@@ -800,39 +801,40 @@
           New Potential Project
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" method="post">
+          <form class="form-horizontal ajax-update" method="post">
               {% csrf_token %}
+              <div class="error_wrap"></div>
               <input type="text" name="modal-type" value="PotentialProjectForm" class="form-control" hidden>
               <input type="number" name="user" value="{{ user.id }}"  hidden>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Name:</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control" name="name">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Why?</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="reason">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Profit opportunities:</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="profit_opportunities">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Description:</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="description">
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-8 offset-lg-2">
-                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
-                </div>
-            </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Name:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="name" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Why?</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="reason" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Profit opportunities:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="profit_opportunities" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Description:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="description" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <div class="col-lg-8 offset-lg-2">
+                      <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
+                  </div>
+              </div>
           </form>
         </div>
       </div>
@@ -849,39 +851,39 @@
           New Design Problem
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" method="post">
+          <form class="form-horizontal ajax-update" method="post">
               {% csrf_token %}
               <input type="text" name="modal-type" value="DesignProblemsForm" class="form-control" hidden>
               <input type="number" name="user" value="{{ user.id }}"  hidden>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Name:</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control" name="name">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Description:</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="description">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Potential solution:</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="potential_solution">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Profit Opportunities:</label>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="profit_opportunities">
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-8 offset-lg-2">
-                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
-                </div>
-            </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Name:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="name" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Description:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="description" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Potential solution:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="potential_solution" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Profit Opportunities:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="profit_opportunities" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <div class="col-lg-8 offset-lg-2">
+                      <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
+                  </div>
+              </div>
           </form>
         </div>
       </div>
@@ -907,7 +909,7 @@
     </div>
 </div>
 
-      <div class="modal fade" id="modal-inspiration">
+    <div class="modal fade" id="modal-inspiration">
   <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header _600">
@@ -917,27 +919,28 @@
           New Inspiration
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" method="post" enctype="multipart/form-data">
+          <form class="form-horizontal ajax-update" method="post" enctype="multipart/form-data">
               {% csrf_token %}
+              <div class="error_wrap"></div>
               <input type="text" name="modal-type" value="InspirationForm" hidden>
               <input type="number" name="user" value="{{ user.id }}"  hidden>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Name:</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control" name="name">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Image:</label>
-                <div class="col-lg-8">
-                    <input type="file" class="form-control" name="image">
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-8 offset-lg-2">
-                    <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
-                </div>
-            </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Name:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="name" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Image:</label>
+                  <div class="col-lg-8">
+                      <input type="file" class="form-control" name="image" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <div class="col-lg-8 offset-lg-2">
+                      <button type="submit" class="btn primary btn-sm p-x-md">Save</button>
+                  </div>
+              </div>
           </form>
         </div>
       </div>
@@ -946,6 +949,13 @@
     </div>
     </div>
 <!-- MODALS END -->
+{% endblock %}
+
+{% block base_scripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+        })
+    </script>
 {% endblock %}
 
 

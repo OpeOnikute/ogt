@@ -22,14 +22,15 @@
                     <div class="dropdown-menu text-color w-md animated fadeInUp pull-right">
                       <!-- search form -->
                       <form class="navbar-form form-inline navbar-item m-a-0 p-x v-m" role="search">
-                        <div class="form-group l-h m-a-0">
-                          <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search projects...">
-                            <span class="input-group-btn">
-                              <button type="submit" class="btn white b-a no-shadow"><i class="fa fa-search"></i></button>
-                            </span>
+                          {% csrf_token %}
+                          <div class="form-group l-h m-a-0">
+                              <div class="input-group">
+                                  <input type="text" class="form-control" placeholder="Search projects...">
+                                  <span class="input-group-btn">
+                                      <button type="submit" class="btn white b-a no-shadow"><i class="fa fa-search"></i></button>
+                                  </span>
+                              </div>
                           </div>
-                        </div>
                       </form>
                       <!-- / search form -->
                     </div>
@@ -151,6 +152,7 @@
 				      	<div class="row-inner">
 				      		<!-- left content -->
 				      		<div class="list" data-ui-list="b-r b-2x b-theme">
+                                {% if project_aggregation %}
                                     {% for project, noOfTasks, noOfCompletedTasks, noOfUncompletedTasks in project_aggregation %}
 				      			    <div class="list-item ">
 				      			      <div class="list-left">
@@ -166,7 +168,7 @@
 				      			              	<i class="fa fa-pencil"></i>
 				      			              	Generate Quote
 				      			              </a>
-                                                <a data-href="{% url 'dashboard:delete_action' 'project' project.id %}" data-toggle="modal" data-target="#confirm-delete" class="dropdown-item">
+                                                <a class="delete-project dropdown-item"  data-type="project" data-id="{{ project.id }}" data-toggle="modal" data-target="#confirm-delete">
 				      			              	<i class="fa fa-pencil"></i>
 				      			              	Delete Project
 				      			              </a>
@@ -184,7 +186,6 @@
 				      			              {{ noOfCompletedTasks }}
 				      			          </span> <span class="text-muted">completed</span>
 				      			        </small>
-
                                           <div class="progress-xxs m-y-sm lter progress w-sm">
 				      			            <div class="progress-bar success" role="progressbar" style="width: {% widthratio noOfCompletedTasks noOfTasks 100 %}%;">
                                             </div>
@@ -192,12 +193,16 @@
 				      			      </div>
 				      			    </div>
                                     {% endfor %}
-
+                                {% else %}
 				      			    <div class="list-item ">
-				      			      <div class="list-left">
-				      			        <span class="w-40 avatar circle lt">
-				      			            <span class="fa fa-tumblr text-md"></span>
-				      			        </span>
+                                        <p class="text-xs">Looks like you don't have any projects yet.</p>
+                                    </div>
+                                {% endif %}
+                                <div class="list-item ">
+                                    <div class="list-left">
+                                        <span class="w-40 avatar circle lt">
+                                            <span class="fa fa-tumblr text-md"></span>
+                                        </span>
 				      			      </div>
 				      			    </div>
     				        	</div>
@@ -269,18 +274,19 @@
                                        <div class="list-body">
                                            <p><small>No  tasks to show.</small></p>
                                        </div>
-                                   </div>pyth
+                                   </div>
                                {% endif %}
                                 {% for task in tasks %}
                                 <div class="list-item row-col">
                                      <div class="pull-right dropdown">
 				      			            <a href="#" data-toggle="dropdown" class="text-muted"><i class="fa fa-fw fa-ellipsis-h"></i></a>
 				      			            <div class="dropdown-menu pull-right text-color" role="menu">
-				      			              <a data-href="{% url 'dashboard:delete_action' 'task' task.id %}" data-toggle="modal" data-target="#confirm-delete" class="dropdown-item">
+				      			              <a data-type="task" data-id="{{ task.id }}" data-toggle="modal" data-target="#confirm-delete" class="dropdown-item">
 				      			              	<i class="fa fa-pencil"></i>
 				      			              	Delete Task
 				      			              </a>
                                                 <div class="dropdown-divider"></div>
+{#                                                TODO: Change this archive #}
                                                 <a data-href="{% url 'dashboard:archive_action' 'archive' 'task' task.id %}" data-toggle="modal" data-target="#confirm-delete" class="dropdown-item">
 				      			              	<i class="fa fa-archive"></i>
                                                 </a>
@@ -298,7 +304,7 @@
 				      						<i class="fa fa-clock-o"></i>{{ task.date|date:'d M ,Y' }}
 				      					</div>
 				      					<div class="dropdown m-t-xs">
-				      						<a href="#" data-toggle="dropdown">
+				      						<a class="dropdown-info" data-toggle="dropdown">
                                                 {% if task.status == "completed"  %}
 				      							<span class="label success rounded dropdown-toggle">{{ task.status }}</span>
                                                 {% elif task.status == "pending"  %}
@@ -309,17 +315,17 @@
 				      							<span class="label warn rounded dropdown-toggle">{{ task.status }}</span>
                                                 {% endif %}
 				      						</a>
-				      						<div class="dropdown-menu">
-				      							<a class="dropdown-item" href="{% url 'dashboard:update_action' 'task' task.id 'completed' %}">
+				      						<div class="dropdown-menu" data-id="{{ task.id }}" data-type="task">
+				      							<a class="dropdown-item update-object" data-value="completed" data-label="success">
 				      								<i class="fa fa-circle-o text-success"></i>Completed
 				      							</a>
-				      							<a class="dropdown-item" href="{% url 'dashboard:update_action' 'task' task.id 'pending' %}">
+				      							<a class="dropdown-item update-object" data-value="pending" data-label="warning">
 				      								<i class="fa fa-circle-o text-warning"></i>Pending
 				      							</a>
-				      							<a class="dropdown-item" href="{% url 'dashboard:update_action' 'task' task.id 'blocked' %}">
-				      								<i class="fa fa-circle-o text-danger"></i>Blocked
+				      							<a class="dropdown-item update-object" data-value="blocked" data-label="danger">
+6				      								<i class="fa fa-circle-o text-danger"></i>Blocked
 				      							</a>
-				      							<a class="dropdown-item" href="{% url 'dashboard:update_action' 'task' task.id 'Client Review' %}">
+				      							<a class="dropdown-item update-object"  data-value="Client Review" data-label="warn">
 				      								<i class="fa fa-circle-o text-warn"></i>Client review
 				      							</a>
 				      						</div>
@@ -524,30 +530,31 @@
           New Project
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" method="post">
-          {% csrf_token %}
+          <form class="form-horizontal ajax-update" method="post">
+              {% csrf_token %}
+              <div class="error_wrap"></div>
               <input type="text" name="modal-type" value="JobForm" class="form-control" hidden>
               <input type="number" name="user" value="{{ user.id }}"  hidden>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Name:</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control" name="project_name">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-2 form-control-label">Client:</label>
-                <div class="col-lg-8">
-                    <select name="client" class="form-control">
-                        {% for client in clients %}
-                        <option value={{ client.id }}>{{ client.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Name:</label>
+                  <div class="col-lg-8">
+                      <input type="text" class="form-control" name="project_name" required>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-2 form-control-label">Client:</label>
+                  <div class="col-lg-8">
+                      <select name="client" class="form-control" required>
+                          {% for client in clients %}
+                              <option value={{ client.id }}>{{ client.name }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+              </div>
               <div class="form-group row">
                 <label class="col-lg-2 form-control-label">Start Date:</label>
                 <div class="col-lg-8">
-                    <input type="date" class="form-control" name="date">
+                    <input type="date" class="form-control" name="date" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -555,7 +562,7 @@
                 <div class="col-lg-10">
                     <div class="b-a">
                       <div class="col-lg-8">
-                        <input type="number" class="form-control" name="price">
+                        <input type="number" class="form-control" name="price" required>
                       </div>
                     </div>
                 </div>
@@ -565,7 +572,7 @@
                 <div class="col-lg-10">
                     <div class="b-a">
                       <div class="col-lg-8">
-                        <select name="payment_status" class="form-control">
+                        <select name="payment_status" class="form-control" required>
                             <option value='Paid'>Paid</option>
                             <option value='Unpaid'>Unpaid</option>
                         </select>
@@ -578,7 +585,7 @@
                 <div class="col-lg-10">
                     <div class="b-a">
                       <div class="col-lg-8">
-                        <select name="completion_status" class="form-control">
+                        <select name="completion_status" class="form-control" required>
                             <option value='Yes'>Yes</option>
                             <option value='No'>No</option>
                         </select>
@@ -606,8 +613,9 @@
           New Task
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" method="post">
+          <form class="form-horizontal ajax-update" method="post">
               {% csrf_token %}
+              <div class="error_wrap"></div>
               <input type="text" name="modal-type" value="TaskForm" class="form-control" hidden>
               <input type="number" name="user" value="{{ user.id }}"  hidden>
             <div class="form-group row">
@@ -670,8 +678,9 @@
 	  			Generate Quote
 	  		</div>
 	  		<div class="modal-body">
-			    <form class="form-horizontal" method="post">
+			    <form class="form-horizontal ajax-update" method="post">
                     {% csrf_token %}
+                    <div class="error_wrap"></div>
                     <input type="text" name="modal-type" value="GenerateQuote" class="form-control" hidden>
                     <input type="number" name="user" value="{{ user.id }}"  hidden>
 				    <div class="form-group row">
@@ -722,11 +731,11 @@
 {% block base_scripts %}
     <script type="text/javascript">
         function generateQuote() {
-        jQuery("<iframe>")                             // create a new iframe element
-            .hide()                               // make it invisible
-            .attr("src", "{% url 'dashboard:quote' 1 %}") // point the iframe to the page you want to print
-            .appendTo("body");                    // add iframe to the DOM to cause it to load the page
-    }
+            jQuery("<iframe>")                             // create a new iframe element
+                .hide()                               // make it invisible
+                .attr("src", "{% url 'dashboard:quote' 1 %}") // point the iframe to the page you want to print
+                .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+         }
     </script>
 {% endblock %}
 {#END SCRIPTS#}

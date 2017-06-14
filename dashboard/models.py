@@ -78,6 +78,16 @@ class Client(models.Model):
     phone_number = models.DecimalField(max_digits=11, decimal_places=0, null=True, blank=True)
 
     @classmethod
+    def get_client_by_id(cls, user, client_id):
+        try:
+            client = cls.objects.get(user=user, id=client_id)
+            return client
+
+        except Exception, e:
+            ErrorLogHelper.log_error(e, 'Client.get_client_by_id')
+            return False
+
+    @classmethod
     def get_top_clients(cls, user):
         try:
             clients = cls.objects.filter(user=user)
@@ -201,7 +211,7 @@ class Task(models.Model):
     archived_at = models.DateField(auto_now_add=False, null=True, blank=True)
 
     @classmethod
-    def getAllProjectsAndTheirTasks(cls, user):
+    def get_all_projects_and_their_tasks(cls, user):
 
         all_tasks = cls.objects.select_related().filter(user=user, archived="no")
         all_jobs = Job.objects.filter(user=user)

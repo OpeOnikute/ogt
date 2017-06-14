@@ -126,7 +126,7 @@
 				    </div>
 				    <div class="nav text-center p-b">
 				    	<a id="go-overview" class="nav-link m-x" data-toggle="tooltip" title="Overview"><i class="ion-navigate"></i></a>
-				    	<a id="go-add-client" class="nav-link m-x" onclick="trigger_save_action('#add-client-modal')"><i class="ion-person-add"></i></a>
+				    	<a id="go-add-client" class="nav-link m-x" data-toggle="tooltip" title="Add client" onclick="trigger_save_action('#add-client-modal')"><i class="ion-person-add"></i></a>
 				    	<a id="go-clients" class="nav-link m-x" data-toggle="tooltip" title="Clients"><i class="ion-person-stalker"></i></a>
 				    	<a id="go-chat" class="nav-link m-x" data-toggle="tooltip" title="Send Messages"><i class="ion-chatbubble"></i></a>
 				    	</div>
@@ -275,120 +275,50 @@
 				<!-- header -->
 				<div class="dark-white b-b">
 					<div class="navbar">
-
-					    <!-- nabar right -->
+					    <!-- navbar right -->
 					    <ul class="nav navbar-nav pull-right m-l">
-					        <li class="nav-item">
-						        <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Phone Call">
+					        <li class="nav-item dropdown">
+						        <a class="nav-link" data-toggle="dropdown">
 						            <span class="btn btn-sm btn-icon rounded success">
-							      		<i class="fa fa-phone"></i>
+							      		<i class="fa fa-paperclip"></i>
 							        </span>
 						        </a>
-					        </li>
-					        <li class="nav-item">
-						        <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Face Call">
-						            <span class="btn btn-sm btn-icon rounded success">
-							      		<i class="fa fa-video-camera"></i>
-							        </span>
-						        </a>
+                                <div class="dropdown-menu pull-right text-color" role="menu">
+                                    <a class="dropdown-item" id="attach-photo">
+                                        <i class="fa fa-file-image-o "></i>
+                                        Photo
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" id="attach-document">
+                                        <i class="fa fa-file-text"></i>
+                                        Document
+                                    </a>
+                                </div>
 					        </li>
 					    </ul>
-					    <!-- / navbar right -->
-
-						<a data-toggle="modal" data-target="#profile" data-ui-modal class="m-r-0 m-l navbar-item pull-right hidden-lg-up">
-							<span class="btn btn-sm btn-icon rounded success">
-					      		<i class="ion-person"></i>
-					        </span>
-					    </a>
-					    <a data-toggle="modal" data-target="#list" data-ui-modal class="navbar-item pull-left hidden-md-up">
-					    	<span class="btn btn-sm btn-icon success">
-					      		<i class="fa fa-list"></i>
-					      	</span>
-					    </a>
-
-				        <span class="navbar-item text-md text-ellipsis">
-				        	Pablo Nouvelle
+					    <!--/ navbar right -->
+                        <span class="navbar-item text-md text-ellipsis pull-left">
+                            Select Client:
 				        </span>
+                        <div>
+                            <select class="form-control pull-left" name="client" id="client_id" style="width: 20%;border: none; border-radius: 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                                {% for client in user_clients %}
+                                    <option value="{{ client.id }}">{{ client.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
 					</div>
+                    <div class="container" style="background-color: rgba(0,0,0,0.1); padding: 1px;">
+                        <input class="form-control" type="text" name="email_subject" id="email_subject" placeholder="Subject" required>
+                    </div>
 				</div>
 				<!-- / -->
 				<!-- flex content -->
 				<div class="row-row">
-					<div class="row-body">
+					<div class="row-body scrollable hover">
 						<div class="row-inner">
 							<!-- content -->
-							<div class="p-a-md">
-					            <div class="m-b">
-					              <a href="#" class="pull-left w-40 m-r-sm">
-					              	<img src="" alt="." class="w-full img-circle">
-					              </a>
-					              <div class="clear">
-					              	<div>
-						                <div class="p-a p-y-sm success inline rounded">
-						                  Hi John, What's up...
-						                </div>
-					                </div>
-					                <div class="m-t-xs">
-						                <div class="p-a p-y-sm success inline rounded">
-						                  hmm...
-						                </div>
-					                </div>
-					                <div class="text-muted text-xs m-t-xs"><i class="fa fa-ok text-success"></i> 2 minutes ago</div>
-					              </div>
-					            </div>
-					            <div class="m-b">
-					              <a href="#" class="pull-right w-40 m-l-sm">
-					              	<img src="" class="w-full img-circle" alt=".">
-					              </a>
-					              <div class="clear text-right">
-					                <div class="p-a p-y-sm dark-white inline rounded text-left">
-					                  Lorem ipsum dolor soe rooke..
-					                </div>
-					                <div class="text-muted text-xs m-t-xs">1 minutes ago</div>
-					              </div>
-					            </div>
-					            <div class="m-b">
-					              <a href="#" class="pull-left w-40 m-r-sm">
-					              	<img src="" alt="." class="w-full img-circle">
-					              </a>
-					              <div class="clear">
-					                <div class="p-a p-y-sm success inline rounded">
-					                  Good!
-					                </div>
-					                <div class="text-muted text-xs m-t-xs"><i class="fa fa-ok text-success"></i> 5 seconds ago</div>
-					              </div>
-					            </div>
-					            <div class="m-b">
-					              <a href="#" class="pull-right w-40 m-l-sm">
-					              	<img src="" class="w-full img-circle" alt=".">
-					              </a>
-					              <div class="clear text-right">
-					              	<div>
-						                <div class="p-a p-y-sm dark-white inline rounded text-left">
-						                  Dlor soe isep slie gosese..
-						                </div>
-					                </div>
-					                <div class="m-t-xs">
-						                <div class="p-a p-y-sm dark-white inline rounded text-left">
-						                  Loris aspim..
-						                </div>
-					                </div>
-					                <div class="text-muted text-xs m-t-xs">3 seconds ago</div>
-					              </div>
-					            </div>
-					            <div class="m-b">
-					              <a href="#" class="pull-left w-40 m-r-sm">
-					              	<img src="" alt="." class="w-full img-circle">
-					              </a>
-					              <div class="clear">
-					              	<div>
-						                <div class="p-a p-y-sm success inline rounded text-left">
-						                  Typing...
-						                </div>
-					                </div>
-					                <div class="text-muted text-xs m-t-xs"><i class="fa fa-ok text-success"></i> Just now</div>
-					              </div>
-					            </div>
+							<div class="p-a-md messages_wrap">
 					        </div>
 							<!-- / -->
 						</div>
@@ -396,21 +326,39 @@
 				</div>
 				<!-- / -->
 				<div class="p-a b-t dark-white">
-				    <form method="post" action="">
+				    <form method="post" action="" id="add-text-message-form">
                         {% csrf_token %}
 				        <div class="input-group">
-				          	<input type="text" class="form-control" placeholder="Say something">
+                            <input type="file" name="attachment" id="add-attachment"  style="display: none;" multiple>
+				          	<input type="text" class="form-control" id="text-content" placeholder="Say something">
 				          	<span class="input-group-btn">
-				            	<button class="btn white b-a no-shadow" type="button">
+				            	<button class="btn white b-a no-shadow disabled" type="button" id="btn_send_mail">
 				            		<i class="fa fa-send text-success"></i>
 				            	</button>
 				          	</span>
 				        </div>
 				    </form>
 				</div>
+                <div class="p-a b-t text-right">
+                    <button class="btn success send_message" id="send_message_btn">Send Message</button>
+                </div>
+                <div class="p-a b-t row" id="attachment-container" style="display: none;">
+{#                    <div class="thumbnail-wrap col-sm-3">#}
+{#                        <span class="thumbnail-close" id="">#}
+{#                            <a href="#"><i class="fa fa-close text-success"></i></a>#}
+{#                        </span>#}
+{#                        <img class="img-responsive" src="{% static 'images/a0.jpg' %}">#}
+{#                    </div>#}
+{#                     <div class="thumbnail-wrap col-sm-3">#}
+{#                         <span class="thumbnail-close" id="">#}
+{#                             <a href="#"><i class="fa fa-close text-success"></i></a>#}
+{#                         </span>#}
+{#                         <img class="img-responsive" src="{% static 'images/a1.jpg' %}">#}
+{#                    </div>#}
+                </div>
 		    </div>
 		</div>
-    <!-- Overview detail ends -->
+        <!-- Overview detail ends -->
 
         <!-- Contacts detail starts -->
 		<div class="col-xs-6 indigo" id="contacts-detail" style="display: none;">
@@ -436,76 +384,355 @@
 
 {% block base_scripts %}
     <script>
-        jQuery(document).ready(
-            function(){
+        var message_buffer = [];
+        var user_text_input = $('#text-content');
+        var attachment_container = $('#attachment-container');
 
-                 function show_overview(){
-                     $('#overview-nav').show();
-                    $('#over-view-detail').show();
-                    $('#contacts-nav').hide();
-                    $('#contacts-detail').hide();
-                    $('#chat-detail').hide();
-                 }
+        var attachment_buffer = {
+            photos: [],
+            documents: []
+        };
 
-                 function show_contacts(){
-                     $('#overview-nav').hide();
-                     $('#over-view-detail').hide();
-                     $('#chat-detail').hide();
-                     $('#contacts-nav').show();
-                     $('#contacts-detail').show();
-                 }
+        function show_overview(){
+            $('#go-overview').click( function() {
 
-                 function show_chats(){
-                     $('#overview-nav').show();
-                     $('#chat-detail').show();
-                     $('#over-view-detail').hide();
-                     $('#contacts-nav').hide();
-                     $('#contacts-detail').hide();
-                 }
+                $('#overview-nav').show();
+                $('#over-view-detail').show();
+                $('#contacts-nav').hide();
+                $('#contacts-detail').hide();
+                $('#chat-detail').hide();
+            });
+        }
 
-                 $('#go-overview').click( function() {
-                    show_overview();
-                 });
+        function show_contacts(){
+            $('#go-clients').click( function() {
+                $('#overview-nav').hide();
+                $('#over-view-detail').hide();
+                $('#chat-detail').hide();
+                $('#contacts-nav').show();
+                $('#contacts-detail').show();
+            });
+        }
 
-                $('#go-clients').click( function() {
-                    show_contacts();
+        function show_chats(){
+            $('#go-chat').click( function(){
+                $('#overview-nav').show();
+                $('#chat-detail').show();
+                $('#over-view-detail').hide();
+                $('#contacts-nav').hide();
+                $('#contacts-detail').hide();
+            });
+        }
+
+        function get_clients(){
+            $('#client-list').click(
+                function(e){
+                    var user_id = e.target.id;
+                    var queryUrl = "/dashboard/ajax/client/" + user_id;
+
+                    $.ajax({
+                        url : window.location.origin + queryUrl,
+                        method : "GET",
+                        dataType: "json",
+                        success: function(response){
+                            var client_name = response.data.name;
+                            var client_phone_number = response.data.phone_number;
+                            var client_email = response.data.email;
+
+                            $('#contacts-detail-name').html(client_name);
+                            $('#contacts-detail-email').html(client_email);
+                            $('#contacts-detail-phone_number').html(client_phone_number);
+
+                            $('#contacts-detail-overview').hide();
+                            $('#contacts-detail-full').show();
+                        },
+                        error: function(err){
+                            console.log(err.responseText);
+                        }
+                    });
                 });
+        }
+        function add_message_to_buffer(){
 
-                 $('#client-list').click(
-                     function(e){
-                         var user_id = e.target.id;
-                         var queryUrl = "/dashboard/client/" + user_id;
+            var user_input = user_text_input.val();
 
-                         var request = $.ajax({
-                             url : window.location.origin + queryUrl,
-                             method : "GET"
-                         });
+            if(user_input.length > 0 && $.inArray(user_input, message_buffer) < 0 ){
+                message_buffer.push(user_input);
 
-                         request.success(function(response) {
-                             var client_name = response.data.name;
-                             var client_phone_number = response.data.phone_number;
-                             var client_email = response.data.email;
-
-                             $('#contacts-detail-name').html(client_name);
-                             $('#contacts-detail-email').html(client_email);
-                             $('#contacts-detail-phone_number').html(client_phone_number);
-
-                             $('#contacts-detail-overview').hide();
-                             $('#contacts-detail-full').show();
-                         });
-
-                         request.error(function(data){
-                            console.log('error');
-                         });
-                 });
-
-                $('#go-chat').click( function() {
-                  show_chats();
-                });
-
-                $('#go-add-client').click( function() {
-                });
+                //Empty the input field
+                user_text_input.val('');
             }
-        );
+        }
+
+        function add_message_to_screen(){
+            var user_input = user_text_input.val();
+            var message_parent = $('.messages_wrap');
+
+            var current_date = new Date(),
+                hour = current_date.getHours(),
+                minute = current_date.getMinutes(),
+                ampm = hour >= 12 ? 'PM' : 'AM';
+
+            var full_date = hour + ':' + minute + ampm;
+
+            if(user_input == ''){
+                return;
+            }
+
+            message_parent.append(
+                '<div class="m-b">' +
+                '<div class="clear text-left">' +
+                '<div class="p-a p-y-sm dark-white inline rounded text-left">' +
+                user_input +
+                '</div>' +
+                '<div class="text-muted text-xs m-t-xs">'+ full_date + '</div>' +
+                '</div>' +
+                '</div>'
+            );
+
+            $(this).addClass('disabled');
+        }
+
+        function add_message(){
+            //Add the text to the message buffer when the input button is clicked
+            $('#btn_send_mail').click(function(){
+                //TO-DO: Allow them use enter to send too.
+                add_message_to_screen();
+                add_message_to_buffer();
+            });
+
+            $('#add-text-message-form').on('submit', function(e){
+                e.preventDefault();
+
+                add_message_to_screen();
+                add_message_to_buffer();
+            });
+        }
+
+        function add_attachment(){
+            //When you click the add photo or document
+            $('#attach-document, #attach-photo').click(function(){
+                $('#add-attachment').click();
+            });
+
+            //And control what happens when a file is selected
+            $('#add-attachment').change(function(e){
+
+                var valid_document_types = ['pdf', 'document'];
+                var files = e.target.files;
+
+                $.each(files, function(index, value){
+                    var doc_string_array = value.type.split("/", 2);
+                    var doc_type = doc_string_array[0];
+                    var doc_content = value;
+
+                    if(doc_type ==  "image" && $.inArray(value, attachment_buffer.photos) === -1){
+                        attachment_buffer.photos.push(value);
+                    } else if (doc_type === "application" && $.inArray(value, attachment_buffer.documents) === -1){
+
+                        var doc_inner_type = doc_string_array[1];
+
+                        if ($.inArray(valid_document_types, doc_inner_type) >= 0){
+                            attachment_buffer.documents.push(doc_content);
+                        } else {
+                            //Go deeper, check what it ends with
+                            $.each(valid_document_types, function(index, value){
+
+                                if(doc_inner_type.endsWith(value)){
+                                    attachment_buffer.documents.push(doc_content);
+
+                                    //Breaks out of the jquery loop
+                                    return false;
+                                }
+                            });
+                        }
+                    }
+                });
+
+                //display all the files added
+                if(typeof(FileReader) != 'undefined'){
+
+                    attachment_container.hide();
+                    attachment_container.empty();
+
+                    //handle photos
+                    if(attachment_buffer.photos.length > 0){
+                        $.each(attachment_buffer.photos, function(index, value){
+
+                            var img_div = $('<div />', {"class": "thumbnail-wrap col-sm-3"});
+                            var del_span = $('<span />', {"class": "thumbnail-close"}).appendTo(img_div);
+
+                            var del_btn = '<a href="#"><i class="fa fa-close text-success"></i></a>';
+                            del_span.append(del_btn);
+
+                            var reader = new FileReader();
+
+                            reader.onload = function(e){
+                                $('<img />', {
+                                    "class": "img-responsive thumbnail-img",
+                                    "src": e.target.result
+                                }).appendTo(img_div);
+
+                                img_div.appendTo(attachment_container);
+                                del_span.on("click",  function(){
+
+                                    attachment_buffer.photos.splice(index, 1);
+                                    img_div.remove();
+
+                                    //Hide the attachment container
+                                    if(!attachment_container.children().length > 0){
+                                        attachment_container.hide();
+                                    }
+                                 });
+                            };
+
+                            reader.readAsDataURL(value);
+                        });
+                    }
+
+                    //handle documents
+                    if(attachment_buffer.documents.length > 0){
+                        $.each(attachment_buffer.documents, function(index, value){
+
+                            var img_div = $('<div />', {"class": "thumbnail-wrap col-sm-3"});
+
+                            var del_span = $('<span />', {"class": "thumbnail-close"}).appendTo(img_div);
+                            var del_btn = '<a href="#"><i class="fa fa-close text-success"></i></a>';
+
+                            var reader = new FileReader();
+
+                            del_span.append(del_btn);
+
+                            reader.onload = function(e){
+                                $('<img />', {
+                                    "class": "img-responsive thumbnail-img",
+                                    "src": e.target
+                                }).appendTo(img_div);
+
+                                img_div.appendTo(attachment_container);
+                                del_span.on("click",  function(){
+
+                                    attachment_buffer.documents.splice(index, 1);
+                                    img_div.remove();
+
+                                    //Hide the attachment container
+                                    if(!attachment_container.children().length > 0){
+                                        attachment_container.hide();
+                                    }
+                                });
+                            };
+
+                            reader.readAsDataURL(value);
+                        });
+                    }
+
+                    if(!attachment_container.children().length > 0){
+                        attachment_container.show();
+                    }
+
+                } else {
+                    alert('Your browser does not support this feature. Please upgrade');
+                }
+            });
+        }
+
+        function message_submission(){
+            user_text_input.keyup(function(e){
+
+                e.preventDefault();
+
+                //Check for other keys
+                var user_input = $(this).val();
+
+                if(user_input.length > 0){
+                    $('#btn_send_mail').removeClass('disabled');
+                } else {
+                    $('#btn_send_mail').addClass('disabled');
+                }
+            });
+        }
+
+        function send_message(){
+            $('#send_message_btn').on('click', function(e){
+                e.preventDefault();
+
+                var csrf_token = "{{ csrf_token }}";
+
+                var client_id  = $('#client_id').val();
+
+                var subject = $('#email_subject').val();
+                var body = '';
+
+                if (subject == ''){
+                    console.log('subject issue');
+                    return;
+                }
+
+                if (message_buffer.length == 0){
+                    //TODO: Display a GOOD dismissible message (Like Twitter's)
+                    console.log('message buffer issue');
+                    return;
+                }
+
+                //Build the message
+                message_buffer.forEach(function(entry){
+                    body += '\n' + entry;
+                });
+
+                var files = $.merge(attachment_buffer.photos, attachment_buffer.documents);
+
+                var form = new FormData();
+
+                form.append("csrfmiddlewaretoken", csrf_token);
+                form.append("client_id", client_id);
+                form.append("subject", subject);
+                form.append("body", body);
+
+                $.each(files, function(index, value){
+                    form.append("file"+index, value);
+                });
+
+                $.ajax({
+                    url: window.location.origin + '/dashboard/ajax/send_message',
+                    method: "post",
+                    data: form,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    beforeSend: function(){
+                        //Block UI
+                        $.blockUI({message: '<img src="{% static "images/loaders/ajax-loader.gif" %}">'});
+                    },
+                    success: function(data){
+                        $.unblockUI();
+                        if(data.status == 'success'){
+                            console.log(data);
+                            //Show success and clear all the data stores.
+                        } else {
+                            console.log(data.message);
+                        }
+                    },
+                    error: function(err){
+                        $.unblockUI();
+                        console.log(err.responseText);
+                    }
+                });
+            });
+        }
+
+        $(document).ready(function(){
+              add_message();
+              add_attachment();
+
+              show_overview();
+              show_contacts();
+              show_chats();
+
+              get_clients();
+
+              message_submission();
+
+              send_message();
+        });
     </script>
 {% endblock %}

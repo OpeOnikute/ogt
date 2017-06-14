@@ -28,12 +28,12 @@
 
   <!-- build:css css/styles/app.min.css -->
   <link rel="stylesheet" href="{% static "css/styles/app.css" %}" type="text/css" />
-  <link rel="stylesheet" href="{% static "css/styles/style.css" %}" type="text/css" />
   <!-- endbuild -->
   <link rel="stylesheet" href="{% static "css/styles/font.css" %}" type="text/css" />
 
-  <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
     {% block header_scripts %}{% endblock %}
+  <link rel="stylesheet" href="{% static "css/styles/style.css" %}" type="text/css" />
+
 </head>
 <body>
   <div class="app" id="app">
@@ -262,14 +262,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4>Confirm Action</h4>
+                    <h4>Confirm Deletion</h4>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok">Confirm</a>
+                    <a class="btn btn-danger btn-ok delete-btn">Confirm</a>
                 </div>
             </div>
         </div>
@@ -294,19 +294,19 @@
 				    <div class="form-group row">
 				        <label class="col-lg-2 form-control-label">Name:</label>
 				        <div class="col-lg-8">
-					        <input type="text" class="form-control" name="name">
+					        <input type="text" class="form-control" name="name" required>
 				        </div>
 				    </div>
 				    <div class="form-group row">
 				        <label class="col-lg-2 form-control-label">Email:</label>
 				        <div class="col-lg-8">
-				          	<input type="email" class="form-control" name="email">
+				          	<input type="email" class="form-control" name="email" required>
 				        </div>
 				    </div>
 				    <div class="form-group row">
 				        <label class="col-lg-2 form-control-label">Phone number:</label>
                         <div class="col-lg-8">
-                            <input type="tel" class="form-control" name="phone_number">
+                            <input type="tel" class="form-control" name="phone_number" required>
                         </div>
 				    </div>
 				    <div class="form-group row">
@@ -318,6 +318,27 @@
 		    </div>
 	  	</div>
   	</div>
+</div>
+
+<div class="modal fade" id="modal-success">
+  <div class="modal-dialog modal-sm text-center">
+      <div class="modal-content">
+        <div class="modal-body">
+            <img src="{% static 'images/icons/success_icon_med.png' %}">
+            <p class="modal-message"></p>
+        </div>
+      </div>
+    </div>
+</div>
+  <div class="modal fade" id="modal-error">
+  <div class="modal-dialog modal-sm text-center">
+      <div class="modal-content">
+        <div class="modal-body">
+            <img src="{% static 'images/icons/error_icon_med.png' %}">
+            <p class="modal-message"></p>
+        </div>
+      </div>
+    </div>
 </div>
    {% block modals %}
    {% endblock %}
@@ -433,68 +454,256 @@
    {#the script to add the url to confirm delete button is used in more than one place also #}
       <script>
 
-          function trigger_save_action(modal_id){
-            $(modal_id).modal("toggle");
+          function save_objects(){
+             $('.ajax-update').on('submit', function(e){
+                e.preventDefault();
 
-            //Find the form inside the modal
-            var modal_form_id = $(modal_id).find("form").selector;
+                var form = $(e.target);
+                var modal = form.parents().eq(3);
 
-            if(modal_form_id){
-                 $(modal_form_id).on('submit', function(e){
-                    e.preventDefault();
-                    var form_inputs = this.elements;
-                    var form_data = {};
+                $.ajax({
+                    url: "{% url 'dashboard:ajax_save' %}",
+                    type: "POST",
+                    data: form.serialize(),
+                    dataType: "json",
+                    beforeSend: function(){
+                        form.find('button:submit').addClass('disabled').attr('disabled', true);
+                    },
+                    success: function(data){
+                        form.find('button:submit').removeClass('disabled').attr('disabled', false);
 
-                    jQuery.each(form_inputs, function(index, val){
-                        //populate the form data
-                        var input_name = val.name;
-                        form_data[input_name] = val.value;
-                    });
-
-                    var response = $.ajax({
-                        url: "{% url 'dashboard:ajax_save_form' %}",
-                        type: "POST",
-                        data: form_data
-                    });
-
-                    response.success(function(json_response){
-
-                        if (json_response.status == "success"){
+                        if (data.status == "success"){
                             //Close the modal
-                            $(modal_id).modal("toggle");
+                            modal.modal("toggle");
 
-                            //TO-DO: Trigger the success modal
+                            displayModalResponse(1);
+
                         } else {
+                            var error_wrap = form.find('.error_wrap');
 
-                            if( typeof json_response.message === 'object'){
+                            if(typeof data.message === 'object'){
+                                //Display the errors gotten from Python forms
 
-                                jQuery.each(json_response.message, function(field, error){
+                                error_wrap.append(
+                                    '<p>Welp. There was an error processing your form. Please correct the following:</p>'
+                                );
 
-                                    var error_message = field + ": " + error[0];
-
-                                    $(modal_id + "-error-display").show();
-                                    $(modal_id + "-error-display").append('<p>' + error_message + '</p>');
+                                $.each(data.message, function(index, value){
+                                    error_wrap.append(
+                                        '<div class="error">' +
+                                        '<p><span style="padding-right: 10px;">' + index + ':</span>' + value + '</p>' +
+                                        '</div>'
+                                    );
                                 });
+                            } else {
+                                 error_wrap.append(
+                                     '<div class="error">' +
+                                     '<p>' + data.message + '</p>' +
+                                     '</div>'
+                                 );
                             }
                         }
-                    });
-
-                    response.error(function(){
-                        console.log("error");
-                    })
-                 });
-            }
-            else {
-                $(modal_id).modal("toggle");
-            }
+                    },
+                    error: function(err){
+                        console.log(err.responseText);
+                        form.find('.error_wrap').append(
+                            '<div class="error">' +
+                            '<p>' + err.responseText + '</p>' +
+                            '</div>'
+                        );
+                    }
+                });
+            });
           }
 
-        $('#confirm-delete').on('show.bs.modal', function(e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        });
+          function update_objects(){
+              $('.update-object').on('click', function(e){
+                  e.preventDefault();
+
+                  var update_link  = $(this);
+                  var parent = update_link.parent();
+
+                  var object_type = $(parent).data('type');
+                  var object_id = $(parent).data('id');
+
+                  var value = update_link.data('value');
+                  var label = update_link.data('label');
+
+                  $.ajax({
+                      url: window.location.origin + "/dashboard/actions/" + object_type + '/' + object_id,
+                      method: "put",
+                      data: {
+                          "value": value
+                      },
+                      dataType: "json",
+                      success: function(response){
+
+                          if(response.status == 'error'){
+                              displayModalResponse(0, response.message);
+                              return;
+                          }
+
+                          //Update the DOM on success
+                          var dropdown = update_link.parents().eq(2).find('a.dropdown-info');
+                          $(dropdown).empty().append('<span class="label ' + label + ' rounded dropdown-toggle">' + value + '</span>');
+
+                      },
+                      error: function(err){
+                          displayModalResponse(0, 'Something went wrong and the update didn\'t happen. Please try again.');
+                          console.log(err.responseText);
+                      }
+                  });
+              });
+          }
+{##}
+{#          function trigger_save_action(modal_id){#}
+{#            $(modal_id).modal("toggle");#}
+{##}
+{#            //Find the form inside the modal#}
+{#            var modal_form_id = $(modal_id).find("form").selector;#}
+{##}
+{#            if(modal_form_id){#}
+{#                 $(modal_form_id).on('submit', function(e){#}
+{#                    e.preventDefault();#}
+{#                    $(this).find('.btn').addClass('disabled');#}
+{#                    var form_inputs = this.elements;#}
+{#                    var form_data = {};#}
+{##}
+{#                    jQuery.each(form_inputs, function(index, val){#}
+{#                        //populate the form data#}
+{#                        var input_name = val.name;#}
+{#                        form_data[input_name] = val.value;#}
+{#                    });#}
+{##}
+{#                    $.ajax({#}
+{#                        url: "{% url 'dashboard:ajax_save' %}",#}
+{#                        type: "POST",#}
+{#                        data: form_data,#}
+{#                        dataType: "json",#}
+{#                        beforeSend: function(){#}
+{#                        },#}
+{#                        success: function(data){#}
+{#                            $(modal_form_id).find('.btn').removeClass('disabled');#}
+{##}
+{#                            if (data.status == "success"){#}
+{#                                //Close the modal#}
+{#                                $(modal_id).modal("toggle");#}
+{##}
+{#                                displayModalResponse(1);#}
+{##}
+{#                                setTimeout(function(){#}
+{#                                    window.location = '{% url "dashboard:messaging" %}';#}
+{#                                }, 5000);#}
+{##}
+{#                                //TO-DO: Trigger the success modal#}
+{#                            } else {#}
+{##}
+{#                                if( typeof data.message === 'object'){#}
+{##}
+{#                                    //Remove all previously shown errors#}
+{#                                    $(modal_id + "-error-display").find('div').remove();#}
+{##}
+{#                                    jQuery.each(data.message, function(field, error){#}
+{##}
+{#                                        var error_message = field + ": " + error[0];#}
+{##}
+{#                                        $(modal_id + "-error-display").append('<div class="alert alert-danger"><p>' + error_message + '</p></div>');#}
+{##}
+{#                                        $(modal_id + "-error-display").fadeIn();#}
+{##}
+{#                                        //remove all errors after five seconds#}
+{#                                        setTimeout(function(){#}
+{#                                            $(modal_id + "-error-display").fadeOut();#}
+{#                                            $(modal_id + "-error-display").find('div').fadeOut();#}
+{#                                        }, 10000);#}
+{#                                    });#}
+{#                                }#}
+{#                            }#}
+{#                        },#}
+{#                        error: function(err){#}
+{#                            console.log(err.responseText);#}
+{#                            displayModalResponse(0);#}
+{#                        }#}
+{#                    });#}
+{#                 });#}
+{#            } else {#}
+{#                $(modal_id).modal("toggle");#}
+{#                displayModalResponse(1);#}
+{#            }#}
+{#          }#}
+
+          $('#confirm-delete').on('show.bs.modal', function(e) {
+              $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+
+              var object_type = $(e.relatedTarget).data('type');
+              var object_id = $(e.relatedTarget).data('id');
+
+              $.ajax({
+                  url: window.location.origin + '/dashboard/actions/' + object_type + '/' + object_id,
+                  method: "delete",
+                  dataType: "json",
+                  beforeSend: function(){
+
+                  },
+                  success: function(response){
+                      console.log(response);
+                  },
+                  error: function(err){
+                      console.log(err.responseText);
+                  }
+              })
+          });
+
+          /**
+           * Displays a modal response after an action
+           * @param type
+           * @param message
+           * @param modal_id
+           */
+          function displayModalResponse(type, message, modal_id){
+
+              var id = '';
+
+              if (type == 1){
+                  //show success
+                  id = typeof (modal_id) == "undefined" ? 'modal-success' : modal_id;
+                  message = (typeof (message) == "undefined") ? "Your data was saved successfully." : message;
+
+              } else if (type == 0){
+                  //show error
+                  id = typeof (modal_id) == "undefined" ? 'modal-error' : modal_id;
+                  message = (typeof (message) == "undefined") ? "An error occured. Please try again." : message;
+              }
+
+              var modal = $('#' + id);
+              var notification = modal.find('.modal-message')[0];
+
+              $(notification).html(message);
+
+              modal.modal("toggle");
+
+              setTimeout(function(){
+                  modal.modal("toggle");
+              }, 3000);
+          }
+
+          $(document).ready(function(){
+
+              save_objects();
+              update_objects();
+
+               $.blockUI.defaults.css = {
+                  padding: 0,
+                  margin: 0,
+                  width: '30%',
+                  top: '40%',
+                  left: '35%',
+                  textAlign: 'center',
+                  cursor: 'wait'
+              };
+          });
     </script>
-  {% block base_scripts %}
-  {% endblock %}
+  {% block base_scripts %}{% endblock %}
 <!-- endbuild -->
 </body>
 </html>

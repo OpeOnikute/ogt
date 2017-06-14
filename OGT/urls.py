@@ -22,6 +22,7 @@ from dashboard import views
 app_name = 'home'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^dashboard/', include('dashboard.urls')),
     url('^activity/', include('actstream.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
