@@ -4,10 +4,11 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
 ADD requirements.txt /code/
-RUN pip install -r requirements.txt
+
+RUN apk update && \
+    apk add postgresql-libs && \
+    apk add --virtual .build-deps gcc musl-dev postgresql-dev && \
+    python -m pip install -r requirements.txt --no-cache-dir && \
+    apk --purge del .build-deps
+
 ADD . /code/
-
-EXPOSE 8000 443
-
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000"]
-

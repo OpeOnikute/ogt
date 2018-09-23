@@ -5,7 +5,7 @@ from .models import Job, DesignProblems, PotentialClient, PotentialProject, Insp
 
 class SignUpForm(forms.ModelForm):
 
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.PasswordInput()
 
     class Meta:
         model = User

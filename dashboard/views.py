@@ -107,15 +107,15 @@ class SignupView(View):
     def post(self, request):
 
         signup_form = SignUpForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
+        # profile_form = UserProfileForm(request.POST)
 
-        if signup_form.is_valid() and profile_form.is_valid():
+        if signup_form.is_valid():
             signup_form.save()
-            profile_form.save()
+            # profile_form.save()
             return HttpResponseRedirect(reverse('dashboard:index'))
         else:
             self.context['form'] = signup_form
-            self.context['profile_form'] = profile_form
+            # self.context['profile_form'] = profile_form
             return render(request, 'dashboard/signup.html', self.context)
 
 
