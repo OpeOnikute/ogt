@@ -16,7 +16,6 @@ from django.contrib import auth
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-print 1
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -25,7 +24,6 @@ SECRET_KEY = 'xifrq+4_uz%xl917iye(n&#l0n)txous-leim3^he*dqf3mff+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-print 2
 ALLOWED_HOSTS = []
 
 # Auth user model
@@ -89,17 +87,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'OGT.wsgi.application'
 
-print 3
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db', # set in docker-compose.yml
+        'PORT': 5432 # default postgres port
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
