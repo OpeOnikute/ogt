@@ -1,4 +1,4 @@
-Django==1.11.29
+Django==2.2.24
 django-activity-stream==0.6.5
 django-jsonfield==1.0.1
 django-jsonfield-compat==0.4.4
